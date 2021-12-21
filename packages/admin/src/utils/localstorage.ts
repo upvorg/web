@@ -12,10 +12,14 @@ const ls = {
   },
 }
 
-type User = {
+export type User = {
   id: number
   level: number
   name: string
+  create_time: string
+  update_time: string
+  status: number
+  bio: string
 }
 
 export const GlobalState: { user: User | null } = {

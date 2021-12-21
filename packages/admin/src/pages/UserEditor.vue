@@ -27,8 +27,8 @@
       <select v-model="user.level" class="select select-bordered w-full max-w-xs">
         <option
           v-for="item in Object.keys(USER_ROLE_STATE_MAP)"
-          :disabled="GlobalState?.user?.level >= item"
-          :value="item"
+          :disabled="GlobalState?.user?.level >= +item"
+          :value="+item"
         >
           {{ USER_ROLE_STATE_MAP[item] }}
         </option>
@@ -68,15 +68,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { USER_ROLE_STATE_MAP, USER_STATUS } from '../constant'
 import { getUser, updateUser } from '../utils/api'
-import { GlobalState, setLocalToken, removeLocalUser } from '../utils/localstorage'
+import { GlobalState, setLocalToken, removeLocalUser, User } from '../utils/localstorage'
 
 export default {
   data() {
     return {
-      user: {},
+      user: {} as User,
       pwd: null,
       USER_STATUS,
       USER_ROLE_STATE_MAP,
@@ -93,7 +93,6 @@ export default {
       })
     },
     update() {
-      console.log(this.user)
       updateUser({ pwd: this.pwd, ...this.user }).then((_) => {
         if (this.user.id === GlobalState.user.id && this.pwd) {
           setLocalToken('')

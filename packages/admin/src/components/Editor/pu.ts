@@ -58,7 +58,7 @@ export const pu = themeFactory({
     background: '#eceff4',
     surface: '#ffffff',
     shadow: '#3b4252',
-    primary: '#946ce6', // '#5e81ac',
+    primary: '#006aa6', // '#5e81ac',
     secondary: '#946ce6', //'#81a1c1',
     neutral: '#2e3440',
   },

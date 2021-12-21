@@ -1,24 +1,27 @@
 <template>
-  <div :class="{ upload, disabled: auth, curr: step === 0 }">
+  <div :class="{ upload, curr: step === 0 }">
     <div>
       <input
         v-model="post.title"
-        :readonly="auth"
         class="input input-bordered"
         placeholder="请输入标题"
         type="text"
       />
-      <MilkdownEditor v-model="post.content" :readonly="auth" />
+      <MilkdownEditor v-model="post.content" />
+      <select v-model="post.type">
+        <option value="post">文章</option>
+        <option value="video">视频</option>
+      </select>
       <select
         v-model="post.status"
-        v-if="isAdmin(GlobalState.user?.level) || isModify"
+        v-if="isAdmin(GlobalState.user?.level) || isModify || post.type == 'video'"
         :disabled="!isAdmin(GlobalState.user?.level)"
       >
         <option v-for="item in Object.keys(POST_STATE_ENUM)" :value="item">
           {{ POST_STATE_ENUM[item] }}
         </option>
       </select>
-      <select v-model="post.sort">
+      <select v-model="post.sort" v-if="post.type == 'video'">
         <option>原创</option>
         <option>番剧</option>
         <option>剧场版</option>
@@ -26,7 +29,7 @@
         <option>转载</option>
       </select>
     </div>
-    <ul class="tags">
+    <ul class="tags" v-if="post.type == 'video'">
       <li
         v-for="item in TAGS"
         :key="item"
@@ -36,9 +39,18 @@
         {{ item }}
       </li>
     </ul>
-    <button class="btn btn-primary btn-outline btn-sm mx-auto block" @click="stepHandler(step + 1)">
-      下一步
-    </button>
+    <p class="text-center">
+      <button
+        v-if="post.type == 'video'"
+        class="btn btn-primary btn-outline btn-sm mr-2"
+        @click="stepHandler(step + 1)"
+      >
+        下一步
+      </button>
+      <button class="btn btn-primary btn-outline btn-sm" @click="upload">
+        {{ isModify ? '修改并发布' : '发布' }}
+      </button>
+    </p>
   </div>
 
   <div :class="{ upload, curr: step === 1 }">
@@ -93,11 +105,7 @@
   <ModalWithSlot v-show="isAddVideo">
     <div class="card card-side">
       <label for="file" class="flex flex-col items-center text-center">
-        <img
-          class="rounded-lg p-6 pb-2"
-          pointer
-          :src="file ? '/images/file-audio.png' : '/images/no-file.png'"
-        />
+        <img class="rounded-lg p-6 pb-2" pointer :src="file ? hasFileImage : nofileImage" />
         <p>{{ file?.name || '点击上传' }}</p>
       </label>
       <div class="max-w-lg card-body">
@@ -128,9 +136,7 @@
               {{ isModifyVideo ? '修改' : '添加' }}
             </button></span
           >
-          <span
-            ><button class="btn btn-sm btn-outline" @click="isAddVideo = false">取消</button></span
-          >
+          <span><button class="btn btn-sm btn-outline" @click="hideModifyVideo">取消</button></span>
         </div>
       </div>
     </div>
@@ -156,11 +162,12 @@ export default {
   components: { ModalWithSlot, MilkdownEditor },
   data() {
     return {
+      nofileImage: require('../assets/no-file.png').default,
+      hasFileImage: require('../assets/file-audio.png').default,
       GlobalState: GlobalState,
       POST_STATE_ENUM: POST_STATE_ENUM,
       TAGS: TAGS,
       step: 0,
-      auth: false,
       isModify: false,
       isAddVideo: false,
       isModifyVideo: false,
@@ -173,7 +180,8 @@ export default {
         content: '',
         status: '2', // 待审核
         sort: '原创',
-        tag: ' 其它',
+        tag: '',
+        type: 'post',
       },
       soltVideo: emptyVideo,
     }
@@ -187,13 +195,11 @@ export default {
     if (this.$route.params.gv) {
       this.isModify = true
       Promise.all([getPost(this.$route.params.gv), getVideos(this.$route.params.gv)]).then(
-        ([{ result }, { videos }]) => {
-          result && (this.post = result)
+        ([{ data }, { data: videos }]) => {
+          data && (this.post = data)
           this.videos = videos || []
         }
       )
-
-      this.auth = GlobalState.level > 2
     }
   },
   methods: {
@@ -201,6 +207,17 @@ export default {
       this.isModifyVideo = true
       this.isAddVideo = true
       this.soltVideo = { ...item }
+    },
+    hideModifyVideo() {
+      this.isAddVideo = false
+      this.isModifyVideo = false
+      this.resetSoltVideo()
+    },
+    resetSoltVideo() {
+      this.soltVideo.title = ''
+      this.soltVideo.content = ''
+      this.soltVideo.oid = this.combineVideos?.length + 1 || 0
+      this.isAddVideo = false
     },
     delVideo(id) {
       emitter.emit('opm', {
@@ -226,7 +243,7 @@ export default {
       const { title, oid, content, id, uid } = this.soltVideo
 
       if (this.videos.findIndex((_) => _.id == id) != -1) {
-        await updateVideo(id, { title, content, oid, uid }).then((_) => {
+        await updateVideo(id, { pid: this.post.id, title, content, oid, uid }).then((_) => {
           _?.code === 200 &&
             this.videos.forEach((_, i) => {
               if (_.id === id) {
@@ -272,17 +289,9 @@ export default {
       })
       this.resetSoltVideo()
     },
-    resetSoltVideo() {
-      this.soltVideo.title = this.combineVideos?.length + 1 || 0
-      this.soltVideo.content = ''
-      this.soltVideo.oid = this.combineVideos?.length + 1 || 0
-      this.isAddVideo = false
-    },
+
     upload() {
-      const { id, title, content, status, sort, tag } = this.post
-      const { queueVideos } = this
-      const params = { id, title, content, status, sort, tag, videos: queueVideos }
-      ;[id ? update : add][0](params).then((res) => {
+      ;[this.post.id ? update : add][0]({ ...this.post, videos: this.queueVideos }).then((res) => {
         if (res.code === 200) this.manage()
       })
     },

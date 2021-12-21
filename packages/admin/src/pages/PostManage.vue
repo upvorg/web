@@ -87,7 +87,7 @@
           </th>
           <th v-if="isAdmin(state.user.level)">{{ item.id }}</th>
           <th pointer @click="pushGv(item.id)" class="primary-color">{{ item.title }}</th>
-          <th v-if="isAdmin(state.user.level)">{{ item.uname }}</th>
+          <th v-if="isAdmin(state.user.level)">{{ item.creator_name }}</th>
           <th>{{ getTimeDistance(item.create_time) }}</th>
           <th>{{ getTimeDistance(item.update_time) }}</th>
           <th>{{ POST_STATE_ENUM[item.status] }}</th>

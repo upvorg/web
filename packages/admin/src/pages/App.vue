@@ -1,8 +1,8 @@
 <template>
   <header>
     <div pointer>
-      <img alt="logo" src="../assets/logo.jpeg" />
-      clicli 投稿中心
+      <img alt="logo" src="../assets/ic_launcher.png" />
+      创作者中心
     </div>
 
     <div class="dropdown dropdown-hover dropdown-end">

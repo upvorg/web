@@ -10,29 +10,12 @@ export function getPost(id) {
   return get(`${perfix}/post/${id}`)
 }
 
-export function add({ title, content, status, sort, tag, uid, videos }) {
-  return post(`${perfix}/post/add`, {
-    title,
-    content,
-    status,
-    sort,
-    tag,
-    uid: parseInt(uid),
-    videos,
-  })
+export function add(params) {
+  return post(`${perfix}/post/add`, params)
 }
 
-export function update({ id, title, content, status, sort, tag, uid, time, videos }) {
-  return post(`${perfix}/post/update/${id}`, {
-    title,
-    content,
-    status,
-    sort,
-    tag,
-    uid: parseInt(uid),
-    time,
-    videos,
-  })
+export function update({ id, ...params }) {
+  return post(`${perfix}/post/update/${id}`, params)
 }
 
 export function login({ name, pwd }) {
@@ -60,17 +43,8 @@ export function getUsers(key, level, page, pageSize, order = '') {
   )
 }
 
-export function updateUser({ id, name, pwd, qq, level, desc, status, bio, avatar }) {
-  return post(`${perfix}/user/update/${id}`, {
-    name,
-    pwd,
-    qq,
-    level: parseInt(level),
-    desc,
-    status,
-    bio,
-    avatar,
-  })
+export function updateUser({ id, ...params }) {
+  return post(`${perfix}/user/update/${id}`, params)
 }
 
 export function getPosts(status, sort, tag, uid, page, pageSize, order, key) {
@@ -104,7 +78,7 @@ export function deleteUserByIds(ids: number[]) {
   return post(`${perfix}/user/deleteUserByIds`, ids)
 }
 
-export function getVideos(pid, page = 1, pageSize = 299) {
+export function getVideos(pid, page = 1, pageSize = 222) {
   return get(
     `${perfix}/videos?${stringifyQuery({
       pid: pid,

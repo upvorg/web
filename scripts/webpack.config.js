@@ -57,7 +57,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)$/i,
         loader: 'file-loader',
         options: {
-          outputPath: 'static/images',
+          outputPath: 'static/assets',
           name() {
             return isEnvProduction ? '[contenthash].[ext]' : '[path][name].[ext]'
           },
@@ -106,7 +106,7 @@ module.exports = {
     }),
     new ProgressPlugin(),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(isEnvProduction),
+      __DEV__: JSON.stringify(!isEnvProduction),
     }),
   ],
   devServer: {
