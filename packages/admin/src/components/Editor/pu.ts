@@ -1,4 +1,4 @@
-import css from '@emotion/css'
+import { css, injectGlobal } from '@emotion/css'
 import { themeFactory } from '@milkdown/core'
 import { view } from './view'
 
@@ -70,6 +70,7 @@ export const pu = themeFactory({
       return span
     },
   }),
+  //@ts-ignore
   mixin: ({ palette }) => ({
     scrollbar: (direction = 'y') => css`
       ${view}
@@ -94,9 +95,8 @@ export const pu = themeFactory({
       }
     `,
   }),
-  global: ({ palette, font, mixin, size }) => {
-    // const css = injectGlobal
-    return css`
+  global: ({ palette, font }) => {
+    return injectGlobal`
       .milkdown {
         max-width: 100% !important;
         padding: 0 !important;

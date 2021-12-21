@@ -11,9 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@emotion/css": "^10.0.27",
-    "prosemirror-model": "^1.15.0",
-    "@web/shared": "workspace:^1.0.0",
+    "@emotion/css": "11.7.1",
     "@milkdown/core": "^5.2.1",
     "@milkdown/plugin-emoji": "^5.2.1",
     "@milkdown/plugin-history": "^5.2.1",
@@ -28,9 +26,11 @@
     "@milkdown/vue": "^5.2.1",
     "@vue/reactivity": "^3.2.26",
     "@vue/runtime-core": "^3.2.26",
+    "@web/shared": "workspace:^1.0.0",
     "daisyui": "^1.16.6",
     "lodash.debounce": "^4.0.8",
     "mitt": "^3.0.0",
+    "prosemirror-model": "^1.15.0",
     "tailwindcss": "^3.0.6",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"

@@ -13,7 +13,7 @@ module.exports = merge(baseConfig, {
     admin: './src/main.ts',
   },
   output: {
-    path: path.resolve(__dirname, '../dist/admin'),
+    path: path.resolve(__dirname, '../../dist/admin'),
   },
   devServer: {
     port: 8888,

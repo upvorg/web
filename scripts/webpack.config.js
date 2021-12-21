@@ -70,7 +70,7 @@ module.exports = {
     minimizer: [
       new ESBuildMinifyPlugin({
         target: 'es2015',
-        css: false,
+        css: true,
       }),
       new TerserPlugin({
         terserOptions: {

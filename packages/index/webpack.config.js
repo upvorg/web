@@ -9,7 +9,7 @@ module.exports = merge(baseConfig, {
   entry: './src/index.js',
   // @ts-ignore
   output: {
-    path: path.resolve(__dirname, '../dist/index'),
+    path: path.resolve(__dirname, '../../dist/index'),
   },
   resolve: {
     alias: {

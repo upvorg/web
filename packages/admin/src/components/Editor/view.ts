@@ -1,4 +1,4 @@
-import css from '@emotion/css'
+import { css } from '@emotion/css'
 
 export const view = css`
   /* copy from https://github.com/ProseMirror/prosemirror-view/blob/master/style/prosemirror.css */
