@@ -4,12 +4,39 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@web/shared": "workspace:^1.0.0"
+    "@emotion/css": "^10.0.27",
+    "prosemirror-model": "^1.15.0",
+    "@web/shared": "workspace:^1.0.0",
+    "@milkdown/core": "^5.2.1",
+    "@milkdown/plugin-emoji": "^5.2.1",
+    "@milkdown/plugin-history": "^5.2.1",
+    "@milkdown/plugin-listener": "^5.2.1",
+    "@milkdown/plugin-math": "^5.2.1",
+    "@milkdown/plugin-prism": "^5.2.1",
+    "@milkdown/plugin-slash": "^5.2.1",
+    "@milkdown/plugin-tooltip": "^5.2.1",
+    "@milkdown/preset-commonmark": "^5.2.1",
+    "@milkdown/preset-gfm": "^5.2.1",
+    "@milkdown/theme-nord": "^5.2.1",
+    "@milkdown/vue": "^5.2.1",
+    "@vue/reactivity": "^3.2.26",
+    "@vue/runtime-core": "^3.2.26",
+    "daisyui": "^1.16.6",
+    "lodash.debounce": "^4.0.8",
+    "mitt": "^3.0.0",
+    "tailwindcss": "^3.0.6",
+    "vue": "^3.2.26",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.26",
+    "vue-loader": "^17.0.0"
   }
 }

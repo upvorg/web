@@ -1,18 +1,19 @@
 {
-    "compilerOptions": {
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "lib": ["es6"],
-      "module": "ES2015",
-      "moduleResolution": "node",
-      "noEmit": true,
-      "noEmitOnError": false,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "pretty": true,
-      "sourceMap": true,
-      "strict": true,
-      "target": "es2017"
-    },
-    "exclude": ["dist", "node_modules", "test/types"]
-  }
+  "compilerOptions": {
+    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": ["es6", "DOM"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noEmitOnError": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["dist", "node_modules", "test/types", "scripts/"]
+}
