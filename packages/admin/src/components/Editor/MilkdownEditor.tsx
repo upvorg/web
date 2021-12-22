@@ -19,7 +19,38 @@ import { tooltip } from '@milkdown/plugin-tooltip'
 import { slash } from '@milkdown/plugin-slash'
 import { Slice } from 'prosemirror-model'
 import { history } from '@milkdown/plugin-history'
+import { indent } from '@milkdown/plugin-indent'
+import { upload, Uploader, uploadPlugin } from '@milkdown/plugin-upload'
 import { pu } from './pu'
+import { uploadApi } from '../../utils/api'
+
+//@ts-ignore
+const uploader: Uploader = (files, schema) => {
+  const images: File[] = []
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files.item(i)
+
+    if (!file || !file.type.includes('image')) {
+      continue
+    }
+
+    images.push(file)
+  }
+
+  return Promise.all(
+    images.map(async (image) => {
+      const fd = new FormData()
+      fd.append('file', image)
+      const src = await uploadApi(fd)
+      const alt = image.name
+      return schema.nodes.image.createAndFill({
+        src,
+        alt,
+      }) as unknown as Node
+    })
+  )
+}
 
 export const MilkdownEditor = defineComponent({
   name: 'MilkdownEditor',
@@ -60,6 +91,8 @@ export const MilkdownEditor = defineComponent({
         .use(slash)
         .use(prism)
         .use(pu)
+        .use(indent)
+        .use(upload.configure(uploadPlugin, { uploader }))
         .use(history)
     )
 

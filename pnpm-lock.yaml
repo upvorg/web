@@ -48,15 +48,17 @@ importers:
 
   packages/admin:
     specifiers:
-      '@emotion/css': ^11.7.1
+      '@emotion/css': 11.7.1
       '@milkdown/core': ^5.2.1
       '@milkdown/plugin-emoji': ^5.2.1
       '@milkdown/plugin-history': ^5.2.1
+      '@milkdown/plugin-indent': ^5.3.0
       '@milkdown/plugin-listener': ^5.2.1
       '@milkdown/plugin-math': ^5.2.1
       '@milkdown/plugin-prism': ^5.2.1
       '@milkdown/plugin-slash': ^5.2.1
       '@milkdown/plugin-tooltip': ^5.2.1
+      '@milkdown/plugin-upload': ^5.3.0
       '@milkdown/preset-commonmark': ^5.2.1
       '@milkdown/preset-gfm': ^5.2.1
       '@milkdown/theme-nord': ^5.2.1
@@ -78,11 +80,13 @@ importers:
       '@milkdown/core': 5.3.0
       '@milkdown/plugin-emoji': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/plugin-history': 5.3.0_@milkdown+core@5.3.0
+      '@milkdown/plugin-indent': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/plugin-listener': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/plugin-math': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/plugin-prism': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/plugin-slash': 5.3.0_525a8deb21f02707bbc05dbeaf33c3e0
       '@milkdown/plugin-tooltip': 5.3.0_772935d284a5f9091d3af6c884dc5de3
+      '@milkdown/plugin-upload': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/preset-commonmark': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/preset-gfm': 5.3.0_@milkdown+core@5.3.0
       '@milkdown/theme-nord': 5.3.0_@milkdown+core@5.3.0
@@ -372,6 +376,19 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@milkdown/plugin-indent/5.3.0_@milkdown+core@5.3.0:
+    resolution: {integrity: sha512-Dco9GiUZuHHRNB+SCR55joz+cKwWzCSUZDoaE4oId8kgzspFGh3/9EG+vrLbOvcWEHZqkycSe3PWvaIMbKzkbg==}
+    peerDependencies:
+      '@milkdown/core': '*'
+    dependencies:
+      '@emotion/css': 11.7.1
+      '@milkdown/core': 5.3.0
+      '@milkdown/utils': 5.3.0_@milkdown+core@5.3.0
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - '@babel/core'
+    dev: false
+
   /@milkdown/plugin-listener/5.3.0_@milkdown+core@5.3.0:
     resolution: {integrity: sha512-Oyc5HCAdLZvK2gthODYPylYZabcpdjtG2cxaFhNik2g3EdOK/EtuI23WIYU8eylcGSo2ZSZ2nqvBC0UK1RcqMA==}
     peerDependencies:
@@ -453,6 +470,16 @@ packages:
       tslib: 2.3.1
     transitivePeerDependencies:
       - '@babel/core'
+    dev: false
+
+  /@milkdown/plugin-upload/5.3.0_@milkdown+core@5.3.0:
+    resolution: {integrity: sha512-4uHhAO/X/hJnuIqy54L9Z+cJL6dGYDHr25HBqvwTOvmW8EhV76RpaddnnFjbPdSE7wURJLGtme+yyaIdiIjJXA==}
+    peerDependencies:
+      '@milkdown/core': '*'
+    dependencies:
+      '@milkdown/core': 5.3.0
+      '@milkdown/utils': 5.3.0_@milkdown+core@5.3.0
+      tslib: 2.3.1
     dev: false
 
   /@milkdown/preset-commonmark/5.3.0_@milkdown+core@5.3.0:

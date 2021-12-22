@@ -4,7 +4,24 @@ import { getLocalToken, setLocalToken } from './localstorage'
 import r from '../router'
 import emitter from './emitter'
 
-export const perfix = __DEV__ ? `//127.0.0.1:8080` : '//64.227.101.251:8080'
+export const perfix = __DEV__ ? `http://127.0.0.1:8080` : '//64.227.101.251:8080'
+
+export function uploadApi(data: FormData) {
+  emitter.emit('loading', true)
+  return fetch(`${perfix}/upload`, {
+    method: 'POST',
+    body: data,
+    headers: {
+      Authorization: getLocalToken(),
+    },
+    credentials: 'include',
+  })
+    .then((_) => _.json())
+    .then((_) => perfix + '/' + _.data)
+    .finally(() => {
+      emitter.emit('loading', false)
+    })
+}
 
 export function getPost(id) {
   return get(`${perfix}/post/${id}`)
@@ -117,16 +134,15 @@ function check(data) {
   }
 }
 
-export function post(url, data = {}) {
-  emitter.emit('loading', true)
-  return fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
+const http = (url: string, method: string, data, header: Object) => (
+  emitter.emit('loading', true),
+  fetch(url, {
+    method,
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
       Authorization: getLocalToken(),
+      ...header,
     },
-    credentials: 'include',
   })
     .then((res: Response) => {
       if (res.status === 401) {
@@ -139,23 +155,8 @@ export function post(url, data = {}) {
     .catch((_) => {
       emitter.emit('loading', false)
     })
-}
+)
 
-export function get(url) {
-  emitter.emit('loading', true)
-  return fetch(url, {
-    headers: { Authorization: getLocalToken() },
-    credentials: 'include',
-  })
-    .then((res) => {
-      if (res.status === 401) {
-        setLocalToken('')
-        r.replace('/login')
-      }
-      return res.json()
-    })
-    .then((res) => check(res))
-    .catch((_) => {
-      emitter.emit('loading', false)
-    })
-}
+export const post = (url, data) => http(url, 'POST', data)
+
+export const get = (url, data) => http(url, 'GET', data)

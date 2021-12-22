@@ -188,7 +188,6 @@ main {
   padding: 100px 50px 20px 300px;
 
   section {
-    max-width: 80%;
     margin: 0 auto;
   }
 }

@@ -119,9 +119,6 @@ export const pu = themeFactory({
             margin: 1rem 0;
           }
         }
-        & ::selection {
-          background: ${palette('secondary', 0.38)};
-        }
       }
       .milkdown-root:focus-within {
         border: 1px solid var(--theme);

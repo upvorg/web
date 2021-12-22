@@ -46,3 +46,13 @@ th {
 .primary-color {
   color: var(--theme);
 }
+
+@media (max-width: 991px) {
+  #app > nav {
+    display: none;
+  }
+  #app main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

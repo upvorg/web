@@ -8,7 +8,7 @@
         type="text"
       />
       <MilkdownEditor v-model="post.content" />
-      <select v-model="post.type">
+      <select @change="typeHandler" :value="post.type">
         <option value="post">文章</option>
         <option value="video">视频</option>
       </select>
@@ -56,7 +56,7 @@
   <div :class="{ upload, curr: step === 1 }">
     <div class="actions">
       <button class="btn btn-outline btn-sm" @click="stepHandler(step - 1)">上一步</button>
-      <button class="btn btn-outline btn-sm" @click="isAddVideo = true">添加剧集</button>
+      <button class="btn btn-outline btn-sm" @click="showAddVideo">添加剧集</button>
       <button class="btn btn-primary btn-sm float-right" @click="upload">
         {{ isModify ? '修改发布' : '投 稿' }}
       </button>
@@ -93,14 +93,8 @@
     </div>
   </div>
 
-  <input
-    id="file"
-    name="file"
-    style="display: none"
-    type="file"
-    @change="fileHandler"
-    accept="video/mp4, video/x-m4v, video/*"
-  />
+  <input id="file" name="file" style="display: none" type="file" @change="fileHandler" />
+  <!-- accept="video/mp4, video/x-m4v, video/*" -->
 
   <ModalWithSlot v-show="isAddVideo">
     <div class="card card-side">
@@ -143,9 +137,19 @@
   </ModalWithSlot>
 </template>
 
-<script>
-import { add, deleteVideo, getPost, getVideos, perfix, update, updateVideo } from '../utils/api'
-import { GlobalState } from '../utils/localstorage'
+<script lang="ts">
+import {
+  add,
+  deleteVideo,
+  getPost,
+  getVideos,
+  perfix,
+  post,
+  update,
+  updateVideo,
+  uploadApi,
+} from '../utils/api'
+import { getLocalToken, GlobalState } from '../utils/localstorage'
 import { POST_STATE_ENUM, TAGS, isAdmin } from '../constant'
 import emitter from '../utils/emitter'
 import ModalWithSlot from '../components/ModalWithSlot.vue'
@@ -203,6 +207,13 @@ export default {
     }
   },
   methods: {
+    typeHandler(e) {
+      this.post.type = e.target.value
+    },
+    showAddVideo() {
+      this.isAddVideo = true
+      this.soltVideo.oid = this.combineVideos.length + 1
+    },
     showModifyVideo(item) {
       this.isModifyVideo = true
       this.isAddVideo = true
@@ -289,8 +300,8 @@ export default {
       })
       this.resetSoltVideo()
     },
-
     upload() {
+      console.log({ ...this.post, videos: this.queueVideos })
       ;[this.post.id ? update : add][0]({ ...this.post, videos: this.queueVideos }).then((res) => {
         if (res.code === 200) this.manage()
       })
@@ -298,12 +309,10 @@ export default {
     uploadFile() {
       const formData = new FormData()
       formData.append('file', this.file)
-      return fetch(`${perfix}/upload`, {
-        method: 'POST',
-        body: formData,
+      return uploadApi(formData).then((src) => {
+        this.file = null
+        return perfix + src
       })
-        .then((_) => _.json())
-        .then((_) => (this.vscr = perfix + _.result))
     },
     stepHandler(n) {
       if (n < 0) n = 0
