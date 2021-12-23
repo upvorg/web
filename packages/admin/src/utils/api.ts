@@ -6,7 +6,13 @@ import shared from '@web/shared'
 
 export const perfix = __DEV__ ? `http://127.0.0.1:8080` : '//64.227.101.251:8080'
 
-const instance = shared.http.create(perfix)
+type BaseResponse = {
+  code: number
+  msg?: string
+  data: any
+}
+
+const instance = shared.http.create<BaseResponse>(perfix)
 
 instance.interceptors.request.use((config) => {
   return {
@@ -21,13 +27,18 @@ instance.interceptors.response.use(
   (data) => {
     if (data?.msg) {
       emitter.emit('alert', {
-        type: data.code === 200 ? 'success' : 'warning',
+        type: 'success',
         text: data.msg,
       })
     }
     return data
   },
   (res) => {
+    res.msg &&
+      emitter.emit('alert', {
+        type: 'warning',
+        text: res.msg,
+      })
     if (res.status === 401) {
       removeLocalUser()
       r.replace('/login')

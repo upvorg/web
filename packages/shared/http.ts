@@ -8,61 +8,38 @@ type ReqConfig = {
   headers?: HeadersInit
 }
 
-type requestInterceptorResolve = (config: HeadersInit) => HeadersInit
-type requestInterceptorReject = (error: any) => any
+type InterceptorResolve<T> = (v: T) => T
+type InterceptorReject<T> = (v: T & Response) => T & Response
 
-class requestInterceptor {
-  constructor(
-    public resolve?: requestInterceptorResolve,
-    public reject?: requestInterceptorReject
-  ) {
-    this.reject = (config) => config
-    this.resolve = (error) => error
-  }
+class Interceptor<S = any, F = any> {
+  public resolve: InterceptorResolve<S> = (v) => v
+  public reject: InterceptorReject<F> = (v) => v
 
-  use(resolve: requestInterceptorResolve, reject?: requestInterceptorReject) {
+  use(resolve: InterceptorResolve<S>, reject?: InterceptorReject<F>) {
     this.resolve = resolve
     reject && (this.reject = reject)
   }
 }
 
-type responseInterceptorResolve<T> = (res: T) => T
-type responseInterceptorReject = (error: any) => any
-
-class responseInterceptor {
-  constructor(
-    public resolve?: responseInterceptorResolve<any>,
-    public reject?: responseInterceptorReject
-  ) {
-    this.reject = (config) => config
-    this.resolve = (error) => error
-  }
-
-  use<T = any>(resolve: responseInterceptorResolve<T>, reject?: responseInterceptorReject) {
-    this.resolve = resolve
-    reject && (this.reject = reject)
-  }
-}
-
-export default class Http {
+export default class Http<T = any> {
   private baseUrl: string
   private headers: HeadersInit
   public interceptors: {
-    request: requestInterceptor
-    response: responseInterceptor
+    request: Interceptor<HeadersInit, T>
+    response: Interceptor<T, T>
   }
 
   constructor(options: Options) {
     this.baseUrl = options.baseUrl ?? ''
     this.headers = options.headers ?? {}
     this.interceptors = {
-      request: new requestInterceptor(),
-      response: new responseInterceptor(),
+      request: new Interceptor<HeadersInit, T>(),
+      response: new Interceptor<T, T>(),
     }
   }
 
-  static create(url?: string, header?: HeadersInit) {
-    return new Http({
+  static create<T = any>(url?: string, header?: HeadersInit) {
+    return new Http<T>({
       baseUrl: url,
       headers: header,
     })
@@ -87,6 +64,7 @@ export default class Http {
         body: JSON.stringify(data),
       }),
     })
+    let rawResponse: Response
     return fetch(`${this.baseUrl}${url}`, {
       method,
       headers: config,
@@ -96,27 +74,27 @@ export default class Http {
     })
       .then(
         (res: Response) => {
-          if (!res.ok) {
-            throw new Error(
-              "The response's status is not ok" +
-                JSON.stringify(
-                  this.interceptors.response.reject?.({
-                    status: res.status,
-                    statusText: res.statusText,
-                    ...res.json(),
-                  })
-                )
-            )
-          }
+          rawResponse = res
           return res.json()
         },
         (reson: any) => {
           console.log('request error' + reson)
           const returnValue = this.interceptors.request.reject?.(reson)
-          throw new Error(returnValue)
+          throw new Error(JSON.stringify(returnValue))
         }
       )
       .then((response) => {
+        if (!rawResponse?.ok) {
+          throw new Error(
+            "The response's status is not ok" +
+              JSON.stringify(
+                this.interceptors.response.reject?.({
+                  ...rawResponse,
+                  ...response,
+                })
+              )
+          )
+        }
         console.log(`${method} ${url} response: `, response)
         return this.interceptors.response.resolve?.(response) ?? response
       })
