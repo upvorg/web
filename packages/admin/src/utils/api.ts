@@ -6,7 +6,7 @@ import shared from '@web/shared'
 
 export const perfix = __DEV__ ? `http://127.0.0.1:8080` : '//64.227.101.251:8080'
 
-const instance = shared.http.create('http://127.0.0.1:8080')
+const instance = shared.http.create(perfix)
 
 instance.interceptors.request.use((config) => {
   return {
