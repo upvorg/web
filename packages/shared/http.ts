@@ -8,14 +8,17 @@ type ReqConfig = {
   headers?: HeadersInit
 }
 
-type requestInterceptorResolve = (config: ReqConfig) => ReqConfig
+type requestInterceptorResolve = (config: HeadersInit) => HeadersInit
 type requestInterceptorReject = (error: any) => any
 
 class requestInterceptor {
   constructor(
     public resolve?: requestInterceptorResolve,
     public reject?: requestInterceptorReject
-  ) {}
+  ) {
+    this.reject = (config) => config
+    this.resolve = (error) => error
+  }
 
   use(resolve: requestInterceptorResolve, reject?: requestInterceptorReject) {
     this.resolve = resolve
@@ -23,16 +26,19 @@ class requestInterceptor {
   }
 }
 
-type responseInterceptorResolve = (res: Response) => Response
+type responseInterceptorResolve<T> = (res: T) => T
 type responseInterceptorReject = (error: any) => any
 
 class responseInterceptor {
   constructor(
-    public resolve?: responseInterceptorResolve,
+    public resolve?: responseInterceptorResolve<any>,
     public reject?: responseInterceptorReject
-  ) {}
+  ) {
+    this.reject = (config) => config
+    this.resolve = (error) => error
+  }
 
-  use(resolve: responseInterceptorResolve, reject?: responseInterceptorReject) {
+  use<T = any>(resolve: responseInterceptorResolve<T>, reject?: responseInterceptorReject) {
     this.resolve = resolve
     reject && (this.reject = reject)
   }
@@ -41,7 +47,7 @@ class responseInterceptor {
 export default class Http {
   private baseUrl: string
   private headers: HeadersInit
-  private interceptors: {
+  public interceptors: {
     request: requestInterceptor
     response: responseInterceptor
   }
@@ -62,29 +68,31 @@ export default class Http {
     })
   }
 
-  get(url: string, { headers, data }: ReqConfig) {
+  get(url: string, { headers, data }: ReqConfig = {}) {
     return this._send(url, 'GET', headers, data)
   }
 
-  post(url: string, { headers, data }: ReqConfig) {
+  post(url: string, { headers, data }: ReqConfig = {}) {
     return this._send(url, 'POST', headers, data)
   }
 
   private _send(url: string, method: string, headers: HeadersInit = {}, data: any = {}) {
+    const config = this.interceptors.request.resolve?.({
+      'Content-type': 'application/json; charset=UTF-8',
+      ...this.headers,
+      ...headers,
+    })
     return fetch(`${this.baseUrl}${url}`, {
       method,
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        ...this.headers,
-        ...headers,
-      },
-      body: JSON.stringify(data),
+      headers: config,
+      ...(['Get', 'HEAD'] && {
+        data: JSON.stringify(data),
+      }),
     })
       .then(
         (res: Response) => {
-          if (res.ok) {
-            return res.json()
-          }
+          if (res.ok) return res.json()
+
           this.interceptors.response.reject?.({
             status: res.status,
             statusText: res.statusText,
@@ -92,7 +100,8 @@ export default class Http {
           return res
         },
         (reson: any) => {
-          const returnValue = this.interceptors.request.resolve?.(reson)
+          console.log('request error' + reson)
+          const returnValue = this.interceptors.request.reject?.(reson)
           return returnValue
         }
       )

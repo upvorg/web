@@ -31,8 +31,8 @@ jobs:
           scp_target: /var/www/admin/
           before_script: |
             df -h
-            rm -rf /var/www/admin/
-            mkdir -p /var/www/admin/
+            sudo rm -r /var/www/admin
+            sudo mkdir -p /var/www/admin
           # mkdir -p /var/www/index/
           after_script: |
             whoami

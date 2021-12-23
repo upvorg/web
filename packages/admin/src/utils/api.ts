@@ -1,14 +1,54 @@
-//@ts-nocheck
 import { stringifyQuery } from 'vue-router'
-import { GlobalState, removeLocalUser, setLocalToken } from './localstorage'
+import { GlobalState, removeLocalUser } from './localstorage'
 import emitter from './emitter'
 import r from '../router'
+import shared from '@web/shared'
 
 export const perfix = __DEV__ ? `http://127.0.0.1:8080` : '//64.227.101.251:8080'
 
+const instance = shared.http.create('http://127.0.0.1:8080')
+
+instance.interceptors.request.use((config) => {
+  return {
+    ...config,
+    ...(GlobalState.token && {
+      Authorization: GlobalState.token,
+    }),
+  }
+})
+
+instance.interceptors.response.use(
+  (data) => {
+    if (data?.msg) {
+      emitter.emit('alert', {
+        type: data.code === 200 ? 'success' : 'warning',
+        text: data.msg,
+      })
+    }
+    if (data?.code === 200) {
+      return data
+    } else {
+      console.log(`[${data?.code}]: ${data?.msg}`)
+      throw Error(`[${data?.code}]: ${data?.msg}`)
+    }
+  },
+  (res) => {
+    if (res.status === 401) {
+      removeLocalUser()
+      r.replace('/login')
+      throw new Error('401')
+    }
+    return res.json()
+  }
+)
+
+export const post = (url: string, data?: any) => instance.post(url, { data })
+
+export const get = (url: string, data?: any) => instance.get(url, { data })
+
 export function uploadApi(data: FormData) {
   emitter.emit('loading', true)
-  return fetch(`${perfix}/upload`, {
+  return fetch(`/upload`, {
     method: 'POST',
     body: data,
     headers: {
@@ -23,50 +63,57 @@ export function uploadApi(data: FormData) {
     })
 }
 
-export function getPost(id) {
-  return get(`${perfix}/post/${id}`)
+export function getPost(id: any) {
+  return get(`/post/${id}`)
 }
 
-export function add(params) {
-  return post(`${perfix}/post/add`, params)
+export function add(params: any) {
+  return post(`/post/add`, params)
 }
 
-export function update({ id, ...params }) {
-  return post(`${perfix}/post/update/${id}`, params)
+export function update({ id, ...params }: any) {
+  return post(`/post/update/${id}`, params)
 }
 
-export function login({ name, pwd }) {
-  return post(`${perfix}/user/login`, {
+export function login({ name, pwd }: any) {
+  return post(`/user/login`, {
     name,
     pwd,
   })
 }
 
-export function register(name, pwd, qq) {
-  return post(`${perfix}/user/register`, {
+export function register(name: any, pwd: any, qq: any) {
+  return post(`/user/register`, {
     name,
     pwd,
     qq,
   })
 }
 
-export function getUser(uname, uid, uqq) {
-  return get(`${perfix}/user?uanme=${uname}&uid=${uid}&uqq=${uqq}`)
+export function getUser(uname: any, uid: any, uqq: any) {
+  return get(`/user?uanme=${uname}&uid=${uid}&uqq=${uqq}`)
 }
 
-export function getUsers(key, level, page, pageSize, order = '') {
+export function getUsers(key: any, level: any, page: any, pageSize: any, order = '') {
+  return get(`/users?name=${key}&level=${level}&order=${order}&page=${page}&pageSize=${pageSize}`)
+}
+
+export function updateUser({ id, ...params }: any) {
+  return post(`/user/update/${id}`, params)
+}
+
+export function getPosts(
+  status: any,
+  sort: any,
+  tag: any,
+  uid: any,
+  page: any,
+  pageSize: any,
+  order: any,
+  key: any
+) {
   return get(
-    `${perfix}/users?name=${key}&level=${level}&order=${order}&page=${page}&pageSize=${pageSize}`
-  )
-}
-
-export function updateUser({ id, ...params }) {
-  return post(`${perfix}/user/update/${id}`, params)
-}
-
-export function getPosts(status, sort, tag, uid, page, pageSize, order, key) {
-  return get(
-    `${perfix}/posts?${stringifyQuery({
+    `/posts?${stringifyQuery({
       status,
       sort,
       tag,
@@ -79,25 +126,25 @@ export function getPosts(status, sort, tag, uid, page, pageSize, order, key) {
   )
 }
 
-export function deletePost(id) {
-  return post(`${perfix}/post/delete/${id}`)
+export function deletePost(id: any) {
+  return post(`/post/delete/${id}`)
 }
 
 export function deletePostByIds(ids: number[]) {
-  return post(`${perfix}/user/deletePostByIds`, ids)
+  return post(`/user/deletePostByIds`, ids)
 }
 
-export function deleteUser(id) {
-  return post(`${perfix}/user/delete/${id}`)
+export function deleteUser(id: any) {
+  return post(`/user/delete/${id}`)
 }
 
 export function deleteUserByIds(ids: number[]) {
-  return post(`${perfix}/user/deleteUserByIds`, ids)
+  return post(`/user/deleteUserByIds`, ids)
 }
 
-export function getVideos(pid, page = 1, pageSize = 222) {
+export function getVideos(pid: any, page = 1, pageSize = 222) {
   return get(
-    `${perfix}/videos?${stringifyQuery({
+    `/videos?${stringifyQuery({
       pid: pid,
       page,
       pageSize,
@@ -105,52 +152,15 @@ export function getVideos(pid, page = 1, pageSize = 222) {
   )
 }
 
-export function updateVideo(id, params: { pid; title; content; oid; uid }) {
-  return post(`${perfix}/video/update/${id}`, params)
+export function updateVideo(
+  id: any,
+  params: { pid: any; title: any; content: any; oid: any; uid: any }
+) {
+  return post(`/video/update/${id}`, params)
 }
 
-export function deleteVideo(id, pid) {
-  return post(`${perfix}/video/delete?${stringifyQuery({ id, pid })}`)
+export function deleteVideo(id: any, pid: any) {
+  return post(`/video/delete?${stringifyQuery({ id, pid })}`)
 }
 
 /****** */
-
-function check(data) {
-  if (data?.msg) {
-    emitter.emit('alert', {
-      type: data.code === 200 ? 'success' : 'warning',
-      text: data.msg,
-    })
-  }
-  if (data?.code === 200) {
-    return data
-  } else {
-    console.log(`[${data?.code}]: ${data?.msg}`)
-    throw Error(`[${data?.code}]: ${data?.msg}`)
-  }
-}
-
-const http = (url: string, method: string, data: any, header: Object) =>
-  fetch(url, {
-    method,
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-      Authorization: globalState.token,
-      ...header,
-    },
-    data,
-  })
-    .then((res: Response) => {
-      if (res.status === 401) {
-        removeLocalUser()
-        r.replace('/login')
-        throw new Error('401')
-      }
-      return res.json()
-    })
-    .then((res) => check(res))
-    .catch((_) => {})
-
-export const post = (url, data) => http(url, 'POST', data)
-
-export const get = (url, data) => http(url, 'GET', data)
