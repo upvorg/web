@@ -12,15 +12,12 @@ module.exports = {
   entry: {},
   mode: isEnvProduction ? 'production' : 'development',
   output: {
-    // path: path.resolve(__dirname, 'dist'),
     filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
-    chunkFilename: isEnvProduction
-      ? 'static/js/[name].[contenthash:8].chunk.js'
-      : 'static/js/[name].chunk.js',
-    publicPath: '/',
+    chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
+    publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
   },
   devtool: !isEnvProduction ? 'eval-source-map' : false,
   module: {
@@ -30,28 +27,24 @@ module.exports = {
         loader: 'esbuild-loader',
         options: {
           loader: 'jsx',
-          target: 'es2015',
-        },
+          target: 'es2015'
+        }
       },
       {
         test: /\.tsx?$/,
         loader: 'esbuild-loader',
         options: {
           loader: 'tsx',
-          target: 'es2015',
-        },
+          target: 'es2015'
+        }
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
@@ -60,31 +53,31 @@ module.exports = {
           outputPath: 'static/assets',
           name() {
             return isEnvProduction ? '[contenthash].[ext]' : '[path][name].[ext]'
-          },
-        },
-      },
-    ],
+          }
+        }
+      }
+    ]
   },
   optimization: {
     minimize: isEnvProduction,
     minimizer: [
       new ESBuildMinifyPlugin({
         target: 'es2015',
-        css: true,
+        css: true
       }),
       new TerserPlugin({
         terserOptions: {
           parse: {
             // @ts-ignore
-            ecma: 8,
+            ecma: 8
           },
           compress: {
             ecma: 5,
             comparisons: false,
-            inline: 2,
+            inline: 2
           },
           mangle: {
-            safari10: true,
+            safari10: true
           },
           // Added for profiling in devtools
           keep_classnames: false,
@@ -92,27 +85,29 @@ module.exports = {
           output: {
             ecma: 5,
             comments: false,
-            ascii_only: true,
-          },
-        },
-      }),
-    ],
+            ascii_only: true
+          }
+        }
+      })
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css',
-      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
     }),
     new ProgressPlugin(),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(!isEnvProduction),
-    }),
+      __DEV__: JSON.stringify(!isEnvProduction)
+    })
   ],
   devServer: {
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
     compress: true,
     historyApiFallback: true,
-    hot: true,
-  },
+    hot: true
+  }
 }
