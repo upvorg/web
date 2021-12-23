@@ -13,7 +13,8 @@ module.exports = {
   output: {
     filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
     chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
-    assetModuleFilename: 'static/media/[name].[hash][ext]'
+    assetModuleFilename: 'static/media/[name].[hash][ext]',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
@@ -114,7 +115,9 @@ module.exports = {
   ],
   devServer: {
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*'
     },
     compress: true,
     historyApiFallback: true,
