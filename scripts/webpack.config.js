@@ -1,4 +1,3 @@
-const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -14,6 +13,7 @@ module.exports = {
   output: {
     filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
     chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
+    assetModuleFilename: 'static/media/[name].[hash][ext]',
     publicPath: '/'
   },
   resolve: {
@@ -40,20 +40,33 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: './static/assets/'
+            }
+          },
+          'css-loader',
+          'postcss-loader'
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
         use: [isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        type: 'asset',
+        parser: {
+          dataUrlCondition: { maxSize: 10000 }
+        }
+      },
+      {
+        test: /\.svg$/i,
         loader: 'file-loader',
         options: {
-          outputPath: 'static/assets',
-          name() {
-            return isEnvProduction ? '[contenthash].[ext]' : '[path][name].[ext]'
-          }
+          name: 'static/media/[name].[hash].[ext]'
         }
       }
     ]
