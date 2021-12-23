@@ -85,7 +85,7 @@ import { useRouter } from 'vue-router'
 const user = getLocalUser()
 const router = useRouter()
 
-if (router.currentRoute.value) {
+if (router.currentRoute.value.fullPath == '/') {
   if (isAdmin(user.level)) {
     router.push({ path: 'postmanage', replace: true })
   } else if (isCreator(user.level)) {

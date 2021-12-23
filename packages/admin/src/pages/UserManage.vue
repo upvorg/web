@@ -26,7 +26,7 @@
       </ul>
     </div>
   </div>
-  <div class="table overflow-x-auto">
+  <div class="overflow-x-auto mb-4">
     <table class="table w-full table-compact">
       <thead>
         <tr>
@@ -36,12 +36,7 @@
                 <div class="indicator-item badge badge-secondary">
                   {{ list.selected.length || 0 }}
                 </div>
-                <input
-                  :checked="isSelectedAll"
-                  class="checkbox"
-                  type="checkbox"
-                  @change="toggleSelectedAll"
-                />
+                <input :checked="isSelectedAll" class="checkbox" type="checkbox" @change="toggleSelectedAll" />
               </div>
             </label>
           </th>
@@ -82,7 +77,7 @@
           v-for="item of list.data"
           :key="item.id"
           :style="{
-            color: item.id === GlobalState.user.id ? 'var(--theme)' : '',
+            color: item.id === GlobalState.user.id ? 'var(--theme)' : ''
           }"
           class="hover"
         >
@@ -127,7 +122,7 @@ const state = reactive({
   status: '10',
   page: 1,
   size: 30,
-  order: 'DESC',
+  order: 'DESC'
 })
 const [list, toggleSelectedAll, isSelectedAll, hasSelected] = useSelect()
 

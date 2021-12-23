@@ -29,7 +29,7 @@
       </ul>
     </div>
   </div>
-  <div class="table overflow-x-auto">
+  <div class="overflow-x-auto mb-4">
     <table class="table w-full table-compact table-zebra">
       <thead>
         <tr>
@@ -37,12 +37,7 @@
             <label>
               <div class="indicator">
                 <div class="indicator-item badge badge-secondary">{{ list.selected.length }}</div>
-                <input
-                  :checked="isSelectedAll"
-                  class="checkbox"
-                  type="checkbox"
-                  @change="toggleSelectedAll"
-                />
+                <input :checked="isSelectedAll" class="checkbox" type="checkbox" @change="toggleSelectedAll" />
               </div>
             </label>
           </th>
@@ -124,7 +119,7 @@ const state = reactive({
   size: 30,
   order: 'DESC',
   state: '',
-  user: getLocalUser(),
+  user: getLocalUser()
 })
 const [list, toggleSelectedAll, isSelectedAll, hasSelected] = useSelect<any>()
 
@@ -147,18 +142,16 @@ const _effect = () => {
       state.status = '10'
     }
 
-    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then(
-      (res) => {
-        if (res.code === 200) {
-          if (prePage.value < state.page) {
-            list.data = list.data.concat(res.posts || [])
-            prePage.value = state.page
-          } else {
-            list.data = res.data || []
-          }
+    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then((res) => {
+      if (res.code === 200) {
+        if (prePage.value < state.page) {
+          list.data = list.data.concat(res.posts || [])
+          prePage.value = state.page
+        } else {
+          list.data = res.data || []
         }
       }
-    )
+    })
   }
   list.selected = []
 }
