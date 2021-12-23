@@ -82,30 +82,42 @@ export default class Http {
       ...this.headers,
       ...headers,
     })
+    console.log(`${method} ${url} data: `, {
+      ...(!['GET', 'HEAD'].includes(method.toUpperCase()) && {
+        body: JSON.stringify(data),
+      }),
+    })
     return fetch(`${this.baseUrl}${url}`, {
       method,
       headers: config,
-      ...(['Get', 'HEAD'] && {
-        data: JSON.stringify(data),
+      ...(!['GET', 'HEAD'].includes(method.toUpperCase()) && {
+        body: JSON.stringify(data),
       }),
     })
       .then(
         (res: Response) => {
-          if (res.ok) return res.json()
-
-          this.interceptors.response.reject?.({
-            status: res.status,
-            statusText: res.statusText,
-          })
-          return res
+          if (!res.ok) {
+            throw new Error(
+              "The response's status is not ok" +
+                JSON.stringify(
+                  this.interceptors.response.reject?.({
+                    status: res.status,
+                    statusText: res.statusText,
+                    ...res.json(),
+                  })
+                )
+            )
+          }
+          return res.json()
         },
         (reson: any) => {
           console.log('request error' + reson)
           const returnValue = this.interceptors.request.reject?.(reson)
-          return returnValue
+          throw new Error(returnValue)
         }
       )
       .then((response) => {
+        console.log(`${method} ${url} response: `, response)
         return this.interceptors.response.resolve?.(response) ?? response
       })
   }

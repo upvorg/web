@@ -25,12 +25,7 @@ instance.interceptors.response.use(
         text: data.msg,
       })
     }
-    if (data?.code === 200) {
-      return data
-    } else {
-      console.log(`[${data?.code}]: ${data?.msg}`)
-      throw Error(`[${data?.code}]: ${data?.msg}`)
-    }
+    return data
   },
   (res) => {
     if (res.status === 401) {
@@ -38,7 +33,7 @@ instance.interceptors.response.use(
       r.replace('/login')
       throw new Error('401')
     }
-    return res.json()
+    return res
   }
 )
 
