@@ -1,8 +1,8 @@
-// @ts-nocheck
+//@ts-nocheck
 import { stringifyQuery } from 'vue-router'
-import { getLocalToken, setLocalToken } from './localstorage'
-import r from '../router'
+import { GlobalState, removeLocalUser, setLocalToken } from './localstorage'
 import emitter from './emitter'
+import r from '../router'
 
 export const perfix = __DEV__ ? `http://127.0.0.1:8080` : '//64.227.101.251:8080'
 
@@ -12,7 +12,7 @@ export function uploadApi(data: FormData) {
     method: 'POST',
     body: data,
     headers: {
-      Authorization: getLocalToken(),
+      Authorization: GlobalState.token,
     },
     credentials: 'include',
   })
@@ -116,17 +116,13 @@ export function deleteVideo(id, pid) {
 /****** */
 
 function check(data) {
-  emitter.emit('loading', false)
   if (data?.msg) {
     emitter.emit('alert', {
       type: data.code === 200 ? 'success' : 'warning',
       text: data.msg,
     })
   }
-  if (data?.code === 401) {
-    setLocalToken('')
-    r.replace('/login')
-  } else if (data?.code === 200) {
+  if (data?.code === 200) {
     return data
   } else {
     console.log(`[${data?.code}]: ${data?.msg}`)
@@ -134,28 +130,26 @@ function check(data) {
   }
 }
 
-const http = (url: string, method: string, data, header: Object) => (
-  emitter.emit('loading', true),
+const http = (url: string, method: string, data: any, header: Object) =>
   fetch(url, {
     method,
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
-      Authorization: getLocalToken(),
+      Authorization: globalState.token,
       ...header,
     },
+    data,
   })
     .then((res: Response) => {
       if (res.status === 401) {
-        setLocalToken('')
+        removeLocalUser()
         r.replace('/login')
+        throw new Error('401')
       }
       return res.json()
     })
     .then((res) => check(res))
-    .catch((_) => {
-      emitter.emit('loading', false)
-    })
-)
+    .catch((_) => {})
 
 export const post = (url, data) => http(url, 'POST', data)
 

@@ -90,12 +90,14 @@ export default {
     get() {
       getUser(null, this.$route.params.uid, null).then((res) => {
         this.user = res.data
+        if (this.$route.params.uid === GlobalState.user.id) {
+          GlobalState.user = res.data
+        }
       })
     },
     update() {
       updateUser({ pwd: this.pwd, ...this.user }).then((_) => {
         if (this.user.id === GlobalState.user.id && this.pwd) {
-          setLocalToken('')
           removeLocalUser()
           this.$router.push({ path: '/login', replace: true })
         } else {

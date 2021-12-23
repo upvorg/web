@@ -20,21 +20,29 @@ export type User = {
   update_time: string
   status: number
   bio: string
+  avatar: string
+  qq: string
 }
 
-export const GlobalState: { user: User | null } = {
-  user: null,
+export const GlobalState = {
+  user: {} as User,
+  token: '',
 }
 
 export const getLocalToken = () => ls.get(TOKEN_KEY)
 export const setLocalToken = (v: string) => ls.set(TOKEN_KEY, v)
 
 export const getLocalUser = (): User => {
+  GlobalState.token = getLocalToken() ?? ''
   return (GlobalState.user = JSON.parse(ls.get(USER_KEY) || '{}'))
 }
 
 export const setLocalUser = (v: object) => ls.set(USER_KEY, JSON.stringify(v))
 
-export const removeLocalUser = () => ls.rm(USER_KEY)
+export const removeLocalUser = () => {
+  ls.rm(USER_KEY)
+  GlobalState.user = {} as User
+  GlobalState.token = ''
+}
 
 export default ls
