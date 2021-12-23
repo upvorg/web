@@ -78,12 +78,22 @@
 </template>
 
 <script setup lang="ts">
-import router from '../router'
 import { getLocalUser, GlobalState, setLocalToken, setLocalUser } from '../utils/localstorage'
 import { isAdmin, isCreator } from '../constant'
-import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const user = getLocalUser()
+const router = useRouter()
+
+if (router.currentRoute.value) {
+  if (isAdmin(user.level)) {
+    router.push({ path: 'postmanage', replace: true })
+  } else if (isCreator(user.level)) {
+    router.push({ path: 'upload', replace: true })
+  } else {
+    router.push({ path: '/user/' + user.id, replace: true })
+  }
+}
 
 const logout = () => {
   setLocalToken('')
