@@ -1,12 +1,7 @@
 <template>
   <div :class="{ upload, curr: step === 0 }">
     <div>
-      <input
-        v-model="post.title"
-        class="input input-bordered"
-        placeholder="请输入标题"
-        type="text"
-      />
+      <input v-model="post.title" class="input input-bordered" placeholder="请输入标题" type="text" />
       <MilkdownEditor v-model="post.content" />
       <select @change="typeHandler" :value="post.type">
         <option value="post">文章</option>
@@ -82,9 +77,7 @@
             <td>{{ getTimeDistance(item?.create_time) }}</td>
             <td>{{ getTimeDistance(item?.update_time) }}</td>
             <th>
-              <button class="btn btn-ghost btn-xs inline" @click="showModifyVideo(item)">
-                修改
-              </button>
+              <button class="btn btn-ghost btn-xs inline" @click="showModifyVideo(item)">修改</button>
               <button class="btn btn-ghost btn-xs inline" @click="delVideo(item.id)">删除</button>
             </th>
           </tr>
@@ -116,11 +109,7 @@
           type="text"
         />
         <span>
-          <input
-            v-model="soltVideo.oid"
-            class="input input-bordered inline-block input-sm mr-4 w-12"
-            type="number"
-          />
+          <input v-model="soltVideo.oid" class="input input-bordered inline-block input-sm mr-4 w-12" type="number" />
           集
         </span>
 
@@ -138,17 +127,7 @@
 </template>
 
 <script lang="ts">
-import {
-  add,
-  deleteVideo,
-  getPost,
-  getVideos,
-  perfix,
-  post,
-  update,
-  updateVideo,
-  uploadApi,
-} from '../utils/api'
+import { add, deleteVideo, getPost, getVideos, perfix, post, update, updateVideo, uploadApi } from '../utils/api'
 import { getLocalToken, GlobalState } from '../utils/localstorage'
 import { POST_STATE_ENUM, TAGS, isAdmin } from '../constant'
 import emitter from '../utils/emitter'
@@ -159,15 +138,15 @@ import { getTimeDistance } from '../utils/date'
 const emptyVideo = {
   oid: 1,
   title: '',
-  content: '',
+  content: ''
 }
 
 export default {
   components: { ModalWithSlot, MilkdownEditor },
   data() {
     return {
-      nofileImage: require('../assets/no-file.png').default,
-      hasFileImage: require('../assets/file-audio.png').default,
+      nofileImage: require('../assets/no-file.png'),
+      hasFileImage: require('../assets/file-audio.png'),
       GlobalState: GlobalState,
       POST_STATE_ENUM: POST_STATE_ENUM,
       TAGS: TAGS,
@@ -185,15 +164,15 @@ export default {
         status: '2', // 待审核
         sort: '原创',
         tag: '',
-        type: 'post',
+        type: 'post'
       },
-      soltVideo: emptyVideo,
+      soltVideo: emptyVideo
     }
   },
   computed: {
     combineVideos() {
       return this.queueVideos.concat(this.videos)
-    },
+    }
   },
   mounted() {
     if (this.$route.params.gv) {
@@ -247,7 +226,7 @@ export default {
               _?.code === 200 && (this.videos = this.videos.filter((_) => _.id !== id))
             })
           }
-        },
+        }
       })
     },
     async editVideo() {
@@ -278,7 +257,7 @@ export default {
       if (!title || !oid || !(this.file || content)) {
         return emitter.emit('alert', {
           type: 'warning',
-          text: '请完善视频信息',
+          text: '请完善视频信息'
         })
       }
 
@@ -296,7 +275,7 @@ export default {
         content: src,
         id: new Date().getTime(),
         create_time: new Date(),
-        update_time: new Date(),
+        update_time: new Date()
       })
       this.resetSoltVideo()
     },
@@ -311,7 +290,7 @@ export default {
       formData.append('file', this.file)
       return uploadApi(formData).then((src) => {
         this.file = null
-        return perfix + src
+        return src
       })
     },
     stepHandler(n) {
@@ -338,7 +317,7 @@ export default {
     manage() {
       emitter.emit('alert', {
         type: 'success',
-        text: this.isModify ? '修改成功' : '发布成功',
+        text: this.isModify ? '修改成功' : '发布成功'
       })
       this.$router.push('/postmanage')
     },
@@ -350,8 +329,8 @@ export default {
       }
     },
     isAdmin,
-    getTimeDistance,
-  },
+    getTimeDistance
+  }
 }
 </script>
 

@@ -13,8 +13,7 @@ module.exports = {
   output: {
     filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
     chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
-    assetModuleFilename: 'static/media/[name].[hash][ext]',
-    publicPath: '/'
+    assetModuleFilename: 'static/media/[name].[hash][ext]'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
@@ -43,9 +42,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: './static/assets/'
-            }
+            options: { publicPath: '../../' }
           },
           'css-loader',
           'postcss-loader'

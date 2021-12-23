@@ -10,6 +10,4 @@ declare module '*.png' {
   export default url
 }
 
-declare var __GH__: boolean
-declare var __ROUTER_BASE__: string
 declare var __DEV__: boolean

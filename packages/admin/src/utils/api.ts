@@ -18,8 +18,8 @@ instance.interceptors.request.use((config) => {
   return {
     ...config,
     ...(GlobalState.token && {
-      Authorization: GlobalState.token,
-    }),
+      Authorization: GlobalState.token
+    })
   }
 })
 
@@ -28,7 +28,7 @@ instance.interceptors.response.use(
     if (data?.msg) {
       emitter.emit('alert', {
         type: 'success',
-        text: data.msg,
+        text: data.msg
       })
     }
     return data
@@ -37,7 +37,7 @@ instance.interceptors.response.use(
     res.msg &&
       emitter.emit('alert', {
         type: 'warning',
-        text: res.msg,
+        text: res.msg
       })
     if (res.status === 401) {
       removeLocalUser()
@@ -54,13 +54,12 @@ export const get = (url: string, data?: any) => instance.get(url, { data })
 
 export function uploadApi(data: FormData) {
   emitter.emit('loading', true)
-  return fetch(`/upload`, {
+  return fetch(`${perfix}/upload`, {
     method: 'POST',
     body: data,
     headers: {
-      Authorization: GlobalState.token,
-    },
-    credentials: 'include',
+      Authorization: GlobalState.token
+    }
   })
     .then((_) => _.json())
     .then((_) => perfix + '/' + _.data)
@@ -84,7 +83,7 @@ export function update({ id, ...params }: any) {
 export function login({ name, pwd }: any) {
   return post(`/user/login`, {
     name,
-    pwd,
+    pwd
   })
 }
 
@@ -92,7 +91,7 @@ export function register(name: any, pwd: any, qq: any) {
   return post(`/user/register`, {
     name,
     pwd,
-    qq,
+    qq
   })
 }
 
@@ -108,16 +107,7 @@ export function updateUser({ id, ...params }: any) {
   return post(`/user/update/${id}`, params)
 }
 
-export function getPosts(
-  status: any,
-  sort: any,
-  tag: any,
-  uid: any,
-  page: any,
-  pageSize: any,
-  order: any,
-  key: any
-) {
+export function getPosts(status: any, sort: any, tag: any, uid: any, page: any, pageSize: any, order: any, key: any) {
   return get(
     `/posts?${stringifyQuery({
       status,
@@ -127,7 +117,7 @@ export function getPosts(
       page,
       pageSize,
       order,
-      key,
+      key
     })}`
   )
 }
@@ -153,15 +143,12 @@ export function getVideos(pid: any, page = 1, pageSize = 222) {
     `/videos?${stringifyQuery({
       pid: pid,
       page,
-      pageSize,
+      pageSize
     })}`
   )
 }
 
-export function updateVideo(
-  id: any,
-  params: { pid: any; title: any; content: any; oid: any; uid: any }
-) {
+export function updateVideo(id: any, params: { pid: any; title: any; content: any; oid: any; uid: any }) {
   return post(`/video/update/${id}`, params)
 }
 

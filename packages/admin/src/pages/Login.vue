@@ -23,12 +23,7 @@
           <label class="label">
             <span class="label-text">Password</span>
           </label>
-          <input
-            type="password"
-            placeholder="password"
-            class="input input-bordered"
-            v-model="pwd"
-          />
+          <input type="password" placeholder="password" class="input input-bordered" v-model="pwd" />
           <!--          <label class="label">-->
           <!--            <a href="#" class="label-text-alt" @click="register">Register</a>-->
           <!--          </label>-->
@@ -42,21 +37,31 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { login } from '../utils/api'
 import { GlobalState, setLocalToken, setLocalUser } from '../utils/localstorage'
 import { useRouter } from 'vue-router'
+import { isAdmin, isCreator } from '../constant'
 
 const name = ref('')
 const pwd = ref('')
 const router = useRouter()
+
+onMounted(() => {})
 
 const onLogin = () => {
   login({ name: name.value, pwd: pwd.value }).then((data) => {
     setLocalToken(data.token)
     setLocalUser(data.user)
     GlobalState.user = data.user
-    router.replace('/')
+    const level = data.user.level as number
+    if (isAdmin(level)) {
+      router.push({ path: 'postmanage', replace: true })
+    } else if (isCreator(level)) {
+      router.push({ path: 'upload', replace: true })
+    } else {
+      router.push({ path: '/user/' + data.user.id, replace: true })
+    }
   })
 }
 

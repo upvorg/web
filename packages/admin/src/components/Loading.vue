@@ -11,7 +11,7 @@ emitter.on('loading', (boolean: boolean) => {
     end.value = true
     setTimeout(() => {
       end.value = false
-    }, 200);
+    }, 200)
   }
   show.value = boolean
 })
@@ -32,8 +32,8 @@ emitter.on('loading', (boolean: boolean) => {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: white;
-  z-index: 998;
+  background: rgb(0 0 0 / 85%);
+  z-index: 1000;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -45,6 +45,7 @@ emitter.on('loading', (boolean: boolean) => {
   &.show {
     visibility: visible;
     opacity: 0.7;
+    background: rgb(0 0 0 / 50%);
   }
 
   &.end {
