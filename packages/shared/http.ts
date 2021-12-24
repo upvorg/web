@@ -34,14 +34,14 @@ export default class Http<T = any> {
     this.headers = options.headers ?? {}
     this.interceptors = {
       request: new Interceptor<HeadersInit, T>(),
-      response: new Interceptor<T, T>(),
+      response: new Interceptor<T, T>()
     }
   }
 
   static create<T = any>(url?: string, header?: HeadersInit) {
     return new Http<T>({
       baseUrl: url,
-      headers: header,
+      headers: header
     })
   }
 
@@ -57,20 +57,20 @@ export default class Http<T = any> {
     const config = this.interceptors.request.resolve?.({
       'Content-type': 'application/json; charset=UTF-8',
       ...this.headers,
-      ...headers,
+      ...headers
     })
     console.log(`${method} ${url} data: `, {
       ...(!['GET', 'HEAD'].includes(method.toUpperCase()) && {
-        body: JSON.stringify(data),
-      }),
+        body: JSON.stringify(data)
+      })
     })
     let rawResponse: Response
     return fetch(`${this.baseUrl}${url}`, {
       method,
       headers: config,
       ...(!['GET', 'HEAD'].includes(method.toUpperCase()) && {
-        body: JSON.stringify(data),
-      }),
+        body: JSON.stringify(data)
+      })
     })
       .then(
         (res: Response) => {
@@ -84,13 +84,13 @@ export default class Http<T = any> {
         }
       )
       .then((response) => {
-        if (!rawResponse?.ok) {
+        if (!rawResponse.ok) {
           throw new Error(
             "The response's status is not ok" +
               JSON.stringify(
                 this.interceptors.response.reject?.({
                   ...rawResponse,
-                  ...response,
+                  ...response
                 })
               )
           )

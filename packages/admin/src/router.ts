@@ -20,7 +20,7 @@ const router = createRouter({
       component: () => import(`./pages/App.vue`),
       children: [
         createRoute('Upload', '', [createRoute('Upload', 'upload/:gv')]),
-        createRoute('PostManage'),
+        createRoute('PostManage', 'posts'),
         createRoute('UserManage', 'users', []),
         createRoute('UserEditor', 'user/:uid')
       ]

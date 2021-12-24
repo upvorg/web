@@ -1,5 +1,4 @@
 import { computed, reactive } from 'vue'
-import { toRaw } from '@vue/reactivity'
 
 export type Props<T> = {
   data: Array<T>

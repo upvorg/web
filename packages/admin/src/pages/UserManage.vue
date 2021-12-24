@@ -1,10 +1,10 @@
 <template>
   <div class="actions">
-    <input class="input input-bordered" placeholder="搜索用户" type="text" @input="search" />
-    <button :disabled="!hasSelected" class="btn btn-primary" @click="del">封禁</button>
+    <input class="input input-bordered input-sm" placeholder="搜索用户" type="text" @input="search" />
+    <button :disabled="!hasSelected" class="btn btn-primary btn-sm" @click="del">封禁</button>
 
     <div class="dropdown dropdown-hover">
-      <div class="btn" tabindex="0">
+      <div class="btn btn-sm" tabindex="0">
         {{ USER_ROLE_STATE_MAP[state.status] || '全部' }}
         <svg
           class="inline-block w-6 h-6 ml-2 stroke-current"
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="overflow-x-auto mb-4">
-    <table class="table w-full table-compact">
+    <table class="table w-full table-compact m-2">
       <thead>
         <tr>
           <th>
@@ -103,13 +103,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
 import { deleteUserByIds, getUser, getUsers, post } from '../utils/api'
 import debounce from 'lodash.debounce'
 import { USER_ROLE_STATE_MAP } from '../constant'
-import emitter from '../utils/emitter'
 import { GlobalState } from '../utils/localstorage'
 import useSelect from '../shared/use-select'
 import { watch } from '@vue/runtime-core'

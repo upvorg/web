@@ -2,8 +2,7 @@ import { css, injectGlobal } from '@emotion/css'
 import { themeFactory } from '@milkdown/core'
 import { view } from './view'
 
-const font =
-  'Roboto,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif'
+const font = 'Roboto,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif'
 
 const fontCode = 'Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace'
 
@@ -41,17 +40,17 @@ const iconMapping: Record<string, string> = {
   undo: 'undeo',
   redo: 'redo',
   liftList: 'lift_list',
-  sinkList: 'sink_list',
+  sinkList: 'sink_list'
 }
 
 export const pu = themeFactory({
   font: {
     typography: font.split(', '),
-    code: fontCode.split(', '),
+    code: fontCode.split(', ')
   },
   size: {
     radius: '2px',
-    lineWidth: '1px',
+    lineWidth: '1px'
   },
   color: {
     line: '#d8dee9',
@@ -60,7 +59,7 @@ export const pu = themeFactory({
     shadow: '#3b4252',
     primary: '#006aa6', // '#5e81ac',
     secondary: '#946ce6', //'#81a1c1',
-    neutral: '#2e3440',
+    neutral: '#2e3440'
   },
   slots: () => ({
     icon: (id) => {
@@ -68,7 +67,7 @@ export const pu = themeFactory({
       span.className = 'icon material-icons material-icons-outlined'
       span.textContent = iconMapping[id]
       return span
-    },
+    }
   }),
   //@ts-ignore
   mixin: ({ palette }) => ({
@@ -93,15 +92,15 @@ export const pu = themeFactory({
       &::-webkit-scrollbar-thumb:hover {
         background: ${palette('secondary')};
       }
-    `,
+    `
   }),
-  global: ({ palette, font }) => {
+  global: ({ font }) => {
     return injectGlobal`
       .milkdown {
         max-width: 100% !important;
         padding: 0 !important;
-        color: ${palette('neutral', 0.87)};
-        background: ${palette('surface')};
+        color: inherit !important;
+        background: inherit;
         position: relative;
         font-family: ${font.typography};
         margin-left: auto;
@@ -127,5 +126,5 @@ export const pu = themeFactory({
         box-shadow: 0 0 0 2px hsl(var(--b1)), 0 0 0 4px hsla(var(--bc) / 0.2);
       }
     `
-  },
+  }
 })

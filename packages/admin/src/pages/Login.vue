@@ -56,7 +56,7 @@ const onLogin = () => {
     GlobalState.user = data.user
     const level = data.user.level as number
     if (isAdmin(level)) {
-      router.push({ path: 'postmanage', replace: true })
+      router.push({ path: 'posts', replace: true })
     } else if (isCreator(level)) {
       router.push({ path: 'upload', replace: true })
     } else {

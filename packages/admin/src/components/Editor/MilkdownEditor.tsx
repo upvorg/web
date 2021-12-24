@@ -1,13 +1,5 @@
 import { defineComponent, PropType, ref, watch, watchEffect } from 'vue'
-import {
-  Ctx,
-  defaultValueCtx,
-  Editor,
-  editorViewCtx,
-  editorViewOptionsCtx,
-  parserCtx,
-  rootCtx,
-} from '@milkdown/core'
+import { Ctx, defaultValueCtx, Editor, editorViewCtx, editorViewOptionsCtx, parserCtx, rootCtx } from '@milkdown/core'
 import { nord } from '@milkdown/theme-nord'
 import { VueEditor, useEditor, EditorRef } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
@@ -20,7 +12,7 @@ import { slash } from '@milkdown/plugin-slash'
 import { Slice } from 'prosemirror-model'
 import { history } from '@milkdown/plugin-history'
 import { indent } from '@milkdown/plugin-indent'
-import { upload, Uploader, uploadPlugin } from '@milkdown/plugin-upload'
+import { upload, Uploader, uploadPlugin } from '../../plugin-upload'
 import { pu } from './pu'
 import { uploadApi } from '../../utils/api'
 

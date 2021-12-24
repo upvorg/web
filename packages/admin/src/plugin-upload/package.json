@@ -1,0 +1,42 @@
+{
+  "name": "@milkdown/plugin-upload",
+  "version": "5.3.0",
+  "main": "./src/index.ts",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.cjs.js"
+    }
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "milkdown",
+    "milkdown plugin"
+  ],
+  "peerDependencies": {
+    "@milkdown/core": "*"
+  },
+  "dependencies": {
+    "@milkdown/utils": "5.3.0",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@milkdown/core": "5.3.0",
+    "@milkdown/prose": "5.3.0",
+    "@milkdown/utils": "5.3.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "watch": "vite build --watch",
+    "test": "jest",
+    "tsc": "tsc --noEmit",
+    "build": "vite build && tsc --emitDeclarationOnly"
+  },
+  "readme": "# @milkdown/plugin-upload\n\nUpload image when drop for [milkdown](https://saul-mirone.github.io/milkdown/).\n\n# Example Usage\n\n```typescript\nimport { Editor } from '@milkdown/core';\nimport { commonmark } from '@milkdown/preset-commonmark';\nimport { nord } from '@milkdown/theme-nord';\n\nimport { upload } from '@milkdown/plugin-upload';\n\nEditor.make().use(commonmark).use(upload).create();\n```\n\n# Setup Uploader\n\n> By default, this plugin will transfer image to base64 and ignore other file types.\n>\n> If you want to upload file and handle the generated blocks, you should setup the uploader.\n\n```typescript\n// ...\nimport { upload, uploadPlugin, Uploader } from '@milkdown/plugin-upload';\nimport type { Node } from 'prosemirror-model';\n\nconst uploader: Uploader = async (files, schema) => {\n    const images: File[] = [];\n\n    for (let i = 0; i < files.length; i++) {\n        const file = files.item(i);\n        if (!file) {\n            continue;\n        }\n\n        // You can handle whatever the file type you want, we handle image here.\n        if (!file.type.includes('image')) {\n            continue;\n        }\n\n        images.push(file);\n    }\n\n    const nodes: Node[] = await Promise.all(\n        images.map(async (image) => {\n            const src = await YourUploadAPI(image);\n            const alt = image.name;\n            return schema.nodes.image.createAndFill({\n                src,\n                alt,\n            }) as Node;\n        }),\n    );\n\n    return nodes;\n};\n\nEditor.make()\n    // .use(...)\n    .use(\n        upload.configure(uploadPlugin, {\n            uploader,\n        }),\n    )\n    .create();\n```\n\n# License\n\nMilkdown is open sourced software licensed under [MIT license](https://github.com/Saul-Mirone/milkdown/blob/main/LICENSE).\n"
+}

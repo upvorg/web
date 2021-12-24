@@ -1,10 +1,10 @@
 <template>
   <div class="actions">
-    <input class="input input-bordered" placeholder="输入关键词" type="text" @input="search" />
-    <button :disabled="!hasSelected" class="btn btn-primary" @click="del">删除</button>
+    <input class="input input-bordered input-sm" placeholder="输入关键词" type="text" @input="search" />
+    <button :disabled="!hasSelected" class="btn btn-sm md:btn-sm btn-primary" @click="del">删除</button>
 
     <div class="dropdown dropdown-hover">
-      <div class="btn" tabindex="0">
+      <div class="btn btn-sm" tabindex="0">
         {{ POST_STATE_ENUM[state.status] || '全部' }}
         <svg
           class="inline-block w-6 h-6 ml-2 stroke-current"
@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="overflow-x-auto mb-4">
-    <table class="table w-full table-compact table-zebra">
+    <table class="table w-full table-compact table-zebra m-2">
       <thead>
         <tr>
           <th>

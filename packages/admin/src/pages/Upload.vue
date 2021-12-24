@@ -1,13 +1,14 @@
 <template>
-  <div :class="{ upload, curr: step === 0 }">
+  <div :class="{ upload, curr: step === 0, 'max-w-screen-md': true, 'mx-auto': true }">
     <div>
       <input v-model="post.title" class="input input-bordered" placeholder="请输入标题" type="text" />
       <MilkdownEditor v-model="post.content" />
-      <select @change="typeHandler" :value="post.type">
+      <select @change="typeHandler" :value="post.type" class="select select-bordered select-sm">
         <option value="post">文章</option>
         <option value="video">视频</option>
       </select>
       <select
+        class="select select-bordered select-sm"
         v-model="post.status"
         v-if="isAdmin(GlobalState.user?.level) || isModify || post.type == 'video'"
         :disabled="!isAdmin(GlobalState.user?.level)"
@@ -16,7 +17,7 @@
           {{ POST_STATE_ENUM[item] }}
         </option>
       </select>
-      <select v-model="post.sort" v-if="post.type == 'video'">
+      <select v-model="post.sort" v-if="post.type == 'video'" class="select select-bordered select-sm">
         <option>原创</option>
         <option>番剧</option>
         <option>剧场版</option>
@@ -25,14 +26,15 @@
       </select>
     </div>
     <ul class="tags" v-if="post.type == 'video'">
-      <li
+      <kbd
+        class="kbd m-1"
         v-for="item in TAGS"
         :key="item"
-        :class="{ active: post.tag.indexOf(item) > -1, tag: true }"
+        :class="{ active: post.tag.indexOf(item) > -1 }"
         @click="selectTag(item)"
       >
         {{ item }}
-      </li>
+      </kbd>
     </ul>
     <p class="text-center">
       <button
@@ -86,8 +88,14 @@
     </div>
   </div>
 
-  <input id="file" name="file" style="display: none" type="file" @change="fileHandler" />
-  <!-- accept="video/mp4, video/x-m4v, video/*" -->
+  <input
+    id="file"
+    name="file"
+    style="display: none"
+    type="file"
+    accept="video/mp4, video/x-m4v, video/*"
+    @change="fileHandler"
+  />
 
   <ModalWithSlot v-show="isAddVideo">
     <div class="card card-side">
@@ -138,7 +146,7 @@ import { getTimeDistance } from '../utils/date'
 const emptyVideo = {
   oid: 1,
   title: '',
-  content: ''
+  content: '',
 }
 
 export default {
@@ -164,15 +172,15 @@ export default {
         status: '2', // 待审核
         sort: '原创',
         tag: '',
-        type: 'post'
+        type: 'post',
       },
-      soltVideo: emptyVideo
+      soltVideo: emptyVideo,
     }
   },
   computed: {
     combineVideos() {
       return this.queueVideos.concat(this.videos)
-    }
+    },
   },
   mounted() {
     if (this.$route.params.gv) {
@@ -226,7 +234,7 @@ export default {
               _?.code === 200 && (this.videos = this.videos.filter((_) => _.id !== id))
             })
           }
-        }
+        },
       })
     },
     async editVideo() {
@@ -257,7 +265,7 @@ export default {
       if (!title || !oid || !(this.file || content)) {
         return emitter.emit('alert', {
           type: 'warning',
-          text: '请完善视频信息'
+          text: '请完善视频信息',
         })
       }
 
@@ -275,12 +283,12 @@ export default {
         content: src,
         id: new Date().getTime(),
         create_time: new Date(),
-        update_time: new Date()
+        update_time: new Date(),
       })
       this.resetSoltVideo()
     },
     upload() {
-      console.log({ ...this.post, videos: this.queueVideos })
+      this.checkForm()
       ;[this.post.id ? update : add][0]({ ...this.post, videos: this.queueVideos }).then((res) => {
         if (res.code === 200) this.manage()
       })
@@ -293,14 +301,18 @@ export default {
         return src
       })
     },
+    checkForm() {
+      const { title, content, type } = this.post
+      if (!title || !content) {
+        emitter.emit('alert', { type: 'warning', text: '请完善信息' })
+        throw new Error('请完善信息')
+      }
+    },
     stepHandler(n) {
       if (n < 0) n = 0
       if (n > 1) n = 1
       if (this.step === 0) {
-        if (!this.post.title || !this.post.content) {
-          emitter.emit('alert', { type: 'warning', text: '请完善标题和内容' })
-          return
-        }
+        return this.checkForm()
       }
       this.step = n
     },
@@ -317,9 +329,9 @@ export default {
     manage() {
       emitter.emit('alert', {
         type: 'success',
-        text: this.isModify ? '修改成功' : '发布成功'
+        text: this.isModify ? '修改成功' : '发布成功',
       })
-      this.$router.push('/postmanage')
+      this.$router.push('/posts')
     },
     url(u) {
       try {
@@ -329,17 +341,12 @@ export default {
       }
     },
     isAdmin,
-    getTimeDistance
-  }
+    getTimeDistance,
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.upload.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .upload {
   width: 100%;
   transition: all 0.3s;
@@ -364,57 +371,21 @@ export default {
     min-height: 400px;
   }
 
-  li {
-    display: flex;
-    width: auto;
-    font-size: 13px;
-  }
-
-  .tag {
-    background: var(--second);
-    color: var(--theme);
-    padding: 4px 8px;
-    border-radius: 40px;
-    display: inline-block;
-    cursor: pointer;
-    margin: 5px;
-  }
-
-  .tags {
-    padding: 20px;
-  }
-
   .active {
     background: var(--theme);
     color: #fff;
+    background-color: hsla(var(--p) / var(--tw-bg-opacity, 1));
   }
 
   select,
   option {
-    padding: 10px;
-    border: 1px solid var(--second);
-    outline: none;
-    margin: 10px;
-    border-radius: 5px;
-  }
-
-  select:hover {
-    border: 1px solid var(--theme);
-  }
-
-  .steps {
-    margin-bottom: 20px;
+    margin: 10px 10px 10px 0;
   }
 
   textarea,
   input {
     margin-bottom: 20px;
     width: 100%;
-  }
-
-  input:focus,
-  textarea:focus {
-    border: 1px solid var(--theme);
   }
 }
 
