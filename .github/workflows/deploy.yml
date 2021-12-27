@@ -28,11 +28,11 @@ jobs:
           username: root
           password: ${{ secrets.SSH_PASSWORD }}
           scp_source: ./dist/*
-          scp_target: /var/www/
+          scp_target: /var/www/build/
           # sudo rm -rf /var/www/admin
           # sudo mkdir -p /var/www/admin
           # mkdir -p /var/www/index/
           after_script: |
             whoami
-            cp -r /var/www/index/* /var/www/html/
-            cp -r /var/www/admin/* /var/www/admin/
+            cp -r /var/www/build/index/* /var/www/html/html/
+            cp -r /var/www/build/admin/* /var/www/html/admin/
