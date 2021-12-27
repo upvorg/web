@@ -34,5 +34,5 @@ jobs:
           # mkdir -p /var/www/index/
           after_script: |
             whoami
-            cp -r /var/www/build/index/* /var/www/html/html/
-            cp -r /var/www/build/admin/* /var/www/html/admin/
+            cp -r /var/www/build/index/* /var/www/html/
+            cp -r /var/www/build/admin/* /var/www/admin/
