@@ -35,3 +35,4 @@ jobs:
           after_script: |
             whoami
             mv /var/www/index/* /var/www/html/
+            mv /var/www/admin/* /var/www/admin/

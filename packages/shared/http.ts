@@ -89,7 +89,8 @@ export default class Http<T = any> {
             "The response's status is not ok" +
               JSON.stringify(
                 this.interceptors.response.reject?.({
-                  ...rawResponse,
+                  status: rawResponse.status,
+                  statusText: rawResponse.statusText,
                   ...response
                 })
               )
