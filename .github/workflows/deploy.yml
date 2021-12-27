@@ -34,5 +34,5 @@ jobs:
           # mkdir -p /var/www/index/
           after_script: |
             whoami
-            mv /var/www/index/* /var/www/html/
-            mv /var/www/admin/* /var/www/admin/
+            mv -f /var/www/index/* /var/www/html/
+            mv -f /var/www/admin/* /var/www/admin/
