@@ -173,7 +173,7 @@
 
     <div class="drawer-side">
       <label for="main-menu" class="drawer-overlay"></label>
-      <aside class="flex flex-col border-r border-base-200 bg-base-100 text-base-content w-80">
+      <aside class="flex flex-col border-r border-base-200 bg-base-100 text-base-content w-64 md:w-80">
         <div
           class="
             sticky
