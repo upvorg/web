@@ -8,9 +8,9 @@ export default function UGCList(props) {
   const [posts, setPosts] = useState([])
   useEffect(() => {
     if (props.word) {
-      getSearch(props.word).then((res) => setPosts(res.posts))
+      getSearch(props.word).then((res) => setPosts(res.data))
     } else {
-      getPost('原创', '', 2, 4).then((res) => setPosts(res.posts))
+      getPost('原创', '', 2, 4).then((res) => setPosts(res.data))
     }
   }, [])
   return (

@@ -3,12 +3,8 @@ import { get } from '../public/js/fetch'
 
 const prefix = isDev ? '//localhost:8080' : '//64.227.101.251:8080'
 
-export function getPost(type, tag, page, pageSize, uid, t = '') {
-  return get(
-    `${prefix}/posts?status=3&sort=${type}&tag=${tag}&uid=${
-      uid || ''
-    }&page=${page}&pageSize=${pageSize}&t=${t}`
-  )
+export function getPost(type, tag, page, pageSize, t = 'video', uid = '') {
+  return get(`${prefix}/posts?status=3&sort=${type}&tag=${tag}&uid=${uid}&page=${page}&pageSize=${pageSize}&type=${t}`)
 }
 
 export function getRank() {

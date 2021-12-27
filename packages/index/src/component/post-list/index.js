@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import { getPost } from 'api/get'
 import { getSuo } from 'public/js/util'
-import { clink } from 'public/js/const'
 import './index.styl'
 
 export default function PostList(props) {
   const [posts, setPosts] = useState([])
   useEffect(() => {
     getPost('bgm', '', 1, 30).then((res) => {
-      setPosts(res.posts || [])
+      setPosts(res.data || [])
     })
   }, [])
   return (

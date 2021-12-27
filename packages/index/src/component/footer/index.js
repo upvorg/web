@@ -1,14 +1,20 @@
 import './index.styl'
 
+const concat = {
+  //风车动漫 : 'https://www.92wuc.com',
+  APP下载: '风车动漫',
+  // : 'https://app.clicli.me',
+  使用说明: '使用说明',
+  // : 'https://www.clicli.me/play/gv31',
+  github: 'github',
+  // : 'https://github.com/cliclitv',
+  微博: '微博',
+  // : 'https://weibo.com/u/6759984025',
+  qq群: 'qq群'
+  // : 'https://jq.qq.com/?_wv=1027&k=5e55m5L',
+}
+
 export default function Footer() {
-  const concat = {
-    风车动漫: 'https://www.92wuc.com',
-    APP下载: 'https://app.clicli.me',
-    使用说明: 'https://www.clicli.me/play/gv31',
-    github: 'https://github.com/cliclitv',
-    微博: 'https://weibo.com/u/6759984025',
-    qq群: 'https://jq.qq.com/?_wv=1027&k=5e55m5L',
-  }
   return (
     <div className="footer">
       <div className="wrap">
@@ -27,7 +33,7 @@ export default function Footer() {
               src="https://player.dogecloud.com/img/logo_colored.png"
               style={{
                 height: '16px',
-                verticalAlign: 'middle',
+                verticalAlign: 'middle'
               }}
             />
           </a>

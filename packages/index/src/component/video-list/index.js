@@ -9,7 +9,7 @@ export default function VideoList(props) {
   const [content, setContent] = useState(null)
   useEffect(() => {
     getVideoList(props.gv).then((res) => {
-      setVideo(res.videos || [])
+      setVideo(res.data || [])
     })
   }, [props.gv])
 

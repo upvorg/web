@@ -12,17 +12,17 @@ export default function PostDetal(props) {
   const [pv, setPv] = useState(0)
   useEffect(() => {
     getPostDetail(props.gv).then((res) => {
-      setPost(res.result)
+      setPost(res.data)
       getPv(props.gv).then((ret) => {
-        setPv(ret.result.pv)
+        setPv(ret.data.pv)
       })
       const w = document.body.clientWidth
-      if (res.result.tag.indexOf('其它') > -1 || w < 480) {
+      if (res.data.tag.indexOf('其它') > -1 || w < 480) {
         t.current.style.display = 'none'
         u.current.style.display = 'block'
-        u.current.innerHTML = markdownit().render(res.result.content)
+        u.current.innerHTML = markdownit().render(res.data.content)
       } else {
-        t.current.innerHTML = markdownit().render(res.result.content)
+        t.current.innerHTML = markdownit().render(res.data.content)
       }
     })
   }, [props.gv])
@@ -34,10 +34,10 @@ export default function PostDetal(props) {
         <div className="info">
           <div className="user">
             <span className="avatar">
-              <img src={getAvatar(post.uqq)} alt={post.uqq}></img>
+              <img src={getAvatar(post.creator_qq)} alt={post.creator_qq}></img>
             </span>
-            <span className="uname">{post.uname}</span>
-            <span className="uid">uid：{post.uid}</span>
+            <span className="uname">{post.creator_name}</span>
+            <span className="uid">uid：{post.creator_id}</span>
           </div>
           <div className="title">
             <h1>{post.title || '少年祈祷中……'}</h1>
@@ -45,7 +45,7 @@ export default function PostDetal(props) {
           </div>
           <div>
             <span>{post.tag}</span>
-            <span>{post.time}</span>
+            <span>{post.create_time}</span>
           </div>
           <article ref={u} className="other"></article>
         </div>

@@ -111,6 +111,9 @@ module.exports = {
     new ProgressPlugin(),
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(!isEnvProduction)
+    }),
+    new webpack.ProvidePlugin({
+      React: 'react'
     })
   ],
   devServer: {

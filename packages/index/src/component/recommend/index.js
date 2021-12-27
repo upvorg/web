@@ -7,7 +7,7 @@ export default function Recommend(props) {
   const [posts, setPosts] = useState([])
   useEffect(() => {
     getPost('', '推荐', 1, 10).then((res) => {
-      setPosts(res.posts || [])
+      setPosts(res.data || [])
     })
   }, [])
   return (

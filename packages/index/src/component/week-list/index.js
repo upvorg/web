@@ -9,7 +9,7 @@ export default function WeekList({ push }) {
   useEffect(() => {
     getPost('新番', '', 1, 100, 'nowait').then((res) => {
       let ret = {}
-      res.posts?.forEach((item) => {
+      res.data?.forEach((item) => {
         let day = new Date(item.time).getDay()
         ret[day] = ret[day] || []
         ret[day].push(item)
@@ -24,7 +24,7 @@ export default function WeekList({ push }) {
     3: '周三',
     4: '周四',
     5: '周五',
-    6: '周六',
+    6: '周六'
   }
   return (
     <div className="week-list">
@@ -34,11 +34,7 @@ export default function WeekList({ push }) {
           <ul>
             {map &&
               Object.keys(map).map((item, index) => (
-                <button
-                  key={item}
-                  className={item == day ? 'active' : ''}
-                  onClick={() => setDay(index)}
-                >
+                <button key={item} className={item == day ? 'active' : ''} onClick={() => setDay(index)}>
                   {map[item]}
                 </button>
               ))}

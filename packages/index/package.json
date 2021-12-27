@@ -11,6 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@web/shared": "workspace:^1.0.0"
+    "@web/shared": "workspace:^1.0.0",
+    "blueimp-md5": "^2.19.0",
+    "griffith": "^1.21.3",
+    "markdown-it": "^12.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

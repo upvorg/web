@@ -17,9 +17,9 @@ export default function Home({ push }) {
         <Recommend push={push} />
         <Rank push={push} />
       </div>
-      <WeekList push={push} />
-      <UgcList title="个人投稿" push={push} />
       <PostList push={push} />
+      <UgcList title="个人投稿" push={push} />
+      <WeekList push={push} />
       <Footer />
     </div>
   )

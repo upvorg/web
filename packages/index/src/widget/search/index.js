@@ -16,7 +16,7 @@ export default function Search({ push }) {
   }
   return (
     <div className="search">
-      <input type="text" placeholder="搜索一下下菊花又不会坏(⊙o⊙)…" onInput={inputWord} />
+      <input type="text" placeholder="搜索一下(⊙o⊙)…" onInput={inputWord} />
       <span onClick={() => push(`/search/${word}`)}>
         <i className="icon-font icon-search"></i>
       </span>

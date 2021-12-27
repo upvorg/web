@@ -7,17 +7,19 @@ const { default: merge } = require('webpack-merge')
 
 module.exports = merge(baseConfig, {
   entry: './src/index.js',
-  // @ts-ignore
   output: {
-    path: path.resolve(__dirname, '../../dist/index'),
+    path: path.resolve(__dirname, '../../dist/index')
+  },
+  devServer: {
+    port: 3000
   },
   resolve: {
     alias: {
       component: path.resolve(__dirname, 'src/component'),
       public: path.resolve(__dirname, 'src/public'),
       api: path.resolve(__dirname, 'src/api'),
-      widget: path.resolve(__dirname, 'src/widget'),
-    },
+      widget: path.resolve(__dirname, 'src/widget')
+    }
   },
   module: {
     rules: [
@@ -30,17 +32,17 @@ module.exports = merge(baseConfig, {
             loader: 'stylus-loader',
             options: {
               stylusOptions: {
-                import: [path.resolve(__dirname, 'src/public/css/var.styl')],
-              },
-            },
-          },
-        ],
-      },
-    ],
+                import: [path.resolve(__dirname, 'src/public/css/var.styl')]
+              }
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
-    }),
-  ],
+      template: './index.html'
+    })
+  ]
 })

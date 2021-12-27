@@ -1,5 +1,5 @@
 <template>
-  <div class="actions">
+  <div class="actions space-x-2 space-y-2 mb-2">
     <input class="input input-bordered input-sm" placeholder="搜索用户" type="text" @input="search" />
     <button :disabled="!hasSelected" class="btn btn-primary btn-sm" @click="del">封禁</button>
 
@@ -46,7 +46,7 @@
           <th pointer @click="toggleSort">
             Register At
             <svg
-              class="h-6 w-6"
+              class="h-4 w-4 inline-block"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -96,7 +96,7 @@
       </tbody>
     </table>
   </div>
-  <div class="btn-group">
+  <div class="btn-group justify-end">
     <button class="btn btn-sm" @click="state.page -= 1">Previous</button>
     <button class="btn btn-active btn-sm">{{ state.page }}</button>
     <button class="btn btn-sm" @click="state.page += 1">Next</button>
@@ -165,54 +165,3 @@ const del = () => {
   deleteUserByIds(list.selected.map((_) => _.id)).then(_effect)
 }
 </script>
-
-<style lang="scss" scoped>
-ul input {
-  width: 200px;
-  min-width: 200px;
-}
-
-button {
-  display: inline-block;
-}
-
-.actions {
-  display: flex;
-  margin-bottom: 20px;
-
-  input,
-  button {
-    margin: 0 20px 0 0;
-  }
-
-  input {
-    max-width: 200px;
-  }
-}
-
-.table {
-  width: 100%;
-
-  input {
-    display: inline-block;
-    margin: 0;
-  }
-
-  .table thead th {
-    background-color: var(--second);
-  }
-
-  thead {
-    th > svg {
-      height: 12px;
-      width: 12px;
-      display: inline-block;
-    }
-  }
-}
-
-.btn-group {
-  margin-top: 20px;
-  justify-content: flex-end;
-}
-</style>

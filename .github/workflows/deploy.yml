@@ -18,7 +18,7 @@ jobs:
         run: |
           npm i pnpm -g
           pnpm i
-          pnpm run build:admin
+          pnpm run build
 
       - name: SSH Server Deploy
         uses: kostya-ten/ssh-server-deploy@v4
@@ -27,12 +27,11 @@ jobs:
           port: 22
           username: root
           password: ${{ secrets.SSH_PASSWORD }}
-          scp_source: ./dist/admin/*
-          scp_target: /var/www/admin/
-          before_script: |
-            df -h
+          scp_source: ./dist/*
+          scp_target: /var/www/
           # sudo rm -rf /var/www/admin
           # sudo mkdir -p /var/www/admin
           # mkdir -p /var/www/index/
           after_script: |
             whoami
+            mv /var/www/index/* /var/www/html/
