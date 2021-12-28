@@ -129,9 +129,7 @@
       </div>
 
       <main class="p-4 lg:p-10">
-        <section>
-          <router-view></router-view>
-        </section>
+        <router-view></router-view>
       </main>
 
       <footer class="p-4 footer bg-base-200 text-base-content footer-center">

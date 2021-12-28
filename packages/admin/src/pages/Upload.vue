@@ -342,6 +342,11 @@ export default {
     },
     isAdmin,
     getTimeDistance
+  },
+  watch: {
+    isAddVideo(v) {
+      document.querySelector('.drawer-content').style.zIndex = v ? 20 : 0
+    }
   }
 }
 </script>
