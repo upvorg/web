@@ -7,7 +7,7 @@
       <div class="btn btn-sm" tabindex="0">
         {{ USER_ROLE_STATE_MAP[state.status] || '全部' }}
         <svg
-          class="inline-block w-6 h-6 ml-2 stroke-current"
+          class="inline-block w-4 h-4 ml-2 stroke-current"
           fill="none"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

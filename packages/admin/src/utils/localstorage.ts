@@ -9,7 +9,7 @@ const ls = {
   },
   rm(k: string) {
     localStorage.removeItem(k)
-  },
+  }
 }
 
 export type User = {
@@ -26,7 +26,7 @@ export type User = {
 
 export const GlobalState = {
   user: {} as User,
-  token: '',
+  token: ''
 }
 
 export const getLocalToken = () => ls.get(TOKEN_KEY)
@@ -41,6 +41,7 @@ export const setLocalUser = (v: object) => ls.set(USER_KEY, JSON.stringify(v))
 
 export const removeLocalUser = () => {
   ls.rm(USER_KEY)
+  ls.rm(TOKEN_KEY)
   GlobalState.user = {} as User
   GlobalState.token = ''
 }

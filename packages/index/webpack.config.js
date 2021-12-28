@@ -8,7 +8,7 @@ const { default: merge } = require('webpack-merge')
 module.exports = merge(baseConfig, {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, '../../dist/index')
+    path: path.resolve(__dirname, '../../dist/html')
   },
   devServer: {
     port: 3000

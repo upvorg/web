@@ -27,7 +27,7 @@ export default function UGCList(props) {
                   </div>
                   <div className="info">
                     <div className="uqq">
-                      <img src={getAvatar(item.uqq)} />
+                      <img src={item.creator_avatar} />
                     </div>
                     <div className="title">{item.title}</div>
                   </div>

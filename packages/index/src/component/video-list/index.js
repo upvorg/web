@@ -28,7 +28,7 @@ export default function VideoList(props) {
         ? video.map((item) => {
             return (
               <li className="item" onClick={() => show(item.content)} key={item.oid}>
-                <img src={getAvatar(item.uqq)} alt={item.uqq}></img>
+                <img src={item.creator_avatar} alt="avatar"></img>
                 <span>P {item.oid}</span>
                 <span>{item.title}</span>
               </li>

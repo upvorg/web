@@ -74,7 +74,7 @@
                 shadow-2xl
                 top-px
                 dropdown-content
-                h-40
+                h-38
                 w-52
                 rounded-b-box
                 bg-base-200
