@@ -245,15 +245,15 @@ const navList = [
     name: 'users',
     path: '/users',
     title: '用户',
-    level: 99
+    level: 0
   },
   {
     name: 'user',
     path: `/user/${user.id}`,
     title: '账号',
-    level: 0
+    level: 99
   }
-]
+].filter((_) => _.level >= user.level)
 
 if (router.currentRoute.value.fullPath == '/') {
   if (isAdmin(user.level)) {

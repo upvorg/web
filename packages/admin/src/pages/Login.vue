@@ -15,9 +15,9 @@
       <div class="card-body">
         <div class="form-control">
           <label class="label">
-            <span class="label-text">Email</span>
+            <span class="label-text">Name</span>
           </label>
-          <input type="text" placeholder="email" class="input input-bordered" v-model="name" />
+          <input type="text" placeholder="name" class="input input-bordered" v-model="name" />
         </div>
         <div class="form-control">
           <label class="label">

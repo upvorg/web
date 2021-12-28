@@ -1,10 +1,11 @@
 <template>
   <div class="flex flex-col space-y-4 max-w-xs">
+    <span class="inline-block"><span class="label-text">用户名</span> ：{{ user.name?.toUpperCase() }}</span>
     <div class="form-control">
       <label class="label">
-        <span class="label-text">用户名</span>
+        <span class="label-text">昵称</span>
       </label>
-      <input v-model="user.name" class="input input-bordered input-sm" placeholder="username" type="text" />
+      <input v-model="user.nickname" class="input input-bordered input-sm" placeholder="nickname" type="text" />
     </div>
 
     <div class="form-control">
@@ -66,7 +67,7 @@ export default {
       pwd: null,
       USER_STATUS,
       USER_ROLE_STATE_MAP,
-      GlobalState,
+      GlobalState
     }
   },
   mounted() {
@@ -90,7 +91,7 @@ export default {
           this.get()
         }
       })
-    },
-  },
+    }
+  }
 }
 </script>
