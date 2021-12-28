@@ -98,21 +98,21 @@
   />
 
   <ModalWithSlot v-show="isAddVideo">
-    <div class="card card-side">
+    <div class="card card-side flex-col md:flex-row">
       <label for="file" class="flex flex-col items-center text-center">
-        <img class="rounded-lg p-6 pb-2" pointer :src="file ? hasFileImage : nofileImage" />
-        <p>{{ file?.name || '点击上传' }}</p>
+        <img class="rounded-lg p-6 pb-2 w-40 md:w-min" pointer :src="file ? hasFileImage : nofileImage" />
+        <p>{{ file?.name?.substr(0, 10) || '点击上传' }}</p>
       </label>
       <div class="max-w-lg card-body">
         <input
           v-model="soltVideo.title"
-          class="input input-bordered input-nd mb-6"
+          class="input input-bordered input-nd mb-6 input-sm"
           placeholder="请输入标题"
           type="text"
         />
         <input
           v-model="soltVideo.content"
-          class="input input-bordered input-nd mb-6"
+          class="input input-bordered input-nd mb-6 input-sm"
           placeholder="请输入链接"
           type="text"
         />
