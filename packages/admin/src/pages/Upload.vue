@@ -146,7 +146,7 @@ import { getTimeDistance } from '../utils/date'
 const emptyVideo = {
   oid: 1,
   title: '',
-  content: '',
+  content: ''
 }
 
 export default {
@@ -172,15 +172,15 @@ export default {
         status: '2', // 待审核
         sort: '原创',
         tag: '',
-        type: 'post',
+        type: 'post'
       },
-      soltVideo: emptyVideo,
+      soltVideo: emptyVideo
     }
   },
   computed: {
     combineVideos() {
       return this.queueVideos.concat(this.videos)
-    },
+    }
   },
   mounted() {
     if (this.$route.params.gv) {
@@ -234,7 +234,7 @@ export default {
               _?.code === 200 && (this.videos = this.videos.filter((_) => _.id !== id))
             })
           }
-        },
+        }
       })
     },
     async editVideo() {
@@ -265,7 +265,7 @@ export default {
       if (!title || !oid || !(this.file || content)) {
         return emitter.emit('alert', {
           type: 'warning',
-          text: '请完善视频信息',
+          text: '请完善视频信息'
         })
       }
 
@@ -283,7 +283,7 @@ export default {
         content: src,
         id: new Date().getTime(),
         create_time: new Date(),
-        update_time: new Date(),
+        update_time: new Date()
       })
       this.resetSoltVideo()
     },
@@ -302,7 +302,7 @@ export default {
       })
     },
     checkForm() {
-      const { title, content, type } = this.post
+      const { title, content } = this.post
       if (!title || !content) {
         emitter.emit('alert', { type: 'warning', text: '请完善信息' })
         throw new Error('请完善信息')
@@ -312,7 +312,7 @@ export default {
       if (n < 0) n = 0
       if (n > 1) n = 1
       if (this.step === 0) {
-        return this.checkForm()
+        this.checkForm()
       }
       this.step = n
     },
@@ -329,7 +329,7 @@ export default {
     manage() {
       emitter.emit('alert', {
         type: 'success',
-        text: this.isModify ? '修改成功' : '发布成功',
+        text: this.isModify ? '修改成功' : '发布成功'
       })
       this.$router.push('/posts')
     },
@@ -341,8 +341,8 @@ export default {
       }
     },
     isAdmin,
-    getTimeDistance,
-  },
+    getTimeDistance
+  }
 }
 </script>
 
