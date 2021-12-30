@@ -50,7 +50,7 @@ const router = useRouter()
 onMounted(() => {})
 
 const onLogin = () => {
-  login({ name: name.value, pwd: pwd.value }).then((data) => {
+  login({ name: name.value, pwd: pwd.value }).then(({ data }) => {
     setLocalToken(data.token)
     setLocalUser(data.user)
     GlobalState.user = data.user

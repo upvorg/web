@@ -4,7 +4,7 @@ import emitter from './emitter'
 import r from '../router'
 import shared from '@web/shared'
 
-export const perfix = __DEV__ ? `http://127.0.0.1:8080` : '//64.227.101.251:8080'
+export const perfix = __DEV__ ? `http://127.0.0.1:8080` : 'http://64.227.101.251:8080'
 
 type BaseResponse = {
   code: number
