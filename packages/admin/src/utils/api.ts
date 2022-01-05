@@ -3,8 +3,7 @@ import { GlobalState, removeLocalUser } from './localstorage'
 import emitter from './emitter'
 import r from '../router'
 import shared from '@web/shared'
-
-export const perfix = __DEV__ ? `http://127.0.0.1:8080` : 'http://64.227.101.251:8080'
+import { apiPerfix as perfix, storgePrefix } from '../constant'
 
 type BaseResponse = {
   code: number
@@ -62,7 +61,7 @@ export function uploadApi(data: FormData) {
     }
   })
     .then((_) => _.json())
-    .then((_) => perfix + '/' + _.data)
+    .then((_) => storgePrefix + '/' + _.data)
     .finally(() => {
       emitter.emit('loading', false)
     })

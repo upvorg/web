@@ -1,3 +1,7 @@
+export const apiPerfix = __DEV__ ? `http://127.0.0.1:8080` : 'http://64.227.101.251:8080'
+
+export const storgePrefix = __DEV__ ? `http://127.0.0.1:8080` : 'http://64.227.101.251:1111'
+
 export const TOKEN_KEY = 'JWT_TOKEN'
 export const USER_KEY = 'USER_INFO'
 
@@ -6,7 +10,7 @@ export const USER_ROLE_STATE_MAP = Object.freeze({
   1: '管理员',
   2: '创作者',
   3: '注册用户',
-  10: '全部',
+  10: '全部'
 })
 
 export const isCreator = (level: number) => level < 3
@@ -19,7 +23,7 @@ export const POST_STATE = Object.freeze([
   { key: '已删除', value: '0', level: 1 },
   { key: '已下架', value: '1', level: 1 },
   { key: '审核中', value: '2', level: 2 },
-  { key: '已发布', value: '3', level: 2 },
+  { key: '已发布', value: '3', level: 2 }
   // { key: '全部', value: '10', level: 2 }
 ])
 
@@ -27,7 +31,7 @@ export const POST_STATE_ENUM = Object.freeze({
   3: '已发布',
   2: '审核中',
   1: '已下架',
-  0: '已删除',
+  0: '已删除'
 })
 
 export const TAGS = Object.freeze([
@@ -66,10 +70,10 @@ export const TAGS = Object.freeze([
   '特摄',
   '真人剧',
   '文章',
-  '其它',
+  '其它'
 ])
 
 export const USER_STATUS = Object.freeze({
   0: '封禁|注销',
-  1: '正常',
+  1: '正常'
 })

@@ -1,9 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "useDefineForClassFields": true,
-    "jsx": "preserve",
-    "resolveJsonModule": true,
-    "allowJs": true
+    "baseUrl": ".",
+    "incremental": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve"
   }
 }

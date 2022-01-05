@@ -18,11 +18,12 @@
         </option>
       </select>
       <select v-model="post.sort" v-if="post.type == 'video'" class="select select-bordered select-sm">
-        <option>原创</option>
         <option>番剧</option>
+        <option>原创</option>
+        <option>转载</option>
+        <option>新番</option>
         <option>剧场版</option>
         <option>完结</option>
-        <option>转载</option>
       </select>
     </div>
     <ul class="tags" v-if="post.type == 'video'">
@@ -135,13 +136,14 @@
 </template>
 
 <script lang="ts">
-import { add, deleteVideo, getPost, getVideos, perfix, post, update, updateVideo, uploadApi } from '../utils/api'
+import { add, deleteVideo, getPost, getVideos, post, update, updateVideo, uploadApi } from '../utils/api'
 import { getLocalToken, GlobalState } from '../utils/localstorage'
 import { POST_STATE_ENUM, TAGS, isAdmin } from '../constant'
 import emitter from '../utils/emitter'
 import ModalWithSlot from '../components/ModalWithSlot.vue'
 import { MilkdownEditor } from '../components/Editor/MilkdownEditor'
 import { getTimeDistance } from '../utils/date'
+import { defineComponent } from 'vue'
 
 const emptyVideo = {
   oid: 1,
@@ -149,7 +151,7 @@ const emptyVideo = {
   content: ''
 }
 
-export default {
+export default defineComponent({
   components: { ModalWithSlot, MilkdownEditor },
   data() {
     return {
@@ -179,7 +181,7 @@ export default {
   },
   computed: {
     combineVideos() {
-      return this.queueVideos.concat(this.videos)
+      return this.queueVideos.concat(this.videos).sort((__, _) => __['create_time'] - _['create_time'])
     }
   },
   mounted() {
@@ -348,7 +350,7 @@ export default {
       document.querySelector('.drawer-content').style.zIndex = v ? 20 : 0
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
