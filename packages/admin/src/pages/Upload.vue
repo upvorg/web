@@ -181,7 +181,7 @@ export default defineComponent({
   },
   computed: {
     combineVideos() {
-      return this.queueVideos.concat(this.videos).sort((__, _) => __['create_time'] - _['create_time'])
+      return this.queueVideos.concat(this.videos).sort((_, __) => __['create_time'] - _['create_time'])
     }
   },
   mounted() {
