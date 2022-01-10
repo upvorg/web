@@ -1,3 +1,4 @@
+import router from '../router'
 import { TOKEN_KEY, USER_KEY } from '../constant'
 
 const ls = {
@@ -25,7 +26,7 @@ export type User = {
 }
 
 export const GlobalState = {
-  user: {} as User,
+  user: {} as User | null,
   token: ''
 }
 
@@ -44,6 +45,11 @@ export const removeLocalUser = () => {
   ls.rm(TOKEN_KEY)
   GlobalState.user = {} as User
   GlobalState.token = ''
+}
+
+export const logout = () => {
+  removeLocalUser()
+  router.push({ path: '/login', replace: true })
 }
 
 export default ls

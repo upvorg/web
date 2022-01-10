@@ -1,8 +1,6 @@
 import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router'
 import { getLocalToken } from './utils/localstorage'
 
-// const pages = require.context('./pages', false, /.vue$/)
-
 const createRoute = (name: string, path: string = '', children?: RouteRecordRaw[]): RouteRecordRaw => {
   return {
     path: `/${path || name.toLocaleLowerCase()}`,
@@ -18,11 +16,13 @@ const router = createRouter({
     {
       path: '/',
       component: () => import(`./pages/App.vue`),
+      redirect: 'dashboard',
       children: [
         createRoute('Upload', '', [createRoute('Upload', 'upload/:gv')]),
         createRoute('PostManage', 'posts'),
         createRoute('UserManage', 'users', []),
-        createRoute('UserEditor', 'user/:uid')
+        createRoute('UserEditor', 'user/:uid'),
+        createRoute('Dashboard')
       ]
     },
     createRoute('Register'),

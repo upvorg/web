@@ -13,8 +13,10 @@
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "allowJs": true
+    "allowJs": true,
+    "resolveJsonModule": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
   "exclude": ["dist", "node_modules", "test/types", "scripts/"]
 }

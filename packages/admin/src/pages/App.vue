@@ -5,19 +5,7 @@
     <div class="flex-grow block overflow-x-hidden bg-base-100 text-base-content drawer-content">
       <div
         id="nav"
-        class="
-          inset-x-0
-          top-0
-          z-50
-          w-full
-          transition
-          duration-200
-          ease-in-out
-          border-b border-base-200
-          bg-base-100
-          text-base-content
-          sticky
-        "
+        class="inset-x-0 top-0 z-50 w-full transition duration-200 ease-in-out border-b border-base-200 bg-base-100 text-base-content sticky"
       >
         <div class="mx-auto space-x-1 navbar max-w-none">
           <div class="flex-none lg:hidden">
@@ -33,12 +21,12 @@
             </label>
           </div>
           <div class="flex items-center flex-none lg:hidden">
-            <a href="/" class="px-2 flex-0 btn btn-ghost md:px-4 nuxt-link-active" aria-label="Homepage">
+            <router-link to="/" class="px-2 flex-0 btn btn-ghost md:px-4 nuxt-link-active" aria-label="Homepage">
               <div class="inline-block text-2xl font-title text-primary">
                 <span class="lowercase">创作者</span>
                 <span class="uppercase text-base-content">中心</span>
               </div>
-            </a>
+            </router-link>
           </div>
           <div class="flex-1"></div>
           <div title="Change Theme" class="dropdown dropdown-end">
@@ -68,18 +56,7 @@
               </svg>
             </div>
             <div
-              class="
-                mt-16
-                overflow-y-auto
-                shadow-2xl
-                top-px
-                dropdown-content
-                h-38
-                w-52
-                rounded-b-box
-                bg-base-200
-                text-base-content
-              "
+              class="mt-16 overflow-y-auto shadow-2xl top-px dropdown-content h-38 w-52 rounded-b-box bg-base-200 text-base-content"
             >
               <ul class="p-4 menu compact">
                 <li
@@ -99,14 +76,7 @@
             <div tabindex="0" class="btn btn-ghost rounded-btn">
               <div :class="{ avatar: true, placeholder: !user.avatar }">
                 <div
-                  class="
-                    rounded-full
-                    w-8
-                    h-8
-                    ring ring-primary ring-offset-base-100 ring-offset-2
-                    bg-neutral-focus
-                    text-neutral-content
-                  "
+                  class="rounded-full w-8 h-8 ring ring-primary ring-offset-base-100 ring-offset-2 bg-neutral-focus text-neutral-content"
                   :class="{
                     'mr-4': user.avatar
                   }"
@@ -173,22 +143,7 @@
       <label for="main-menu" class="drawer-overlay"></label>
       <aside class="flex flex-col border-r border-base-200 bg-base-100 text-base-content w-64 md:w-80">
         <div
-          class="
-            sticky
-            inset-x-0
-            top-0
-            z-50
-            hidden
-            w-full
-            py-1
-            transition
-            duration-200
-            ease-in-out
-            border-b
-            lg:block
-            border-base-200
-            bg-base-100
-          "
+          class="sticky inset-x-0 top-0 z-50 hidden w-full py-1 transition duration-200 ease-in-out border-b lg:block border-base-200 bg-base-100"
         >
           <div class="mx-auto space-x-1 navbar max-w-none">
             <div class="flex items-center flex-none">
@@ -208,6 +163,7 @@
             </li>
             <li v-for="nav in navList">
               <router-link :to="nav.path" exact active-class="capitalize active nuxt-link-active" class="capitalize">
+                <span class="icon material-icons material-icons-outlined mr-2 text-lg">{{ nav.icon }}</span>
                 {{ nav.title }}
               </router-link>
             </li>
@@ -219,67 +175,59 @@
 </template>
 
 <script setup lang="ts">
-import { getLocalUser, GlobalState, setLocalToken, setLocalUser } from '../utils/localstorage'
-import { isAdmin, isCreator } from '../constant'
-import { useRouter } from 'vue-router'
+import { getLocalUser, logout } from '../utils/localstorage'
 import { onMounted } from 'vue'
 
+// https://fonts.google.com/icons?selected=Material+Icons&icon.query=edit
 const user = getLocalUser()
-const router = useRouter()
 const navList = [
+  {
+    name: 'dashboard',
+    path: '/dashboard',
+    title: 'Dashboard',
+    level: 99,
+    icon: 'dashboard'
+  },
   {
     name: 'upload',
     path: '/upload',
     title: '投稿',
-    level: 2
+    level: 2,
+    icon: 'edit'
   },
   {
     name: 'post',
     path: '/posts',
     title: '文章',
-    level: 0
+    level: 0,
+    icon: 'vertical_split'
   },
   {
     name: 'users',
     path: '/users',
     title: '用户',
-    level: 0
+    level: 0,
+    icon: 'people'
   },
   {
     name: 'user',
     path: `/user/${user.id}`,
     title: '账号',
-    level: 99
+    level: 99,
+    icon: 'account_circle'
   }
 ].filter((_) => _.level >= user.level)
 
-if (router.currentRoute.value.fullPath == '/') {
-  if (isAdmin(user.level)) {
-    router.push({ path: 'posts', replace: true })
-  } else if (isCreator(user.level)) {
-    router.push({ path: 'upload', replace: true })
-  } else {
-    router.push({ path: '/user/' + user.id, replace: true })
-  }
-}
-
-const logout = () => {
-  setLocalToken('')
-  setLocalUser('' as any)
-  GlobalState.user = null
-  router.push({ path: '/login', replace: true })
-}
-document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'))
-
 onMounted(() => {
-  ;[...document.querySelectorAll('[data-set-theme]')].forEach((e) => {
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light')
+  document.querySelectorAll('[data-set-theme]').forEach((e) => {
     e.addEventListener('click', function () {
-      document.documentElement.setAttribute('data-theme', this.getAttribute('data-set-theme'))
-      localStorage.setItem('theme', document.documentElement.getAttribute('data-theme'))
-      ;[...document.querySelectorAll('[data-set-theme]')].forEach((e) => {
-        e.classList.remove(e.getAttribute('data-act-class'))
+      document.documentElement.setAttribute('data-theme', e.getAttribute('data-set-theme')!)
+      localStorage.setItem('theme', document.documentElement.getAttribute('data-theme')!)
+      document.querySelectorAll('[data-set-theme]').forEach((e) => {
+        e.classList.remove(e.getAttribute('data-act-class')!)
       })
-      e.getAttribute('data-act-class') && e.classList.add(e.getAttribute('data-act-class'))
+      e.getAttribute('data-act-class') && e.classList.add(e.getAttribute('data-act-class')!)
     })
   })
 })

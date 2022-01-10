@@ -5,6 +5,8 @@
     "incremental": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "preserve"
-  }
+    "jsx": "preserve",
+    "useDefineForClassFields": true
+  },
+  "include": ["**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue"]
 }

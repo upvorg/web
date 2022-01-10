@@ -155,4 +155,6 @@ export function deleteVideo(id: any, pid: any) {
   return post(`/video/delete?${stringifyQuery({ id, pid })}`)
 }
 
-/****** */
+export function getUserStat(uid: number) {
+  return get(`/user/${uid}/stat`)
+}

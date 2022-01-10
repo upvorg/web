@@ -41,7 +41,6 @@ import { onMounted, ref } from 'vue'
 import { login } from '../utils/api'
 import { GlobalState, setLocalToken, setLocalUser } from '../utils/localstorage'
 import { useRouter } from 'vue-router'
-import { isAdmin, isCreator } from '../constant'
 
 const name = ref('')
 const pwd = ref('')
@@ -54,14 +53,7 @@ const onLogin = () => {
     setLocalToken(data.token)
     setLocalUser(data.user)
     GlobalState.user = data.user
-    const level = data.user.level as number
-    if (isAdmin(level)) {
-      router.push({ path: 'posts', replace: true })
-    } else if (isCreator(level)) {
-      router.push({ path: 'upload', replace: true })
-    } else {
-      router.push({ path: '/user/' + data.user.id, replace: true })
-    }
+    router.push('/')
   })
 }
 
