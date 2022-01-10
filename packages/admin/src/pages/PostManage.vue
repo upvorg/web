@@ -5,7 +5,7 @@
 
     <div class="dropdown dropdown-hover">
       <div class="btn btn-sm" tabindex="0">
-        {{ POST_STATE_ENUM[state.status] || '全部' }}
+        {{ POST_STATE_ENUM[state.status as unknown as keyof typeof POST_STATE_ENUM ] || '全部' }}
         <svg
           class="inline-block w-4 h-4 ml-2 stroke-current"
           fill="none"
@@ -81,11 +81,11 @@
             </label>
           </th>
           <th v-if="isAdmin(state.user.level)">{{ item.id }}</th>
-          <th pointer @click="pushGv(item.id)" class="primary-color">{{ item.title }}</th>
+          <th pointer @click="pushGv(item.id)" class="primary-color">{{ item.title.substr(0, 15) }}</th>
           <th v-if="isAdmin(state.user.level)">{{ item.creator_name }}</th>
           <th>{{ getTimeDistance(item.create_time) }}</th>
           <th>{{ getTimeDistance(item.update_time) }}</th>
-          <th>{{ POST_STATE_ENUM[item.status] }}</th>
+          <th>{{ POST_STATE_ENUM[item.status as keyof typeof POST_STATE_ENUM] }}</th>
         </tr>
       </tbody>
     </table>

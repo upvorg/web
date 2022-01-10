@@ -1,43 +1,63 @@
 <template>
-  <div :class="{ upload, curr: step === 0, 'max-w-screen-md': true, 'mx-auto': true }">
-    <div>
-      <input v-model="post.title" class="input input-bordered" placeholder="请输入标题" type="text" />
-      <MilkdownEditor v-model="post.content" />
-      <select @change="typeHandler" :value="post.type" class="select select-bordered select-sm">
-        <option value="post">文章</option>
-        <option value="video">视频</option>
-      </select>
-      <select
-        class="select select-bordered select-sm"
-        v-model="post.status"
-        v-if="isAdmin(GlobalState.user?.level) || isModify || post.type == 'video'"
-        :disabled="!isAdmin(GlobalState.user?.level)"
-      >
-        <option v-for="item in Object.keys(POST_STATE_ENUM)" :value="item">
-          {{ POST_STATE_ENUM[item] }}
-        </option>
-      </select>
-      <select v-model="post.sort" v-if="post.type == 'video'" class="select select-bordered select-sm">
-        <option>番剧</option>
-        <option>原创</option>
-        <option>转载</option>
-        <option>新番</option>
-        <option>剧场版</option>
-        <option>完结</option>
-      </select>
+  <div :class="{ upload, curr: step === 0, 'mx-auto': true, 'space-y-4': true }">
+    <div class="flex w-full flex-col md:flex-row justify-center">
+      <div class="editor w-full md:mr-5" style="max-width: 46rem">
+        <input
+          v-model="post.title"
+          class="input input-bordered w-full mb-4 mr-4"
+          placeholder="请输入标题"
+          type="text"
+        />
+        <MilkdownEditor v-model="post.content" />
+        <ul class="tags mt-4" v-if="post.type == 'video'">
+          <kbd
+            class="kbd m-1"
+            v-for="item in TAGS"
+            :key="item"
+            :class="{ active: post.tag.indexOf(item) > -1 }"
+            @click="selectTag(item)"
+          >
+            {{ item }}
+          </kbd>
+        </ul>
+      </div>
+      <div class="options w-max">
+        <div class="form-control flex-row">
+          <label
+            class="cursor-pointer label"
+            v-for="item in [
+              ['文章', 'post'],
+              ['视频', 'video']
+            ]"
+          >
+            <input type="radio" name="opt" v-model="post.type" class="radio" :value="item[1]" />
+            <span class="label-text ml-2">{{ item[0] }}</span>
+          </label>
+        </div>
+        <div class="md:flex md:flex-col">
+          <select
+            class="select select-bordered select-sm"
+            v-model="post.status"
+            v-if="isAdmin(GlobalState.user?.level) || isModify || post.type == 'video'"
+            :disabled="!isAdmin(GlobalState.user?.level)"
+          >
+            <option v-for="item in Object.keys(POST_STATE_ENUM)" :value="item">
+              {{ POST_STATE_ENUM[item] }}
+            </option>
+          </select>
+          <select v-model="post.sort" v-if="post.type == 'video'" class="select select-bordered select-sm">
+            <option>番剧</option>
+            <option>原创</option>
+            <option>转载</option>
+            <option>新番</option>
+            <option>剧场版</option>
+            <option>完结</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <ul class="tags" v-if="post.type == 'video'">
-      <kbd
-        class="kbd m-1"
-        v-for="item in TAGS"
-        :key="item"
-        :class="{ active: post.tag.indexOf(item) > -1 }"
-        @click="selectTag(item)"
-      >
-        {{ item }}
-      </kbd>
-    </ul>
-    <p class="text-center">
+
+    <p class="text-center mt-4">
       <button
         v-if="post.type == 'video'"
         class="btn btn-primary btn-outline btn-sm mr-2"
@@ -136,8 +156,8 @@
 </template>
 
 <script lang="ts">
-import { add, deleteVideo, getPost, getVideos, post, update, updateVideo, uploadApi } from '../utils/api'
-import { getLocalToken, GlobalState } from '../utils/localstorage'
+import { add, deleteVideo, getPost, getVideos, update, updateVideo, uploadApi } from '../utils/api'
+import { GlobalState } from '../utils/localstorage'
 import { POST_STATE_ENUM, TAGS, isAdmin } from '../constant'
 import emitter from '../utils/emitter'
 import ModalWithSlot from '../components/ModalWithSlot.vue'
@@ -164,7 +184,7 @@ export default defineComponent({
       isModify: false,
       isAddVideo: false,
       isModifyVideo: false,
-      file: null,
+      file: null as unknown as File,
       videos: [],
       queueVideos: [],
       post: {
@@ -387,12 +407,6 @@ export default defineComponent({
   select,
   option {
     margin: 10px 10px 10px 0;
-  }
-
-  textarea,
-  input {
-    margin-bottom: 20px;
-    width: 100%;
   }
 }
 

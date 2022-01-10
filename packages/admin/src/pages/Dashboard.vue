@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div v-if="isCreator(dashBoardStat.level)" class="alert bg-base-100 shadow-lg">
+    <div v-if="!isCreator(dashBoardStat.level)" class="alert bg-base-100 shadow-lg">
       <div class="flex-1">
         <label class="mx-3"
           >想要获取发帖权限？
