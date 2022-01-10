@@ -12,7 +12,7 @@ import { slash } from '@milkdown/plugin-slash'
 import { Slice } from 'prosemirror-model'
 import { history } from '@milkdown/plugin-history'
 import { indent } from '@milkdown/plugin-indent'
-import { upload, Uploader, uploadPlugin } from '../../plugin-upload'
+import { upload, Uploader, uploadPlugin } from '@milkdown/plugin-upload'
 import { pu } from './pu'
 import { uploadApi } from '../../utils/api'
 
@@ -38,7 +38,7 @@ const uploader: Uploader = (files, schema) => {
       const alt = image.name
       return schema.nodes.image.createAndFill({
         src,
-        alt,
+        alt
       }) as unknown as Node
     })
   )
@@ -53,8 +53,8 @@ export const MilkdownEditor = defineComponent({
     content: String,
     readonly: {
       type: Boolean,
-      defaut: false,
-    },
+      defaut: false
+    }
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
@@ -62,8 +62,8 @@ export const MilkdownEditor = defineComponent({
       markdown: [
         (getMarkdown: any) => {
           emit('update:modelValue', getMarkdown())
-        },
-      ],
+        }
+      ]
     }
 
     const editor = useEditor((root) =>
@@ -110,5 +110,5 @@ export const MilkdownEditor = defineComponent({
     })
 
     return () => <VueEditor editor={editor} editorRef={editorRef as any} />
-  },
+  }
 })
