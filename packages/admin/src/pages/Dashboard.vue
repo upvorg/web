@@ -15,13 +15,7 @@
       <!-- 个人卡片 -->
       <div class="md:w-1/4 grid p-4 shadow-md rounded-box place-items-center md:mx-4">
         <div class="w-24 h-24 p-px mask mask-squircle bg-base-content bg-opacity-10">
-          <img
-            :src="dashBoardStat.avatar"
-            width="94"
-            height="94"
-            alt="Avatar Tailwind CSS Component"
-            class="mask mask-squircle"
-          />
+          <img :src="dashBoardStat.avatar" width="94" height="94" alt="Avatar " class="mask mask-squircle" />
         </div>
         <div>
           <div class="text-center">
@@ -38,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!isCreator(dashBoardStat.level)" class="alert bg-base-100 shadow-md">
+    <div v-if="!isCreator(dashBoardStat.level!)" class="alert bg-base-100 shadow-md">
       <div class="flex-1">
         <label class="mx-3">
           想要获取发帖权限？
@@ -81,20 +75,17 @@
 
 <script lang="ts" setup>
 import { getUserStat } from '../utils/api'
-import { GlobalState, setLocalUser, logout } from '../utils/localstorage'
+import { GlobalState, setLocalUser, logout, User } from '../utils/localstorage'
 import { onMounted, ref } from 'vue'
 import { isCreator } from '../constant'
 
-type DashBoardStat = {
-  avatar: string
-  level: number
+interface DashBoardStat extends User {
   pv_count: number
   liked_count: number
   comment_count: number
   collect_count: number
   post_count: number
   video_count: number
-  [key: string]: any
 }
 
 const STATSET: {
@@ -134,8 +125,7 @@ const STATSET: {
   }
 ]
 
-const dashBoardStat = ref<DashBoardStat>({
-  avatar: '',
+const dashBoardStat = ref<Partial<DashBoardStat>>({
   level: 3,
   pv_count: 0,
   liked_count: 0,

@@ -13,17 +13,7 @@ const ls = {
   }
 }
 
-export type User = {
-  id: number
-  level: number
-  name: string
-  create_time: string
-  update_time: string
-  status: number
-  bio: string
-  avatar: string
-  qq: string
-}
+export type User = UPV.R.User
 
 export const GlobalState = {
   user: {} as User | null,

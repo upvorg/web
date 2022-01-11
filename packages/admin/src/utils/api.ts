@@ -5,13 +5,7 @@ import r from '../router'
 import shared from '@web/shared'
 import { apiPerfix as perfix, storgePrefix } from '../constant'
 
-type BaseResponse = {
-  code: number
-  msg?: string
-  data: any
-}
-
-const instance = shared.http.create<BaseResponse>(perfix)
+const instance = shared.http.create<UPV.R.Response>(perfix)
 
 instance.interceptors.request.use((config) => {
   return {
