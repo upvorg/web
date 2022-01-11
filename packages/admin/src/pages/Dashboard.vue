@@ -1,88 +1,47 @@
 <template>
-  <div class="space-y-4">
-    <div class="flex flex-col flex-wrap xl:flex-nowrap shadow stats md:flex-row shadow-lg">
-      <div class="stat md:w-2/6">
-        <div class="stat-figure text-info">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-8 h-8 stroke-current"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
+  <div class="space-y-4 container md:w-10/12 m-auto">
+    <div class="flex flex-col md:flex-row">
+      <!-- stats  -->
+      <div class="stats grid-rows-2 md:grid-rows-2 grid-flow-col gap-3 w-full shadow-md">
+        <div class="stat" v-for="item in STATSET">
+          <div :class="`stat-figure ${item.class}`">
+            <span class="icon material-icons material-icons-outlined mr-2">{{ item.icon }}</span>
+          </div>
+          <div class="stat-title">{{ item.title }}</div>
+          <div :class="`stat-value ${item.class}`">{{ dashBoardStat[item.value] }}</div>
+          <div :class="`stat-desc ${item.class}`">{{ item.desc }}</div>
         </div>
-        <div class="stat-title">Views</div>
-        <div class="stat-value text-info">{{ dashBoardStat.read_count }}</div>
-        <div class="stat-desc text-info">浏览量</div>
       </div>
-      <div class="stat md:w-2/6">
-        <div class="stat-figure text-error">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-8 h-8 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            ></path>
-          </svg>
+      <!-- 个人卡片 -->
+      <div class="md:w-1/4 grid p-4 shadow-md rounded-box place-items-center md:mx-4">
+        <div class="w-24 h-24 p-px mask mask-squircle bg-base-content bg-opacity-10">
+          <img
+            :src="dashBoardStat.avatar"
+            width="94"
+            height="94"
+            alt="Avatar Tailwind CSS Component"
+            class="mask mask-squircle"
+          />
         </div>
-        <div class="stat-title">Likes</div>
-        <div class="stat-value text-error">{{ dashBoardStat.like_count }}</div>
-        <div class="stat-desc text-error">获得点赞</div>
-      </div>
-      <div class="stat md:w-2/6">
-        <div class="stat-figure text-primary">
-          <span class="icon material-icons material-icons-outlined mr-2">chat_bubble_outline</span>
-        </div>
-        <div class="stat-title">Comments</div>
-        <div class="stat-value text-primary">{{ dashBoardStat.comment_count }}</div>
-        <div class="stat-desc text-primary">获得评论</div>
-      </div>
-      <div class="stat md:w-2/6">
-        <div class="stat-figure text-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-8 h-8 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-            ></path>
-          </svg>
-        </div>
-        <div class="stat-title">Collects</div>
-        <div class="stat-value text-secondary">{{ dashBoardStat.collection_count }}</div>
-        <div class="stat-desc text-secondary">被收藏</div>
-      </div>
-      <div class="stat md:w-2/6">
-        <div class="stat-figure text-info">
-          <div class="avatar online">
-            <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
-              <img :src="dashBoardStat.avatar" alt="Avatar Tailwind CSS Component" class="mask mask-squircle" />
+        <div>
+          <div class="text-center">
+            <div class="text-lg font-extrabold">{{ dashBoardStat.nickname }}</div>
+            <div class="my-3 text-sm text-base-content text-opacity-60">
+              {{ dashBoardStat.post_count }} posts, {{ dashBoardStat.video_count }} videos
             </div>
           </div>
-        </div>
-        <div class="stat-value">{{ dashBoardStat.post_count + dashBoardStat.video_count }}</div>
-        <div class="stat-title">publish</div>
-        <div class="stat-desc text-info">
-          {{ dashBoardStat.post_count }} posts, {{ dashBoardStat.video_count }} videos
+          <div class="mt-2 text-center">
+            <!-- <div class="badge badge-ghost">Design</div>
+            <div class="badge badge-ghost">Art</div>
+            <div class="badge badge-ghost">Illustration</div>-->
+          </div>
         </div>
       </div>
     </div>
-    <div v-if="!isCreator(dashBoardStat.level)" class="alert bg-base-100 shadow-lg">
+    <div v-if="!isCreator(dashBoardStat.level)" class="alert bg-base-100 shadow-md">
       <div class="flex-1">
-        <label class="mx-3"
-          >想要获取发帖权限？
+        <label class="mx-3">
+          想要获取发帖权限？
           <p class="text-sm text-base-content text-opacity-60">去 QQ 群 @ 群主吧!</p>
         </label>
       </div>
@@ -94,33 +53,94 @@
       </div>
     </div>
 
-    <div class="alert bg-base-100 shadow-lg">这里也许需要一个图表</div>
+    <div class="p-4 bg-base-100 shadow-md rounded-box space-y-4">
+      <div>
+        投稿注意格式
+        <div class="text-sm text-base-content text-opacity-60 leading-6">
+          <p>地区：日本</p>
+          <p>别名：时光碎片/Fragtime</p>
+          <p>播放状态：HD</p>
+          <p>语言：日语</p>
+          <p>首播时间：2019</p>
+          <p>动画种类：OVA</p>
+          <p>官方网站：http://frag-time.com</p>
+          <p>剧情类型：校园,百合,治愈</p>
+          <p>更新时间：2021-07-13</p>
+        </div>
+      </div>
+      <div>
+        头图抓取规则
+        <div class="mt-2 text-sm text-base-content text-opacity-60 leading-6">
+          <p>1. 抓取描述关键词`suo` ![suo](https://xxx.com/xxx.png)</p>
+          <p>2. 否则文章内出现的一个图片 ![](https://xxx.com/xxx.png)</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { getUserStat } from '../utils/api'
 import { GlobalState, setLocalUser, logout } from '../utils/localstorage'
-import { onMounted, reactive } from 'vue'
+import { onMounted, ref } from 'vue'
 import { isCreator } from '../constant'
 
 type DashBoardStat = {
   avatar: string
   level: number
-  read_count: number
-  like_count: number
+  pv_count: number
+  liked_count: number
   comment_count: number
-  collection_count: number
+  collect_count: number
   post_count: number
   video_count: number
+  [key: string]: any
 }
-const dashBoardStat = reactive<DashBoardStat>({
+
+const STATSET: {
+  title: string
+  value: keyof DashBoardStat
+  icon: string
+  desc: string
+  class: string
+}[] = [
+  {
+    icon: 'bolt',
+    title: 'View',
+    value: 'pv_count',
+    desc: '浏览量',
+    class: 'text-info'
+  },
+  {
+    icon: 'favorite_border',
+    title: 'LIKE',
+    value: 'liked_count',
+    desc: '获得点赞',
+    class: 'text-error'
+  },
+  {
+    icon: 'chat_bubble_outline',
+    title: 'Comment',
+    value: 'comment_count',
+    desc: '获得评论',
+    class: 'text-primary'
+  },
+  {
+    icon: 'library_add_check',
+    title: 'Collect',
+    value: 'collect_count',
+    desc: '被收藏',
+    class: 'text-secondary'
+  }
+]
+
+const dashBoardStat = ref<DashBoardStat>({
   avatar: '',
   level: 3,
-  read_count: 0,
-  like_count: 0,
+  pv_count: 0,
+  liked_count: 0,
   comment_count: 0,
-  collection_count: 0,
+  collect_count: 0,
   post_count: 0,
   video_count: 0
 })
@@ -135,14 +155,7 @@ onMounted(() => {
       }
       setLocalUser(stat)
       GlobalState.user = stat
-      dashBoardStat.read_count = stat.pv_count ?? 0
-      dashBoardStat.like_count = stat.liked_count ?? 0
-      dashBoardStat.comment_count = stat.comment_count ?? 0
-      dashBoardStat.collection_count = stat.collect_count ?? 0
-      dashBoardStat.post_count = stat.post_count ?? 0
-      dashBoardStat.video_count = stat.video_count ?? 0
-      dashBoardStat.avatar = stat.avatar
-      dashBoardStat.level = stat.level
+      dashBoardStat.value = { ...stat }
     })
 })
 </script>
