@@ -2,7 +2,7 @@
   <div class="space-y-4 container md:w-10/12 m-auto">
     <div class="flex flex-col md:flex-row">
       <!-- stats  -->
-      <div class="stats grid-rows-2 md:grid-rows-2 grid-flow-col w-full shadow-md">
+      <div class="stats grid-rows-2 md:grid-rows-2 grid-flow-col w-full shadow-md overflow-hidden">
         <div class="stat" v-for="item in STATSET">
           <div :class="`stat-figure ${item.class}`">
             <span class="icon material-icons material-icons-outlined mr-2">{{ item.icon }}</span>
