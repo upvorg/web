@@ -3,7 +3,7 @@
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "dom.iterable"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -14,8 +14,11 @@
     "sourceMap": true,
     "strict": true,
     "allowJs": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
-  "exclude": ["dist", "node_modules", "test/types", "scripts/"]
+  "include": ["src"]
 }

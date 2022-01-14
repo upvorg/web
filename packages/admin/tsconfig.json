@@ -8,5 +8,5 @@
     "jsx": "preserve",
     "useDefineForClassFields": true
   },
-  "include": ["**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue", "../../types/type.d.ts"]
+  "include": ["src", "../../types"]
 }
