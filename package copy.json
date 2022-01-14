@@ -1,0 +1,64 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/node": "^16.11.19",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.5.1",
+    "esbuild-loader": "^2.18.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "postcss": "^8.4.5",
+    "postcss-loader": "*",
+    "sass": "^1.45.1",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "stylus": "^0.56.0",
+    "stylus-loader": "^6.2.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1",
+    "webpack-merge": "^5.8.0"
+  },
+  "scripts": {
+    "dev:index": "pnpm run dev --filter @web/index",
+    "build:index": "pnpm run build --filter @web/index",
+    "dev:admin": "pnpm run dev --filter @web/admin",
+    "build:admin": "pnpm run build --filter @web/admin",
+    "dev": "pnpm run dev:index & pnpm run dev:admin",
+    "dev:coming": "pnpm run dev --filter @web/coming",
+    "build:coming": "pnpm run dev --filter @web/coming",
+    "build": "pnpm run build:index & pnpm run build:admin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upvorg/web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/upvorg/web/issues"
+  },
+  "homepage": "https://github.com/upvorg/web#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
