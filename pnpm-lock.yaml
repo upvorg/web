@@ -107,6 +107,24 @@ importers:
       '@vue/compiler-sfc': 3.2.26
       vue-loader: 17.0.0_webpack@5.65.0
 
+  packages/coming:
+    specifiers:
+      '@types/react': ^17.0.38
+      '@types/react-dom': ^17.0.11
+      '@web/shared': workspace:^1.0.0
+      bulma: ^0.9.3
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      web-vitals: ^2.1.3
+    dependencies:
+      '@types/react': 17.0.38
+      '@types/react-dom': 17.0.11
+      '@web/shared': link:../shared
+      bulma: 0.9.3
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      web-vitals: 2.1.3
+
   packages/index:
     specifiers:
       '@web/shared': workspace:^1.0.0
@@ -876,6 +894,12 @@ packages:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
     dev: true
 
+  /@types/react-dom/17.0.11:
+    resolution: {integrity: sha512-f96K3k+24RaLGVu/Y2Ng3e1EbZ8/cVJvypZWd7cy0ofCBaf2lcM46xNhycMZ2xGwbBjRql7hOlZ+e2WlJ5MH3Q==}
+    dependencies:
+      '@types/react': 17.0.38
+    dev: false
+
   /@types/react/17.0.38:
     resolution: {integrity: sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==}
     dependencies:
@@ -1458,6 +1482,10 @@ packages:
   /buffer-indexof/1.1.1:
     resolution: {integrity: sha512-4/rOEg86jivtPTeOUUT61jJO1Ya1TrR/OkqCSZDyq84WJh3LuuiphBYJN+fm5xufIk4XAFcEwte/8WzC8If/1g==}
     dev: true
+
+  /bulma/0.9.3:
+    resolution: {integrity: sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g==}
+    dev: false
 
   /bytes/3.0.0:
     resolution: {integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=}
@@ -5175,6 +5203,10 @@ packages:
     dependencies:
       minimalistic-assert: 1.0.1
     dev: true
+
+  /web-vitals/2.1.3:
+    resolution: {integrity: sha512-+ijpniAzcnQicXaXIN0/eHQAiV/jMt1oHGHTmz7VdAJPPkzzDhmoYPSpLgJTuFtUh+jCjxCoeTZPg7Ic+g8o7w==}
+    dev: false
 
   /webpack-cli/4.9.1_b84c6ca1a0d1a6eaa102e036920cc264:
     resolution: {integrity: sha512-JYRFVuyFpzDxMDB+v/nanUdQYcZtqFPGzmlW4s+UkPMFhSpfRNmf1z4AwYcHJVdvEFAM7FFCQdNTpsBYhDLusQ==}
