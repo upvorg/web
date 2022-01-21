@@ -35,7 +35,7 @@
     "build:admin": "pnpm run build --filter @web/admin",
     "dev": "pnpm run dev:index & pnpm run dev:admin",
     "dev:index": "pnpm run dev --filter @web/coming",
-    "build:index": "pnpm run dev --filter @web/coming",
+    "build:index": "pnpm run build --filter @web/coming",
     "build": "pnpm run build:index & pnpm run build:admin"
   },
   "repository": {
