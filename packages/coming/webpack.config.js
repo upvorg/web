@@ -7,7 +7,7 @@ const { default: merge } = require('webpack-merge')
 module.exports = merge(baseConfig, {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, '../../dist/coming')
+    path: path.resolve(__dirname, '../../dist/html')
   },
   devServer: {
     port: 3001
@@ -15,7 +15,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       template: '../../index.html',
-      title: 'Coming'
+      title: 'vpv - free animes no ads'
     })
   ]
 })
