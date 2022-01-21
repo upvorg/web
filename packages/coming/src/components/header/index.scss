@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Nanum+Pen+Script);
+
+.logo {
+  font-family: 'Nanum Pen Script';
+  font-size: 27px;
+  transform: scale(1.5);
+}
+
+nav.navbar {
+  background-color: transparent;
+  padding: 0px 24px;
+  line-height: 30px;
+
+  a.navbar-item {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  a.navbar-item:hover {
+    background-color: transparent;
+    font-weight: bold;
+  }
+}

@@ -53,17 +53,18 @@ export default class Http<T = any> {
     return this._send(url, 'POST', headers, data)
   }
 
-  private _send(url: string, method: string, headers: HeadersInit = {}, data: any = {}) {
+  private _send(
+    url: string,
+    method: string,
+    headers: HeadersInit = {},
+    data: any = {}
+  ): Promise<T> {
     const config = this.interceptors.request.resolve?.({
       'Content-type': 'application/json; charset=UTF-8',
       ...this.headers,
       ...headers
     })
-    console.log(`${method} ${url} data: `, {
-      ...(!['GET', 'HEAD'].includes(method.toUpperCase()) && {
-        body: JSON.stringify(data)
-      })
-    })
+    console.log(`${method} ${url} data: `, method.toUpperCase(), data)
     let rawResponse: Response
     return fetch(`${this.baseUrl}${url}`, {
       method,
