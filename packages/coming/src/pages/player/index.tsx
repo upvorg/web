@@ -26,7 +26,7 @@ export default function PlayerPage(props: any) {
     <>
       <div className="player-header">
         <div className="player-header__player">
-          {video.length == 0 ? (
+          {video.length > 0 ? (
             <UPlayer src={video[currentIndex]?.content} playerIsPlaying={playerIsPlaying} />
           ) : (
             <div
@@ -52,7 +52,7 @@ export default function PlayerPage(props: any) {
               </span>
             </div>
             <div className="list-wrapper">
-              {video.length > 1 ? (
+              {video.length > 0 ? (
                 <ul>
                   {video.map((item, i) => (
                     <a key={i}>
