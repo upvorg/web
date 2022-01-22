@@ -5,8 +5,8 @@ import { axios } from '@web/shared'
 
 export default function IndexPage() {
   const st = ['推荐', '最新', '原创']
-  const [state, setState] = useState<any[][]>([])
-  const [rankList, setRankList] = useState([])
+  const [state, setState] = useState<any[]>([null, null, null])
+  const [rankList, setRankList] = useState<[] | null>(null)
 
   useEffect(() => {
     Promise.allSettled([

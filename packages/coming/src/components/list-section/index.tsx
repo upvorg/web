@@ -9,6 +9,8 @@ interface ListSectionProps {
 }
 
 export default function ListSection({ title, videos, asideTitle, aside }: ListSectionProps) {
+  console.log(videos)
+
   return (
     <div className={`upv-grid ${!!asideTitle ? 'col-2' : ''}`}>
       <div className="upv-card-list">
@@ -16,10 +18,14 @@ export default function ListSection({ title, videos, asideTitle, aside }: ListSe
           <h2>{title}</h2>
         </div>
         <div className="list-body ">
-          {videos.length > 0 ? (
-            videos.map((item, index) => <VideoCard key={index} info={item} />)
+          {videos ? (
+            videos.length > 0 ? (
+              videos.map((item, index) => <VideoCard key={index} info={item} />)
+            ) : (
+              <div className="empty">暂无数据</div>
+            )
           ) : (
-            <div className="empty">暂无数据</div>
+            <span className="loading empty">加载中···</span>
           )}
         </div>
       </div>

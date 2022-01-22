@@ -20,6 +20,10 @@
     // grid-template-rows: repeat(10, 1fr);
   }
 
+  .loading {
+    animation: loading 5s infinite ease-in-out;
+  }
+
   &__item {
     cursor: pointer;
     padding: 8px 8px;
