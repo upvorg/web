@@ -2,12 +2,10 @@ import { stringifyQuery } from 'vue-router'
 import { GlobalState, removeLocalUser } from './localstorage'
 import emitter from './emitter'
 import r from '../router'
-import shared from '@web/shared'
+import { axios } from '@web/shared'
 import { apiPerfix as perfix, storgePrefix } from '../constant'
 
-const instance = shared.http.create<UPV.R.Response>(perfix)
-
-instance.interceptors.request.use((config) => {
+axios.interceptors.request.use((config) => {
   return {
     ...config,
     ...(GlobalState.token && {
@@ -16,7 +14,7 @@ instance.interceptors.request.use((config) => {
   }
 })
 
-instance.interceptors.response.use(
+axios.interceptors.response.use(
   (data) => {
     if (data?.msg) {
       emitter.emit('alert', {
@@ -41,9 +39,9 @@ instance.interceptors.response.use(
   }
 )
 
-export const post = (url: string, data?: any) => instance.post(url, { data })
+export const post = (url: string, data?: any) => axios.post(url, { data })
 
-export const get = (url: string, data?: any) => instance.get(url, { data })
+export const get = (url: string, data?: any) => axios.get(url, { data })
 
 export function uploadApi(data: FormData) {
   emitter.emit('loading', true)
@@ -100,7 +98,16 @@ export function updateUser({ id, ...params }: any) {
   return post(`/user/update/${id}`, params)
 }
 
-export function getPosts(status: any, sort: any, tag: any, uid: any, page: any, pageSize: any, order: any, key: any) {
+export function getPosts(
+  status: any,
+  sort: any,
+  tag: any,
+  uid: any,
+  page: any,
+  pageSize: any,
+  order: any,
+  key: any
+) {
   return get(
     `/posts?${stringifyQuery({
       status,
@@ -141,7 +148,10 @@ export function getVideos(pid: any, page = 1, pageSize = 222) {
   )
 }
 
-export function updateVideo(id: any, params: { pid: any; title: any; content: any; oid: any; uid: any }) {
+export function updateVideo(
+  id: any,
+  params: { pid: any; title: any; content: any; oid: any; uid: any }
+) {
   return post(`/video/update/${id}`, params)
 }
 
