@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import ListSection from '../../components/list-section'
 import RankList from '../../components/rank-list'
-import { axios } from '../../constants'
+import { axios } from '@web/shared'
 
 export default function IndexPage() {
   const st = ['推荐', '最新', '原创']

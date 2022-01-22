@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { DefaultRoute, IndexRoute } from './components/layout'
 import { Switch } from 'wouter'
 import IndexPage from './pages/index'
-import PlayerPage from './pages/index/player'
+import PlayerPage from './pages/player'
 // import reportWebVitals from './reportWebVitals'
 import './index.scss'
 

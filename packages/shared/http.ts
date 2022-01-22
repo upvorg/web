@@ -64,7 +64,7 @@ export default class Http<T = any> {
       ...this.headers,
       ...headers
     })
-    console.log(`${method} ${url} data: `, method.toUpperCase(), data)
+    if (__DEV__) console.log(`${method} ${url} data: `, method.toUpperCase(), data)
     let rawResponse: Response
     return fetch(`${this.baseUrl}${url}`, {
       method,
@@ -97,7 +97,7 @@ export default class Http<T = any> {
               )
           )
         }
-        console.log(`${method} ${url} response: `, response)
+        if (__DEV__) console.log(`${method} ${url} response: `, response)
         return this.interceptors.response.resolve?.(response) ?? response
       })
   }

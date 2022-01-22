@@ -30,7 +30,8 @@ main {
       position: relative;
       background-color: #f4f4f4;
       border-radius: 2px;
-      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
 
       .list-title {
         height: 42px;
@@ -62,6 +63,9 @@ main {
       .list-wrapper {
         height: 100%;
         padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         ul {
           display: grid;

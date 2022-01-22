@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { getCoverFormMd } from '../../utils/reg'
+import { getCoverFormMd } from '@web/shared'
 
 import './index.scss'
 
