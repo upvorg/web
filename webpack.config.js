@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { ProgressPlugin } = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
@@ -12,7 +13,9 @@ module.exports = {
   mode: isEnvProduction ? 'production' : 'development',
   output: {
     filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
-    chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
+    chunkFilename: isEnvProduction
+      ? 'static/js/[name].[contenthash:8].chunk.js'
+      : 'static/js/[name].chunk.js',
     assetModuleFilename: 'static/media/[name].[hash][ext]',
     publicPath: '/'
   },
@@ -51,7 +54,11 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [
+          isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -114,6 +121,10 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       React: 'react'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
     })
   ],
   devServer: {

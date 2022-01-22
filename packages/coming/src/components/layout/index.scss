@@ -20,6 +20,28 @@
     z-index: 1;
     width: 100%;
     height: 64px;
+
+    &:not(.fixed-header) {
+      nav.navbar {
+        background-color: transparent;
+
+        .navbar-menu:not(.is-active) {
+          a.navbar-item {
+            color: #fff;
+            font-weight: bold;
+          }
+        }
+
+        .navbar-brand {
+          .navbar-item {
+            color: #fff;
+          }
+        }
+      }
+      .navbar-burger {
+        color: #fff;
+      }
+    }
   }
 
   .fixed-header {
@@ -34,9 +56,8 @@
   }
 
   &__banner {
-    // https://ae01.alicdn.com/kf/U251ceb70165240ef865c7bed275579feN.jpg.  
-    background: url(https://s2.loli.net/2022/01/22/bJMefymnBDdcgo7.jpg) no-repeat
-      center;
+    // https://ae01.alicdn.com/kf/U251ceb70165240ef865c7bed275579feN.jpg.
+    background: url(https://s2.loli.net/2022/01/22/bJMefymnBDdcgo7.jpg) no-repeat center;
     position: relative;
     z-index: 0;
     display: flex;

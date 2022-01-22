@@ -16,9 +16,11 @@ export default function ListSection({ title, videos, asideTitle, aside }: ListSe
           <h2>{title}</h2>
         </div>
         <div className="list-body ">
-          {videos.map((item, index) => (
-            <VideoCard key={index} info={item} />
-          ))}
+          {videos.length > 0 ? (
+            videos.map((item, index) => <VideoCard key={index} info={item} />)
+          ) : (
+            <div className="empty">暂无数据</div>
+          )}
         </div>
       </div>
 
