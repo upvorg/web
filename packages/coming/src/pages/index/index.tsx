@@ -9,14 +9,14 @@ export default function IndexPage() {
   const [rankList, setRankList] = useState([])
 
   useEffect(() => {
-    Promise.all([
+    Promise.allSettled([
       axios.get('/posts?status=3&tag=推荐&page=1&pageSize=10&type=video'),
       axios.get('/posts?status=3&sort=bgm&page=1&pageSize=10&type=video'),
       axios.get('/posts?status=3&sort=原创&page=1&pageSize=10&type=video'),
       axios.get(`/rank`)
     ]).then(([recommend, bgm, original, rank]) => {
-      setState([recommend.data, bgm.data, original.data])
-      setRankList(rank.data)
+      setState([recommend.value?.data, bgm.value?.data, original.value?.data])
+      setRankList(rank.value?.data)
     })
   }, [])
 
