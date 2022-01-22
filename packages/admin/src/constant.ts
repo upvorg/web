@@ -1,6 +1,5 @@
-export const apiPerfix = __DEV__ ? `http://127.0.0.1:8080` : 'http://64.227.101.251:8080'
-
-export const storgePrefix = __DEV__ ? `http://127.0.0.1:8080` : 'http://64.227.101.251:1111'
+export const apiPerfix = __DEV__ ? `http://127.0.0.1:8080` : '//api.upv.life'
+export const storgePrefix = __DEV__ ? `http://127.0.0.1:8080` : '//storge.upv.life'
 
 export const TOKEN_KEY = 'JWT_TOKEN'
 export const USER_KEY = 'USER_INFO'
