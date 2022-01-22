@@ -19,8 +19,8 @@ const getCoverFormMd = (text: string = '') => {
   }
 
   return {
-    title: '',
-    url: ''
+    title: 'cover',
+    url: 'https://s2.loli.net/2022/01/22/IkS53uazMbyYHsp.jpg'
   }
 }
 
