@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { DefaultRoute, IndexRoute } from './components/layout'
-import { Switch } from 'wouter'
-import IndexPage from './pages/index'
-import PlayerPage from './pages/player'
+import { Router, Switch } from 'wouter'
 // import reportWebVitals from './reportWebVitals'
 import './index.scss'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Switch>
-      <IndexRoute path="/" component={IndexPage} />
-      <DefaultRoute path="/bangumi/play/:id" component={PlayerPage} />
-      <DefaultRoute path="/:rest*">
-        {(params) => `404, Sorry the page ${params.rest} does not exist!`}
-      </DefaultRoute>
-    </Switch>
+    <Router>
+      <Suspense fallback={null}>
+        <Switch>
+          <IndexRoute path="/" component={lazy(() => import('./pages/index'))} />
+          <DefaultRoute path="/bangumi/play/:id" component={lazy(() => import('./pages/player'))} />
+          <DefaultRoute path="/:rest*">
+            {(params) => (
+              <p
+                style={{ marginTop: '2em' }}
+              >{`404, Sorry the page ${params.rest} does not exist!`}</p>
+            )}
+          </DefaultRoute>
+        </Switch>
+      </Suspense>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 )
