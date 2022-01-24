@@ -8,6 +8,7 @@
 
 .navbar {
   padding: 0px 24px;
+  height: 100%;
 }
 
 .center-search {
@@ -46,9 +47,6 @@
 
       &:focus-within {
         background-color: #e3e5e7;
-        .nav-search-clean {
-          visibility: visible;
-        }
       }
 
       .nav-search-input {
@@ -62,6 +60,12 @@
         font-size: 14px;
         line-height: 20px;
         outline: 0;
+
+        &:not(:placeholder-shown) {
+          & + .nav-search-clean {
+            visibility: visible;
+          }
+        }
       }
 
       .nav-search-clean {
