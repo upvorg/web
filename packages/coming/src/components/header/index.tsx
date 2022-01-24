@@ -18,6 +18,7 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
+    if (__DEV__) return
     const fetchHitokoto = () => {
       fetch('//v1.hitokoto.cn?c=a')
         .then((res) => res.json())
@@ -57,6 +58,9 @@ export default function Header() {
         <div className="navbar-start">
           <Link className="navbar-item" href="/">
             首页
+          </Link>
+          <Link className="navbar-item" href="/anime/index/">
+            新番时间表
           </Link>
           <a className="navbar-item" href="//app.upv.life">
             APP 下载
