@@ -20,4 +20,5 @@
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true
   },
+  "exclude": ["node_modules"]
 }
