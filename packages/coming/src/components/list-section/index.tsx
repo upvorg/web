@@ -9,8 +9,6 @@ interface ListSectionProps {
 }
 
 export default function ListSection({ title, videos, asideTitle, aside }: ListSectionProps) {
-  console.log(videos)
-
   return (
     <div className={`upv-grid ${!!asideTitle ? 'col-2' : ''}`}>
       <div className="upv-card-list">
