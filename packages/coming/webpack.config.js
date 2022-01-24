@@ -1,4 +1,3 @@
-// @ts-nocheck
 const path = require('path')
 const baseConfig = require('../../webpack.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -14,8 +13,21 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: '../../index.html',
+      template: '../../public/index.html',
       title: 'vpv - free animes no ads'
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        griffith: {
+          test: (module) => {
+            return /griffith.+|hls.+/.test(module.context)
+          },
+          name: 'griffith',
+          priority: 1
+        }
+      }
+    }
+  }
 })
