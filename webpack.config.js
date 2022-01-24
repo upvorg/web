@@ -9,10 +9,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  entry: {},
   mode: isEnvProduction ? 'production' : 'development',
   output: {
-    filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
+    filename: isEnvProduction
+      ? 'static/js/[name].[contenthash:8].js'
+      : 'static/js/bundle_[name].js',
     chunkFilename: isEnvProduction
       ? 'static/js/[name].[contenthash:8].chunk.js'
       : 'static/js/[name].chunk.js',
@@ -86,7 +87,6 @@ module.exports = {
       new TerserPlugin({
         terserOptions: {
           parse: {
-            // @ts-ignore
             ecma: 8
           },
           compress: {
@@ -97,7 +97,6 @@ module.exports = {
           mangle: {
             safari10: true
           },
-          // Added for profiling in devtools
           keep_classnames: false,
           keep_fnames: false,
           output: {
@@ -107,7 +106,17 @@ module.exports = {
           }
         }
       })
-    ]
+    ],
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -136,6 +145,14 @@ module.exports = {
     },
     compress: true,
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8080',
+        pathRewrite: { '^/api': '' },
+        secure: false,
+        changeOrigin: true
+      }
+    }
   }
 }
