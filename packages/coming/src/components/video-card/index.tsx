@@ -10,7 +10,7 @@ export default function VideoCard({ info }: any) {
         <Link href={`/bangumi/play/${info.id}`}>
           <div className="upv-video-card__image">
             <div className="upv-video-card__image--wrap">
-              <img src={getCoverFormMd(info.content).url} />
+              <img src={getCoverFormMd(info.content).url} alt={info.title} />
             </div>
           </div>
         </Link>
