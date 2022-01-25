@@ -72,6 +72,13 @@
     background-position: center 0;
     background-size: cover;
 
+    @media (max-width: 991px) {
+      & {
+        min-height: 96px;
+        min-width: 100%;
+      }
+    }
+
     .taper-line {
       position: absolute;
       top: 0;
@@ -85,9 +92,9 @@
   }
 }
 
-main {
-  max-width: 2540px;
-  min-width: 1080px;
-  margin: 0 auto;
-  padding: 0 56px;
+@media (max-width: 991px) {
+  main {
+    padding: 0 8px;
+    min-width: 100%;
+  }
 }

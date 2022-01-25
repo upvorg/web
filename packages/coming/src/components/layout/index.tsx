@@ -31,7 +31,7 @@ const IndexLayout: React.FC<any> = (props) => {
           <div className="taper-line"></div>
         </div>
       </div>
-      <main className="upv-main">{props.children}</main>
+      <main className="container">{props.children}</main>
     </>
   )
 }
@@ -44,7 +44,7 @@ const DefaultLayout: React.FC = (props) => {
           <Header />
         </div>
       </div>
-      <main className="upv-main">{props.children}</main>
+      <main className="container">{props.children}</main>
     </>
   )
 }

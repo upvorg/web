@@ -1,5 +1,4 @@
 .upv-video-card {
-  position: relative;
   --title-font-size: 15px;
   --title-line-height: 22px;
   --subtitle-font-size: 13px;
@@ -9,7 +8,6 @@
   --avatar-margin-right: 8px;
   --icon-size: 18px;
   --title-padding-right: 16px;
-  cursor: pointer;
 
   &__wrap {
     // position: absolute;

@@ -1,8 +1,3 @@
-main {
-  max-width: 1244px;
-  box-sizing: content-box;
-}
-
 .player-header {
   display: flex;
   position: relative;
@@ -120,22 +115,20 @@ main {
   &__meta {
     overflow: hidden;
     margin: 20px auto;
+    word-break: break-all;
+    display: flex;
+
     img {
-      position: relative;
-      display: block;
-      float: left;
       width: 134px;
       height: 179px;
-      z-index: 2;
       border-radius: 2px;
-      overflow: hidden;
       background-color: #f4f5f7;
     }
     > div {
-      padding-left: 150px;
+      padding-left: 10px;
+      word-break: break-all;
     }
     h3 {
-      display: block;
       height: 20px;
       line-height: 20px;
       font-size: 16px;
@@ -143,11 +136,42 @@ main {
       font-weight: 500;
       margin-top: 4px;
       margin-bottom: 16px;
-      padding-right: 240px;
       overflow: hidden;
       -o-text-overflow: ellipsis;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .player-header {
+    & {
+      min-width: 100%;
+      flex-direction: column;
+      padding-right: 0px;
+      margin: 10px auto;
+
+      .upv-player {
+        min-height: auto;
+      }
+
+      &__r {
+        margin-top: 10px;
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
+  .player-body {
+    &__meta {
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
+
+      img {
+        display: none;
+      }
     }
   }
 }
