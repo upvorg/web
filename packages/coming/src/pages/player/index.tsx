@@ -29,18 +29,7 @@ export default function PlayerPage(props: any) {
           {video.length > 0 ? (
             <UPlayer src={video[currentIndex]?.content} playerIsPlaying={playerIsPlaying} />
           ) : (
-            <div
-              className="player-header__player empty"
-              style={{
-                width: '100%',
-                height: '500px',
-                backgroundColor: '#f4f4f4',
-                textAlign: 'center',
-                lineHeight: '500px'
-              }}
-            >
-              暂无视频
-            </div>
+            <div className="player-header__player empty">暂无视频</div>
           )}
         </div>
         <div className="player-header__r">
