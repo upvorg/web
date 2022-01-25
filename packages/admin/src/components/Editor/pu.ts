@@ -1,8 +1,8 @@
-import { css, injectGlobal } from '@emotion/css'
-import { themeFactory } from '@milkdown/core'
+import { Emotion, themeFactory } from '@milkdown/core'
 import { view } from './view'
 
-const font = 'Roboto,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif'
+const font =
+  'Roboto,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif'
 
 const fontCode = 'Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace'
 
@@ -43,7 +43,7 @@ const iconMapping: Record<string, string> = {
   sinkList: 'sink_list'
 }
 
-export const pu = themeFactory({
+export const pu = themeFactory((emotion: Emotion) => ({
   font: {
     typography: font.split(', '),
     code: fontCode.split(', ')
@@ -62,7 +62,7 @@ export const pu = themeFactory({
     neutral: '#2e3440'
   },
   slots: () => ({
-    icon: (id) => {
+    icon: (id: string) => {
       const span = document.createElement('span')
       span.className = 'icon material-icons material-icons-outlined'
       span.textContent = iconMapping[id]
@@ -71,7 +71,7 @@ export const pu = themeFactory({
   }),
   //@ts-ignore
   mixin: ({ palette }) => ({
-    scrollbar: (direction = 'y') => css`
+    scrollbar: (direction = 'y') => emotion.css`
       ${view}
       scrollbar-width: thin;
       scrollbar-color: ${palette('secondary', 0.38)} ${palette('secondary', 0.12)};
@@ -95,7 +95,8 @@ export const pu = themeFactory({
     `
   }),
   global: ({ font }) => {
-    return injectGlobal`
+    //TOOD:
+    emotion.injectGlobal`
       .milkdown {
         max-width: 100% !important;
         padding: 0 !important;
@@ -127,4 +128,4 @@ export const pu = themeFactory({
       }
     `
   }
-})
+}))

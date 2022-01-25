@@ -53,7 +53,6 @@ importers:
 
   packages/admin:
     specifiers:
-      '@emotion/css': ^11.7.1
       '@milkdown/core': ^5.3.5
       '@milkdown/plugin-emoji': ^5.3.5
       '@milkdown/plugin-history': ^5.3.5
@@ -82,7 +81,6 @@ importers:
       vue-loader: ^17.0.0
       vue-router: ^4.0.12
     dependencies:
-      '@emotion/css': 11.7.1
       '@milkdown/core': 5.3.5
       '@milkdown/plugin-emoji': 5.3.5
       '@milkdown/plugin-history': 5.3.5
