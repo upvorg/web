@@ -118,7 +118,8 @@ main {
 
 .player-body {
   &__meta {
-    // display: flex;
+    overflow: hidden;
+    margin: 20px auto;
     img {
       position: relative;
       display: block;

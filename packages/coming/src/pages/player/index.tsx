@@ -48,7 +48,7 @@ export default function PlayerPage(props: any) {
             <div className="list-title">
               <h4>播放列表</h4>
               <span className="ep-list-progress">
-                {currentIndex + 1}/{video.length}
+                {video.length > 0 ? currentIndex + 1 : 0}/{video.length}
               </span>
             </div>
             <div className="list-wrapper">

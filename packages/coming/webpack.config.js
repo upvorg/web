@@ -1,3 +1,4 @@
+// @ts-nocheck
 const path = require('path')
 const baseConfig = require('../../webpack.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -14,7 +15,17 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       template: '../../public/index.html',
-      title: 'vpv - free animes no ads'
+      title: 'vpv - free animes no ads',
+      script: `<script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5e4eee252da8cfbd070f418edd852e33";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      `
     })
   ],
   optimization: {
