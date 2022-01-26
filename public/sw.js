@@ -1,4 +1,5 @@
 // import { handlePush, handleNotificationClick, handleClientMessage } from './push-notification'
+import { respondWithCache } from './asset-cache'
 
 // declare const self: ServiceWorkerGlobalScope
 const ASSET_CACHE_PATTERN = /.+\.[0-9a-f]{8}\..+(js|css|woff2?|svg|png|jpg|jpeg|json|wasm)$/
