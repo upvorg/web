@@ -1,4 +1,4 @@
-import { handlePush, handleNotificationClick, handleClientMessage } from './push-notification'
+// import { handlePush, handleNotificationClick, handleClientMessage } from './push-notification'
 
 // declare const self: ServiceWorkerGlobalScope
 const ASSET_CACHE_PATTERN = /.+\.[0-9a-f]{8}\..+(js|css|woff2?|svg|png|jpg|jpeg|json|wasm)$/
@@ -42,6 +42,6 @@ self.addEventListener('fetch', (e /*: FetchEvent*/) => {
   return false
 })
 
-self.addEventListener('push', handlePush)
-self.addEventListener('notificationclick', handleNotificationClick)
-self.addEventListener('message', handleClientMessage)
+// self.addEventListener('push', handlePush)
+// self.addEventListener('notificationclick', handleNotificationClick)
+// self.addEventListener('message', handleClientMessage)
