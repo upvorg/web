@@ -11,7 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@emotion/css": "^11.7.1",
     "@milkdown/core": "^5.3.5",
     "@milkdown/plugin-emoji": "^5.3.5",
     "@milkdown/plugin-history": "^5.3.5",
@@ -22,9 +21,7 @@
     "@milkdown/plugin-slash": "^5.3.5",
     "@milkdown/plugin-tooltip": "^5.3.5",
     "@milkdown/plugin-upload": "^5.3.5",
-    "@milkdown/preset-commonmark": "^5.3.5",
     "@milkdown/preset-gfm": "^5.3.5",
-    "@milkdown/theme-nord": "^5.3.5",
     "@milkdown/vue": "^5.3.5",
     "@vue/reactivity": "^3.2.29",
     "@vue/runtime-core": "^3.2.29",

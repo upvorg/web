@@ -1,8 +1,8 @@
-import { css, injectGlobal } from '@emotion/css'
-import { themeFactory } from '@milkdown/core'
+import { Emotion, themeFactory } from '@milkdown/core'
 import { view } from './view'
 
-const font = 'Roboto,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif'
+const font =
+  'Roboto,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif'
 
 const fontCode = 'Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace'
 
@@ -43,7 +43,7 @@ const iconMapping: Record<string, string> = {
   sinkList: 'sink_list'
 }
 
-export const pu = themeFactory({
+export const pu = themeFactory((emotion: Emotion) => ({
   font: {
     typography: font.split(', '),
     code: fontCode.split(', ')
@@ -62,17 +62,16 @@ export const pu = themeFactory({
     neutral: '#2e3440'
   },
   slots: () => ({
-    icon: (id) => {
+    icon: (id: string) => {
       const span = document.createElement('span')
       span.className = 'icon material-icons material-icons-outlined'
       span.textContent = iconMapping[id]
       return span
     }
   }),
-  //@ts-ignore
   mixin: ({ palette }) => ({
-    scrollbar: (direction = 'y') => css`
-      ${view}
+    scrollbar: (direction = 'y') => emotion.css`
+      ${view(emotion)}
       scrollbar-width: thin;
       scrollbar-color: ${palette('secondary', 0.38)} ${palette('secondary', 0.12)};
       -webkit-overflow-scrolling: touch;
@@ -95,36 +94,36 @@ export const pu = themeFactory({
     `
   }),
   global: ({ font }) => {
-    return injectGlobal`
-      .milkdown {
-        max-width: 100% !important;
-        padding: 0 !important;
-        color: inherit !important;
-        background: inherit;
-        position: relative;
-        font-family: ${font.typography};
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: none;
-        box-sizing: border-box;
-        .editor {
-          min-height: 300px;
-          outline: none;
-          padding: 0;
-          & > p {
-            margin: 0rem 0;
-          }
-          & > * {
-            margin: 1rem 0;
-          }
-        }
+    emotion.injectGlobal`
+  .milkdown {
+    max-width: 100% !important;
+    padding: 0 !important;
+    color: inherit !important;
+    background: inherit;
+    position: relative;
+    font-family: ${font.typography};
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: none;
+    box-sizing: border-box;
+    .editor {
+      min-height: 300px;
+      outline: none;
+      padding: 0;
+      & > p {
+        margin: 0rem 0;
       }
-      .milkdown-root:focus-within {
-        border: 1px solid var(--theme);
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        box-shadow: 0 0 0 2px hsl(var(--b1)), 0 0 0 4px hsla(var(--bc) / 0.2);
+      & > * {
+        margin: 1rem 0;
       }
-    `
+    }
   }
-})
+  .milkdown-root:focus-within {
+    border: 1px solid var(--theme);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--b1)), 0 0 0 4px hsla(var(--bc) / 0.2);
+  }
+`
+  }
+}))

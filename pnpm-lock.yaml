@@ -53,7 +53,6 @@ importers:
 
   packages/admin:
     specifiers:
-      '@emotion/css': ^11.7.1
       '@milkdown/core': ^5.3.5
       '@milkdown/plugin-emoji': ^5.3.5
       '@milkdown/plugin-history': ^5.3.5
@@ -64,9 +63,7 @@ importers:
       '@milkdown/plugin-slash': ^5.3.5
       '@milkdown/plugin-tooltip': ^5.3.5
       '@milkdown/plugin-upload': ^5.3.5
-      '@milkdown/preset-commonmark': ^5.3.5
       '@milkdown/preset-gfm': ^5.3.5
-      '@milkdown/theme-nord': ^5.3.5
       '@milkdown/vue': ^5.3.5
       '@types/lodash.debounce': ^4.0.6
       '@vue/compiler-sfc': ^3.2.29
@@ -82,7 +79,6 @@ importers:
       vue-loader: ^17.0.0
       vue-router: ^4.0.12
     dependencies:
-      '@emotion/css': 11.7.1
       '@milkdown/core': 5.3.5
       '@milkdown/plugin-emoji': 5.3.5
       '@milkdown/plugin-history': 5.3.5
@@ -93,9 +89,7 @@ importers:
       '@milkdown/plugin-slash': 5.3.5
       '@milkdown/plugin-tooltip': 5.3.5
       '@milkdown/plugin-upload': 5.3.5
-      '@milkdown/preset-commonmark': 5.3.5
       '@milkdown/preset-gfm': 5.3.5
-      '@milkdown/theme-nord': 5.3.5
       '@milkdown/vue': 5.3.5_vue@3.2.29
       '@vue/reactivity': 3.2.29
       '@vue/runtime-core': 3.2.29
@@ -584,17 +578,6 @@ packages:
       prosemirror-transform: 1.3.3
       prosemirror-view: 1.23.6
       tslib: 2.3.1
-    dev: false
-
-  /@milkdown/theme-nord/5.3.5:
-    resolution: {integrity: sha512-BCgYNIz/Pgxo27I4Gcl02sNKISBqPwf649lnUBo9brZgaMSpHXBa/ZvsSL8jtGhQ++SYf5cGqf/qEwHv1ti06Q==}
-    dependencies:
-      '@milkdown/core': 5.3.5
-      '@milkdown/design-system': 5.3.5
-      '@milkdown/prose': 5.3.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - supports-color
     dev: false
 
   /@milkdown/transformer/5.3.5:

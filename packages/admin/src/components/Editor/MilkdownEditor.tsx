@@ -1,9 +1,15 @@
 import { defineComponent, PropType, ref, watch, watchEffect } from 'vue'
-import { Ctx, defaultValueCtx, Editor, editorViewCtx, editorViewOptionsCtx, parserCtx, rootCtx } from '@milkdown/core'
-import { nord } from '@milkdown/theme-nord'
+import {
+  Ctx,
+  defaultValueCtx,
+  Editor,
+  editorViewCtx,
+  editorViewOptionsCtx,
+  parserCtx,
+  rootCtx
+} from '@milkdown/core'
 import { VueEditor, useEditor, EditorRef } from '@milkdown/vue'
-import { commonmark } from '@milkdown/preset-commonmark'
-import { listenerCtx, listener as listenerPlugin } from '@milkdown/plugin-listener'
+import { listenerCtx, listener } from '@milkdown/plugin-listener'
 import { gfm } from '@milkdown/preset-gfm'
 import { emoji } from '@milkdown/plugin-emoji'
 import { prism } from '@milkdown/plugin-prism'
@@ -16,7 +22,6 @@ import { upload, Uploader, uploadPlugin } from '@milkdown/plugin-upload'
 import { pu } from './pu'
 import { uploadApi } from '../../utils/api'
 
-//@ts-ignore
 const uploader: Uploader = (files, schema) => {
   const images: File[] = []
 
@@ -39,7 +44,7 @@ const uploader: Uploader = (files, schema) => {
       return schema.nodes.image.createAndFill({
         src,
         alt
-      }) as unknown as Node
+      }) as unknown as any
     })
   )
 }
@@ -58,31 +63,23 @@ export const MilkdownEditor = defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const listener = {
-      markdown: [
-        (getMarkdown: any) => {
-          emit('update:modelValue', getMarkdown())
-        }
-      ]
-    }
-
     const editor = useEditor((root) =>
       Editor.make()
         .config((ctx) => {
           ctx.set(rootCtx, root)
           ctx.set(defaultValueCtx, props.modelValue || '')
-          ctx.set(listenerCtx, listener)
+          ctx.get(listenerCtx).markdownUpdated((_, markdown, __) => {
+            emit('update:modelValue', markdown)
+          })
           ctx.set(editorViewOptionsCtx, { editable: () => !props.readonly })
         })
-        .use(nord)
-        .use(commonmark)
-        .use(listenerPlugin)
+        .use(listener)
+        .use(pu)
         .use(gfm)
         .use(emoji)
         .use(tooltip)
         .use(slash)
         .use(prism)
-        .use(pu)
         .use(indent)
         .use(upload.configure(uploadPlugin, { uploader }))
         .use(history)
@@ -109,6 +106,7 @@ export const MilkdownEditor = defineComponent({
       editorRef.value?.dom?.()?.classList.add('textarea', 'textarea-bordered', 'milkdown-root')
     })
 
+    //@ts-ignore
     return () => <VueEditor editor={editor} editorRef={editorRef as any} />
   }
 })

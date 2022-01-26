@@ -1,6 +1,6 @@
-import { css } from '@emotion/css'
+import type { Emotion } from '@milkdown/core'
 
-export const view = css`
+export const view = (emotion: Emotion) => emotion.css`
   /* copy from https://github.com/ProseMirror/prosemirror-view/blob/master/style/prosemirror.css */
   .ProseMirror {
     position: relative;
