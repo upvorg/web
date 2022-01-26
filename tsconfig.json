@@ -3,7 +3,7 @@
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM", "dom.iterable"],
+    "lib": ["ESNext", "DOM", "dom.iterable", "WebWorker"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,

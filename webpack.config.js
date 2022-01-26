@@ -5,6 +5,7 @@ const { ProgressPlugin } = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CopyPlugin = require('copy-webpack-plugin')
 
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
@@ -120,6 +121,16 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: '../../public/',
+          globOptions: {
+            ignore: ['**/*.html']
+          }
+        }
+      ]
+    }),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'

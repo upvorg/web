@@ -45,7 +45,11 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: '../../public/index.html',
+      title: '创作者中心',
+      script: `<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
+      <link rel="stylesheet" href="https://unpkg.com/prism-themes/themes/prism-material-light.css" />
+    `
     }),
     new VueLoaderPlugin(),
     new webpack.ProvidePlugin({
