@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      await navigator.serviceWorker.register(new URL('./sw.js', import.meta.url))
+      await navigator.serviceWorker.register('./sw.js')
 
       console.log('[SW] ServiceWorker registered')
 

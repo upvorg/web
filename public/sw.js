@@ -1,6 +1,6 @@
 // declare const self: ServiceWorkerGlobalScope
 
-const ASSET_CACHE_PATTERN = /.+\.[0-9a-f]{8}\.(js|css|woff2?|svg|png|jpg|jpeg|json|wasm)$/
+const ASSET_CACHE_PATTERN = /.+\.[0-9a-f]{8}\..+(js|css|woff2?|svg|png|jpg|jpeg|json|wasm)$/
 const ACTIVATE_TIMEOUT = 3000
 
 const pause = (ms) =>
