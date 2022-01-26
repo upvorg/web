@@ -27,7 +27,7 @@ ReactDOM.render(
           <div className="content" style={{ textAlign: 'center' }}>
             <p>
               <strong className="font-family-logo">UPV</strong>
-              {'  '}The source code is licensed{' '}
+              {'  '}The <a href="https://github.com/upvorg/cdn">source code</a> is licensed{' '}
               <a href="https://opensource.org/licenses/GPL-3.0">GPL-3.0</a>. The website content is
               licensed{' '}
               <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
