@@ -5,6 +5,7 @@ importers:
     specifiers:
       '@types/node': ^16.11.21
       autoprefixer: ^10.4.2
+      browserslist: ^4.19.1
       clean-webpack-plugin: ^4.0.0
       copy-webpack-plugin: ^10.2.1
       cross-env: ^7.0.3
@@ -32,6 +33,7 @@ importers:
       typescript: 4.5.5
     devDependencies:
       autoprefixer: 10.4.2_postcss@8.4.5
+      browserslist: 4.19.1
       clean-webpack-plugin: 4.0.0_webpack@5.67.0
       copy-webpack-plugin: 10.2.1_webpack@5.67.0
       cross-env: 7.0.3
@@ -1759,7 +1761,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.19.1
-      caniuse-lite: 1.0.30001302
+      caniuse-lite: 1.0.30001303
       fraction.js: 4.1.2
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1882,7 +1884,7 @@ packages:
     engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001302
+      caniuse-lite: 1.0.30001303
       electron-to-chromium: 1.4.54
       escalade: 3.1.1
       node-releases: 2.0.1
@@ -1958,10 +1960,10 @@ packages:
     engines: { node: '>= 6' }
     dev: false
 
-  /caniuse-lite/1.0.30001302:
+  /caniuse-lite/1.0.30001303:
     resolution:
       {
-        integrity: sha512-YYTMO+tfwvgUN+1ZnRViE53Ma1S/oETg+J2lISsqi/ZTNThj3ZYBOKP2rHwJc37oCsPqAzJ3w2puZHn0xlLPPw==
+        integrity: sha512-/Mqc1oESndUNszJP0kx0UaQU9kEv9nNtJ7Kn8AdA0mNnH8eR1cj0kG+NbNuC1Wq/b21eA8prhKRA3bbkjONegQ==
       }
     dev: true
 

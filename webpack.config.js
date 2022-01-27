@@ -15,8 +15,13 @@ const STORAGE_HOST = isEnvProduction ? '//storge.upv.life' : `${LOCAL_API_HOST}/
 
 module.exports = {
   mode: isEnvProduction ? 'production' : 'development',
-  target: 'web',
+  target: ['browserslist'],
+  devtool: !isEnvProduction ? 'cheap-module-source-map' : false,
+  infrastructureLogging: {
+    level: 'none'
+  },
   output: {
+    pathinfo: !isEnvProduction,
     filename: isEnvProduction
       ? 'static/js/[name].[contenthash:8].js'
       : 'static/js/bundle_[name].js',
@@ -29,7 +34,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
   },
-  devtool: !isEnvProduction ? 'eval-source-map' : false,
   module: {
     rules: [
       {
@@ -192,3 +196,4 @@ module.exports = {
     }
   }
 }
+
