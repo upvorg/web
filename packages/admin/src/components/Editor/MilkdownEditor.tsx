@@ -11,7 +11,6 @@ import {
 import { VueEditor, useEditor, EditorRef } from '@milkdown/vue'
 import { listenerCtx, listener } from '@milkdown/plugin-listener'
 import { gfm } from '@milkdown/preset-gfm'
-import { emoji } from '@milkdown/plugin-emoji'
 import { prism } from '@milkdown/plugin-prism'
 import { tooltip } from '@milkdown/plugin-tooltip'
 import { slash } from '@milkdown/plugin-slash'
@@ -76,7 +75,6 @@ export const MilkdownEditor = defineComponent({
         .use(listener)
         .use(pu)
         .use(gfm)
-        .use(emoji)
         .use(tooltip)
         .use(slash)
         .use(prism)

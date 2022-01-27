@@ -59,5 +59,18 @@ module.exports = merge(baseConfig, {
       __VUE_PROD_DEVTOOLS__: false,
       __VUE_OPTIONS_API__: true
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        milkdown: {
+          test: (module) => {
+            return /@milkdown.+/.test(module.context)
+          },
+          name: 'milkdown',
+          priority: 1
+        }
+      }
+    }
+  }
 })

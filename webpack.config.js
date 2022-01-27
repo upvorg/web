@@ -164,7 +164,6 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     hot: true,
-    stats: 'minimal',
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8080',

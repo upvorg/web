@@ -49,6 +49,6 @@ async function withTimeout(cb /*: () => Promise<T>*/, timeout /*: number*/) {
   }
 }
 
-function clearAssetCache() {
+export function clearAssetCache() {
   return self.caches.delete(ASSET_CACHE_NAME)
 }
