@@ -1,16 +1,16 @@
 const ASSET_CACHE_NAME = 'asset-cache'
 
-const pause = (ms) =>
+// declare const self: ServiceWorkerGlobalScope
+
+export const pause = (ms) =>
   new Promise((resolve) => {
     setTimeout(() => resolve(), ms)
   })
 
-// declare const self: ServiceWorkerGlobalScope
-
 // An attempt to fix freezing UI on iOS
 const CACHE_TIMEOUT = 3000
 
-async function respondWithCache(e /*: FetchEvent*/) {
+export async function respondWithCache(e /*: FetchEvent*/) {
   const cacheResult = await withTimeout(async () => {
     const cache = await self.caches.open(ASSET_CACHE_NAME)
     const cached = await cache.match(e.request)
@@ -44,7 +44,6 @@ async function withTimeout(cb /*: () => Promise<T>*/, timeout /*: number*/) {
       cb()
     ])
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(err)
     return undefined
   }
