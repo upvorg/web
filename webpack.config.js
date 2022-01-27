@@ -9,6 +9,10 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
+const LOCAL_API_HOST = 'http://127.0.0.1:8080'
+const API_HOST = isEnvProduction ? 'http://api.upv.life' : `/api`
+const STORAGE_HOST = isEnvProduction ? 'http://storge.upv.life' : `${LOCAL_API_HOST}/upload`
+
 module.exports = {
   mode: isEnvProduction ? 'production' : 'development',
   target: 'web',
@@ -144,17 +148,17 @@ module.exports = {
     }),
     new ProgressPlugin(),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(!isEnvProduction)
+      __DEV__: JSON.stringify(!isEnvProduction),
+      __API_HOST__: JSON.stringify(API_HOST),
+      __STORAGE_HOST__: JSON.stringify(STORAGE_HOST)
     }),
     new webpack.ProvidePlugin({
       React: 'react'
     }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false
-    })
-  ],
+    isEnvProduction && new BundleAnalyzerPlugin()
+  ].filter(Boolean),
   devServer: {
+    static: '../../public',
     open: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -166,7 +170,7 @@ module.exports = {
     hot: true,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8080',
+        target: LOCAL_API_HOST,
         pathRewrite: { '^/api': '' },
         secure: false,
         changeOrigin: true

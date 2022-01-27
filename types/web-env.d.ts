@@ -7,3 +7,5 @@ declare module '*.svg' {
 }
 
 declare var __DEV__: boolean
+declare var __API_HOST__: string
+declare var __STORAGE_HOST__: string
