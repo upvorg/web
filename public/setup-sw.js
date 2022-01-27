@@ -1,20 +1,13 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
-    try {
-      await navigator.serviceWorker.register('/sw.js', { type: 'module' })
-
-      console.log('[SW] ServiceWorker registered')
-
-      await navigator.serviceWorker.ready
-
-      if (navigator.serviceWorker.controller) {
-        console.log('[SW] ServiceWorker ready')
-      } else {
-        console.error('[SW] ServiceWorker not available')
+    navigator.serviceWorker.register('/sw.js', { type: 'module', scope: '/' }).then(
+      (registration) => {
+        console.log('Service worker registration succeeded:', registration)
+      },
+      (error) => {
+        console.log('Service worker registration failed:', error)
       }
-    } catch (err) {
-      console.error('[SW] ServiceWorker registration failed: ', err)
-    }
+    )
   })
   window.addEventListener('focus', async () => {
     await navigator.serviceWorker.ready
