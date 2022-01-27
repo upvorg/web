@@ -10,8 +10,8 @@ const CopyPlugin = require('copy-webpack-plugin')
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
 const LOCAL_API_HOST = 'http://127.0.0.1:8080'
-const API_HOST = isEnvProduction ? 'http://api.upv.life' : `/api`
-const STORAGE_HOST = isEnvProduction ? 'http://storge.upv.life' : `${LOCAL_API_HOST}/upload`
+const API_HOST = isEnvProduction ? '//api.upv.life' : `/api`
+const STORAGE_HOST = isEnvProduction ? '//storge.upv.life' : `${LOCAL_API_HOST}/upload`
 
 module.exports = {
   mode: isEnvProduction ? 'production' : 'development',
