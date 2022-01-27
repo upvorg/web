@@ -25,6 +25,7 @@ module.exports = merge(baseConfig, {
         s.parentNode.insertBefore(hm, s);
       })();
       </script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum Pen Script" />
       `
     })
   ],
