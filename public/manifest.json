@@ -2,6 +2,7 @@
   "name": "Your Anime",
   "short_name": "Your Anime",
   "description": "Anime Web App.\nMore info & source code here: https://github.com/upvorg/cdn",
+  "start_url": "./",
   "version": "0.0.1",
   "manifest_version": 2,
   "app": {
