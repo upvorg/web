@@ -51,10 +51,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../../' }
-          },
+          isEnvProduction
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+                options: { publicPath: '../../' }
+              }
+            : 'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -67,7 +69,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
+          isEnvProduction
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+                options: { publicPath: '../../' }
+              }
+            : 'style-loader',
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -93,16 +100,19 @@ module.exports = {
     minimize: isEnvProduction,
     minimizer: [
       new ESBuildMinifyPlugin({
-        target: 'es2015',
-        css: true
+        target: 'es2015'
+        // css: true
       }),
       new TerserPlugin({
         terserOptions: {
           parse: {
+            //@ts-ignore
             ecma: 8
           },
           compress: {
             ecma: 5,
+            //@ts-ignore
+            warnings: false,
             comparisons: false,
             inline: 2
           },
