@@ -155,7 +155,11 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: 'react'
     }),
-    isEnvProduction && new BundleAnalyzerPlugin()
+    isEnvProduction &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false
+      })
   ].filter(Boolean),
   devServer: {
     static: '../../public',
