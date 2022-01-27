@@ -11,6 +11,7 @@ const isEnvProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
   mode: isEnvProduction ? 'production' : 'development',
+  target: 'web',
   output: {
     filename: isEnvProduction
       ? 'static/js/[name].[contenthash:8].js'
@@ -50,7 +51,12 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: { publicPath: '../../' }
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
           'postcss-loader'
         ]
       },
@@ -59,6 +65,7 @@ module.exports = {
         use: [
           isEnvProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
+          'postcss-loader',
           'sass-loader'
         ]
       },
@@ -157,6 +164,7 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     hot: true,
+    stats: 'minimal',
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8080',
