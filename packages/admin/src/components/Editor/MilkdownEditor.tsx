@@ -11,8 +11,6 @@ import {
 import { VueEditor, useEditor, EditorRef } from '@milkdown/vue'
 import { listenerCtx, listener } from '@milkdown/plugin-listener'
 import { gfm } from '@milkdown/preset-gfm'
-import { prism } from '@milkdown/plugin-prism'
-import { tooltip } from '@milkdown/plugin-tooltip'
 import { slash } from '@milkdown/plugin-slash'
 import { Slice } from 'prosemirror-model'
 import { history } from '@milkdown/plugin-history'
@@ -75,9 +73,7 @@ export const MilkdownEditor = defineComponent({
         .use(listener)
         .use(pu)
         .use(gfm)
-        .use(tooltip)
         .use(slash)
-        .use(prism)
         .use(indent)
         .use(upload.configure(uploadPlugin, { uploader }))
         .use(history)
