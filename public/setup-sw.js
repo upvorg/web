@@ -2,7 +2,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     navigator.serviceWorker.register('/sw.js', { type: 'module', scope: '/' }).then(
       (registration) => {
-        console.log('Service worker registration succeeded:', registration)
+        // console.log('Service worker registration succeeded:', registration)
       },
       (error) => {
         console.log('Service worker registration failed:', error)
