@@ -95,6 +95,9 @@ export const pu = themeFactory((emotion: Emotion) => ({
   }),
   global: ({ font }) => {
     emotion.injectGlobal`
+  .milkdown-root{
+    padding: 0;
+  }
   .milkdown {
     max-width: 100% !important;
     max-height: 70vh !important;

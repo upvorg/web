@@ -24,16 +24,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-::-webkit-scrollbar {
-  height: 6px;
-  width: 8px;
-  background-color: var(--second);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--second);
-}
-
 th {
   font-weight: normal;
 }
