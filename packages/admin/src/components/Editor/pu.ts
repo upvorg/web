@@ -97,7 +97,10 @@ export const pu = themeFactory((emotion: Emotion) => ({
     emotion.injectGlobal`
   .milkdown {
     max-width: 100% !important;
-    padding: 0 !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+    border-radius: var(--rounded-btn, .5rem);
+    padding: 0.5rem 1rem!important;
     color: inherit !important;
     background: inherit;
     position: relative;
@@ -110,12 +113,6 @@ export const pu = themeFactory((emotion: Emotion) => ({
       min-height: 300px;
       outline: none;
       padding: 0;
-      & > p {
-        margin: 0rem 0;
-      }
-      & > * {
-        margin: 1rem 0;
-      }
     }
   }
   .milkdown-root:focus-within {

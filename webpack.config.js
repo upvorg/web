@@ -18,7 +18,7 @@ module.exports = {
   target: ['browserslist'],
   devtool: !isEnvProduction ? 'cheap-module-source-map' : false,
   infrastructureLogging: {
-    level: 'none'
+    level: isEnvProduction ? 'error' : 'verbose'
   },
   output: {
     pathinfo: !isEnvProduction,
@@ -145,7 +145,10 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['../../dist'],
+      dangerouslyAllowCleanPatternsOutsideProject: true
+    }),
     new CopyPlugin({
       patterns: [
         {
@@ -196,4 +199,3 @@ module.exports = {
     }
   }
 }
-
