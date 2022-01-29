@@ -7,14 +7,11 @@ const ASSET_CACHE_PATTERN = /.+\.[0-9a-f]{8}\..*(js|css|woff2?|svg|png|jpg|jpeg|
 const ACTIVATE_TIMEOUT = 3000
 
 self.addEventListener('install', (e) => {
-  console.log('ServiceWorker installed')
-
   // Activate worker immediately
   e.waitUntil(self.skipWaiting())
 })
 
 self.addEventListener('activate', (e) => {
-  console.log('ServiceWorker activated')
   e.waitUntil(
     Promise.race([
       // An attempt to fix freezing UI on iOS
