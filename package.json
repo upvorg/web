@@ -33,13 +33,11 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "dev:dindex": "pnpm run dev --filter @web/index",
-    "build:dindex": "pnpm run build --filter @web/index",
     "dev:admin": "pnpm run dev --filter @web/admin",
     "build:admin": "pnpm run build --filter @web/admin",
+    "dev:index": "pnpm run dev --filter @web/index",
+    "build:index": "pnpm run build --filter @web/index",
     "dev": "pnpm run dev:index & pnpm run dev:admin",
-    "dev:index": "pnpm run dev --filter @web/coming",
-    "build:index": "pnpm run build --filter @web/coming",
     "build": "pnpm run build:index & pnpm run build:admin"
   },
   "repository": {

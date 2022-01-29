@@ -1,48 +1,45 @@
-//@ts-nocheck
+// @ts-nocheck
 const path = require('path')
-const baseConfig = require('../../webpack.config.js')
+const baseConfig = require('../../webpack.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { default: merge } = require('webpack-merge')
 
 module.exports = merge(baseConfig, {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, '../../dist/html')
   },
   devServer: {
-    port: 3000
-  },
-  resolve: {
-    alias: {
-      component: path.resolve(__dirname, 'src/component'),
-      public: path.resolve(__dirname, 'src/public'),
-      api: path.resolve(__dirname, 'src/api'),
-      widget: path.resolve(__dirname, 'src/widget')
-    }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.styl$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'stylus-loader',
-            options: {
-              stylusOptions: {
-                import: [path.resolve(__dirname, 'src/public/css/var.styl')]
-              }
-            }
-          }
-        ]
-      }
-    ]
+    port: 3001
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: '../../public/index.html',
+      title: 'vpv - free animes no ads',
+      script: `<script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5e4eee252da8cfbd070f418edd852e33";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum Pen Script" />
+      `
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        griffith: {
+          test: (module) => {
+            return /griffith.+|hls.+/.test(module.context)
+          },
+          name: 'griffith',
+          priority: 1
+        }
+      }
+    }
+  }
 })
