@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4 container md:w-10/12 m-auto">
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0">
       <!-- stats  -->
       <div class="stats grid-rows-2 md:grid-rows-2 grid-flow-col w-full shadow-md overflow-hidden">
         <div class="stat" v-for="item in STATSET">
@@ -15,14 +15,20 @@
       <!-- 个人卡片 -->
       <div class="md:w-1/4 grid p-4 shadow-md rounded-box place-items-center md:mx-4">
         <div class="w-24 h-24 p-px mask mask-squircle bg-base-content bg-opacity-10">
-          <img :src="dashBoardStat.avatar" width="94" height="94" alt="Avatar " class="mask mask-squircle" />
+          <img
+            :src="dashBoardStat.avatar"
+            width="94"
+            height="94"
+            alt="Avatar "
+            class="mask mask-squircle"
+          />
         </div>
         <div>
           <div class="text-center">
             <div class="text-lg font-extrabold">{{ dashBoardStat.nickname }}</div>
-            <div class="my-3 text-sm text-base-content text-opacity-60">
-              {{ dashBoardStat.post_count }} posts, {{ dashBoardStat.video_count }} videos
-            </div>
+            <div
+              class="my-3 text-sm text-base-content text-opacity-60"
+            >{{ dashBoardStat.post_count }} posts, {{ dashBoardStat.video_count }} videos</div>
           </div>
           <div class="mt-2 text-center">
             <!-- <div class="badge badge-ghost">Design</div>
@@ -41,9 +47,12 @@
       </div>
       <div class="flex-none">
         <!-- <button class="btn btn-sm btn-ghost mr-2">Cancel</button> -->
-        <a href="https://jq.qq.com/?_wv=1027&k=5lfSD1B" role="button" target="_blank" class="btn btn-sm btn-primary"
-          >Go</a
-        >
+        <a
+          href="https://jq.qq.com/?_wv=1027&k=5lfSD1B"
+          role="button"
+          target="_blank"
+          class="btn btn-sm btn-primary"
+        >Go</a>
       </div>
     </div>
 
@@ -88,13 +97,15 @@ interface DashBoardStat extends User {
   video_count: number
 }
 
-const STATSET: {
+interface DashBoardStatItem {
   title: string
   value: keyof DashBoardStat
   icon: string
   desc: string
   class: string
-}[] = [
+}
+
+const STATSET: DashBoardStatItem[] = [
   {
     icon: 'bolt',
     title: 'View',
