@@ -5,7 +5,7 @@
 
     <div class="dropdown dropdown-hover">
       <div class="btn btn-sm" tabindex="0">
-        {{ POST_STATE_ENUM[state.status as unknown as keyof typeof POST_STATE_ENUM ] || '全部' }}
+        {{ POST_STATE_ENUM[state.status as unknown as keyof typeof POST_STATE_ENUM] || '全部' }}
         <svg
           class="inline-block w-4 h-4 ml-2 stroke-current"
           fill="none"
@@ -37,7 +37,12 @@
             <label>
               <div class="indicator">
                 <div class="indicator-item badge badge-secondary">{{ list.selected.length }}</div>
-                <input :checked="isSelectedAll" class="checkbox" type="checkbox" @change="toggleSelectedAll" />
+                <input
+                  :checked="isSelectedAll.value"
+                  class="checkbox"
+                  type="checkbox"
+                  @change="toggleSelectedAll"
+                />
               </div>
             </label>
           </th>
@@ -81,7 +86,11 @@
             </label>
           </th>
           <th v-if="isAdmin(state.user.level)">{{ item.id }}</th>
-          <th pointer @click="pushGv(item.id)" class="primary-color">{{ item.title.substr(0, 15) }}</th>
+          <th
+            pointer
+            @click="pushDetail(item.id)"
+            class="primary-color"
+          >{{ item.title.substr(0, 15) }}</th>
           <th v-if="isAdmin(state.user.level)">{{ item.creator_name }}</th>
           <th>{{ getTimeDistance(item.create_time) }}</th>
           <th>{{ getTimeDistance(item.update_time) }}</th>
@@ -112,13 +121,11 @@ import { getTimeDistance } from '../utils/date'
 const prePage = ref(1)
 const router = useRouter()
 const state = reactive({
-  gv: null,
   key: '',
   status: '',
   page: 1,
   size: 30,
   order: 'DESC',
-  state: '',
   user: getLocalUser()
 })
 const [list, toggleSelectedAll, isSelectedAll, hasSelected] = useSelect<any>()
@@ -142,24 +149,26 @@ const _effect = () => {
       state.status = '10'
     }
 
-    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then((res) => {
-      if (res.code === 200) {
-        if (prePage.value < state.page) {
-          list.data = list.data.concat(res.posts || [])
-          prePage.value = state.page
-        } else {
-          list.data = res.data || []
+    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then(
+      (res) => {
+        if (res.code === 200) {
+          if (prePage.value < state.page) {
+            list.data = list.data.concat(res.data || [])
+            prePage.value = state.page
+          } else {
+            list.data = res.data || []
+          }
         }
       }
-    })
+    )
   }
   list.selected = []
 }
 
 watch(state, _effect, { immediate: true })
 
-function pushGv(id: string) {
-  router.push(`/upload/${id || state.gv}`)
+function pushDetail(id: string) {
+  router.push(`/upload/${id}`)
 }
 
 function toggleSort() {
@@ -169,6 +178,7 @@ function toggleSort() {
 
 const search = debounce(
   (e) => {
+    state.page = 1
     state.key = e.target.value
   },
   800,

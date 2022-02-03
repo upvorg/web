@@ -5,7 +5,7 @@
 
     <div class="dropdown dropdown-hover">
       <div class="btn btn-sm" tabindex="0">
-        {{ USER_ROLE_STATE_MAP[state.status] || '全部' }}
+        {{ USER_ROLE_STATE_MAP[state.status as unknown as keyof typeof USER_ROLE_STATE_MAP] || '全部' }}
         <svg
           class="inline-block w-4 h-4 ml-2 stroke-current"
           fill="none"
@@ -21,7 +21,11 @@
           :key="item"
           @click="state.status = item"
         >
-          <a>{{ USER_ROLE_STATE_MAP[item] }}&nbsp;&nbsp;{{ state.status === item ? '√' : '' }}</a>
+          <a>
+            {{
+              USER_ROLE_STATE_MAP[item as unknown as keyof typeof USER_ROLE_STATE_MAP]
+            }}&nbsp;&nbsp;{{ state.status === item ? '√' : '' }}
+          </a>
         </li>
       </ul>
     </div>
@@ -33,10 +37,13 @@
           <th>
             <label>
               <div class="indicator">
-                <div class="indicator-item badge badge-secondary">
-                  {{ list.selected.length || 0 }}
-                </div>
-                <input :checked="isSelectedAll" class="checkbox" type="checkbox" @change="toggleSelectedAll" />
+                <div class="indicator-item badge badge-secondary">{{ list.selected.length || 0 }}</div>
+                <input
+                  :checked="isSelectedAll.value"
+                  class="checkbox"
+                  type="checkbox"
+                  @change="toggleSelectedAll"
+                />
               </div>
             </label>
           </th>
@@ -77,7 +84,7 @@
           v-for="item of list.data"
           :key="item.id"
           :style="{
-            color: item.id === GlobalState.user.id ? 'var(--theme)' : ''
+            color: item.id === GlobalState.user?.id ? 'var(--theme)' : ''
           }"
           class="hover"
         >
@@ -90,7 +97,7 @@
           <th pointer @click="pushU(item.id)">{{ item.name }}</th>
           <th>{{ item.bio }}</th>
           <th>{{ item.create_time }}</th>
-          <th>{{ USER_ROLE_STATE_MAP[item.level] }}</th>
+          <th>{{ USER_ROLE_STATE_MAP[item.level as keyof typeof USER_ROLE_STATE_MAP] }}</th>
           <th>{{ ['封禁', '正常'][item.status || 1] }}</th>
         </tr>
       </tbody>
@@ -106,7 +113,7 @@
 <script setup lang="ts">
 import { reactive, ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
-import { deleteUserByIds, getUser, getUsers, post } from '../utils/api'
+import { deleteUserByIds, getUser, getUsers } from '../utils/api'
 import debounce from 'lodash.debounce'
 import { USER_ROLE_STATE_MAP } from '../constant'
 import { GlobalState } from '../utils/localstorage'
@@ -116,19 +123,18 @@ import { watch } from '@vue/runtime-core'
 const prePage = ref(1)
 const router = useRouter()
 const state = reactive({
-  gv: null,
   key: '',
   status: '10',
   page: 1,
   size: 30,
   order: 'DESC'
 })
-const [list, toggleSelectedAll, isSelectedAll, hasSelected] = useSelect()
+const [list, toggleSelectedAll, isSelectedAll, hasSelected] = useSelect<any>()
 
 const _effect = () => {
   if (typeof parseInt(state.key) == 'number' && !isNaN(parseInt(state.key))) {
     getUser('', state.key, '').then((_) => {
-      list.data = [_.result]
+      list.data = [_.data]
     })
   } else {
     getUsers(state.key, state.status, state.page, state.size, state.order).then((_) => {
@@ -144,7 +150,7 @@ const _effect = () => {
 
 watch(state, _effect, { immediate: true })
 
-function pushU(id) {
+function pushU(id: string) {
   router.push(`/user/${id}`)
 }
 
