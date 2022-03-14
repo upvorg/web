@@ -2,14 +2,28 @@ import { getCoverFormMd } from '@web/shared'
 
 import './index.scss'
 
+const ImageType = {
+  webp: 'image/webp',
+  jpg: 'image/jpeg',
+  png: 'image/png'
+}
+
 export default function VideoCard({ info }: any) {
+  const { url, type } = getCoverFormMd(info.content)
   return (
     <div className="upv-video-card">
       <div className="upv-video-card__wrap">
         <a href={`/bangumi/play/${info.id}`} target="_blank">
           <div className="upv-video-card__image">
             <div className="upv-video-card__image--wrap">
-              <img src={getCoverFormMd(info.content).url} alt={info.title} />
+              <picture>
+                <source
+                  srcSet={url}
+                  type={ImageType[type! as keyof typeof ImageType]}
+                  title={info.title}
+                />
+                <img src="https://s2.loli.net/2022/01/22/IkS53uazMbyYHsp.jpg" alt={info.title} />
+              </picture>
             </div>
           </div>
         </a>

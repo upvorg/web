@@ -1,19 +1,21 @@
-const imagesReg = /!\[(.*?)\]\((.*?)\)/
+const imagesReg = /!\[(.*?)\]\((.*?)\.(.*?)\)/
 
 const getCoverFormMd = (text: string = '') => {
-  const cover = text.match(/!\[suo\]\((.*?)\)/)
+  const cover = text.match(/!\[suo\]\((.*?)\.(.*?)\)/)
 
   if (cover) {
     return {
       titile: 'cover',
-      url: cover[1]
+      url: cover[1],
+      type: cover[2]
     }
   } else {
     const match = text.match(imagesReg)
     if (match) {
       return {
         title: match[1],
-        url: match[2]
+        url: match[2],
+        type: match[3]
       }
     }
   }
