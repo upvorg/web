@@ -5,7 +5,10 @@ import './index.scss'
 const ImageType = {
   webp: 'image/webp',
   jpg: 'image/jpeg',
-  png: 'image/png'
+  png: 'image/png',
+  gif: 'image/gif',
+  jpeg: 'image/jpeg',
+  svg: 'image/svg+xml'
 }
 
 export default function VideoCard({ info }: any) {
