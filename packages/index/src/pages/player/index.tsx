@@ -12,25 +12,20 @@ export default function PlayerPage(props: any) {
   const [playerIsPlaying, setPlayerIsPlaying] = useState<boolean>(false)
 
   useEffect(() => {
-    Promise.all([
-      axios.get(`/post/${props.id}`),
-      axios.get(`/videos?pid=${props.id}&page=1&pageSize=222`)
-    ]).then(([a, b]) => {
-      a.data && setState(a.data)
-      b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
-      b.data && setVideo(b.data)
-    })
+    Promise.all([axios.get(`/post/${props.id}`), axios.get(`/videos?pid=${props.id}&page=1&pageSize=222`)]).then(
+      ([a, b]) => {
+        a.data && setState(a.data)
+        b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
+        b.data && setVideo(b.data)
+      }
+    )
   }, [])
 
   return (
     <>
       <div className="player-header">
         <div className="player-header__player">
-          {video.length > 0 ? (
-            <UPlayer src={video[currentIndex]?.content} playerIsPlaying={playerIsPlaying} />
-          ) : (
-            <div className="player-header__player empty">暂无视频</div>
-          )}
+          <UPlayer src={video[currentIndex]?.content} playerIsPlaying={playerIsPlaying} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">

@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/react": "^17.0.40",
-    "@types/react-dom": "^17.0.13",
+    "@types/react": "^17.0.42",
+    "@types/react-dom": "^17.0.14",
     "@web/shared": "workspace:^1.0.0",
     "bulma": "^0.9.3",
     "griffith": "^1.24.1",
