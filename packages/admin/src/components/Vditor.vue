@@ -16,7 +16,10 @@ const onChange = defineEmits<{
 
 onMounted(() => {
   vditor.value = new Vditor('vditor', {
+    toolbar: [],
+    toolbarConfig: { hide: true },
     after: () => {
+      document.querySelector('.vditor-ir')?.classList.add('textarea', 'textarea-bordered', 'milkdown-root')
       vditor.value!.setValue(props.modelValue)
     },
     input: (value: string) => {
@@ -25,3 +28,24 @@ onMounted(() => {
   })
 })
 </script>
+
+<style lang="scss">
+#vditor {
+  border: none;
+  min-height: 400px;
+  max-height: 700px;
+
+  .vditor-toolbar {
+    display: none;
+  }
+
+  .vditor-ir {
+    padding: 0.5em 0 0;
+    margin-top: 8px;
+  }
+
+  .vditor-reset {
+    background: transparent;
+  }
+}
+</style>

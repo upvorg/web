@@ -8,7 +8,7 @@
           placeholder="请输入标题"
           type="text"
         />
-        <MilkdownEditor v-model="post.content" />
+        <Vditor v-model="post.content" />
         <ul class="tags mt-4" v-if="post.type == 'video'">
           <kbd
             class="kbd m-1"
@@ -161,9 +161,9 @@ import { GlobalState } from '../utils/localstorage'
 import { POST_STATE_ENUM, TAGS, isAdmin } from '../constant'
 import emitter from '../utils/emitter'
 import ModalWithSlot from '../components/ModalWithSlot.vue'
-import { MilkdownEditor } from '../components/Editor/MilkdownEditor'
 import { getTimeDistance } from '../utils/date'
 import { defineComponent } from 'vue'
+import Vditor from '../components/Vditor.vue'
 
 const emptyVideo = {
   oid: 1,
@@ -172,7 +172,7 @@ const emptyVideo = {
 }
 
 export default defineComponent({
-  components: { ModalWithSlot, MilkdownEditor },
+  components: { ModalWithSlot, Vditor },
   data() {
     return {
       nofileImage: require('../assets/no-file.png'),
