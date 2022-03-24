@@ -79,6 +79,7 @@ importers:
       mitt: ^3.0.0
       prosemirror-model: ^1.16.1
       tailwindcss: ^3.0.23
+      vditor: ^3.8.12
       vue: ^3.2.31
       vue-loader: ^17.0.0
       vue-router: ^4.0.14
@@ -101,6 +102,7 @@ importers:
       mitt: 3.0.0
       prosemirror-model: 1.16.1
       tailwindcss: 3.0.23_autoprefixer@10.4.4
+      vditor: 3.8.12
       vue: 3.2.31
       vue-router: 4.0.14_vue@3.2.31
     devDependencies:
@@ -1804,6 +1806,10 @@ packages:
 
   /didyoumean/1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
+    dev: false
+
+  /diff-match-patch/1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
     dev: false
 
   /diff/5.0.0:
@@ -5065,6 +5071,12 @@ packages:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /vditor/3.8.12:
+    resolution: {integrity: sha512-bpYubNGA5PcWSsOOKK6rXYOSU1Wy6plmhwdWB9oXy8D714hj6vcVtJjE/8x8+aZOyX45Rxa+a72h5xOU0SdfFg==}
+    dependencies:
+      diff-match-patch: 1.0.5
+    dev: false
 
   /vfile-location/4.0.1:
     resolution: {integrity: sha512-JDxPlTbZrZCQXogGheBHjbRWjESSPEak770XwWPfw5mTc1v1nWGLB/apzZxsx8a0SJVfF8HK8ql8RD308vXRUw==}

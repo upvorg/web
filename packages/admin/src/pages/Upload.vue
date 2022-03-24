@@ -38,8 +38,8 @@
           <select
             class="select select-bordered select-sm"
             v-model="post.status"
-            v-if="isAdmin(GlobalState.user?.level) || isModify || post.type == 'video'"
-            :disabled="!isAdmin(GlobalState.user?.level)"
+            v-if="isAdmin(GlobalState.user?.level!) || isModify || post.type == 'video'"
+            :disabled="!isAdmin(GlobalState.user?.level!)"
           >
             <option v-for="item in Object.keys(POST_STATE_ENUM)" :value="item">
               {{ POST_STATE_ENUM[item] }}
