@@ -2,7 +2,6 @@ import { Router, Switch } from 'wouter'
 import React, { lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { DefaultRoute, IndexRoute } from './components/layout'
-// import reportWebVitals from './reportWebVitals'
 
 import './index.scss'
 
@@ -21,6 +20,11 @@ createRoot(document.getElementById('root')!).render(
           </DefaultRoute>
         </Switch>
         <footer className="footer">
+          <div className="bd-footer-support">
+            <h4 className="bd-footer-title">
+              <strong>Support</strong> <span className="font-family-logo">UPV</span>
+            </h4>
+          </div>
           <div className="content" style={{ textAlign: 'center' }}>
             <p>
               <strong className="font-family-logo">UPV</strong>
@@ -34,8 +38,3 @@ createRoot(document.getElementById('root')!).render(
     </Router>
   </React.StrictMode>
 )
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals()

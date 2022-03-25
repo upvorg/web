@@ -25,10 +25,43 @@ body,
   overflow-y: auto;
 }
 
+main {
+  min-height: 90vh;
+}
+
 .font-family-logo {
   font-family: 'Nanum Pen Script';
 }
 
 .empty {
   color: var(--caption-color);
+}
+
+.footer {
+  padding: 2rem 1.5rem 4rem;
+}
+
+.bd-footer-support {
+  background-color: #fafafa;
+  text-align: center;
+
+  .bd-footer-title {
+    color: #7a7a7a;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    transition-duration: 86ms;
+    transition-property: color;
+    font-size: 1.5rem;
+    strong {
+      color: currentColor;
+      font-weight: 600;
+    }
+    span {
+      vertical-align: middle;
+      color: #7a7a7a;
+      font-size: 1.7rem;
+      font-weight: 400;
+    }
+  }
 }
