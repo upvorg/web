@@ -13,13 +13,14 @@ export default function PlayerPage(props: any) {
   useEffect(() => {
     Promise.all([axios.get(`/post/${props.id}`), axios.get(`/videos?pid=${props.id}&page=1&pageSize=222`)]).then(
       ([a, b]) => {
+        const { title, creator_nickname } = a.data
         a.data && setState(a.data)
         b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
         b.data && setVideo(b.data)
+        document.title = `${title || '少女祈祷中···'} ${creator_nickname ? ` - ${creator_nickname}` : ''}`
       }
     )
     axios.get(`/pv/${props.id}`).then((_) => setPv(_.data.pv))
-    document.title = `${state.title || '少女祈祷中···'} ${state.author ? ` - ${state.author}` : ''}`
   }, [])
 
   return (
@@ -62,7 +63,7 @@ export default function PlayerPage(props: any) {
               p-id="6828"
             ></path>
           </svg>
-          {state.create_time || '-'}
+          <span>{state.create_time || '-'}</span>
         </div>
       </div>
       <div className="player-header">

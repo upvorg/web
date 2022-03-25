@@ -21,6 +21,9 @@
     align-items: center;
     height: 24px;
     line-height: 18px;
+    > img {
+      border-radius: 50%;
+    }
     > svg,
     > img {
       margin-right: 4px;
