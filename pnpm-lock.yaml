@@ -23,7 +23,7 @@ importers:
       stylus: ^0.56.0
       stylus-loader: ^6.2.0
       terser-webpack-plugin: ^5.3.1
-      typescript: ^4.6.2
+      typescript: ^4.6.3
       webpack: ^5.70.0
       webpack-bundle-analyzer: ^4.5.0
       webpack-cli: ^4.9.2
@@ -31,7 +31,7 @@ importers:
       webpack-merge: ^5.8.0
     dependencies:
       '@types/node': 17.0.23
-      typescript: 4.6.2
+      typescript: 4.6.3
     devDependencies:
       autoprefixer: 10.4.4_postcss@8.4.12
       browserslist: 4.20.2
@@ -112,14 +112,14 @@ importers:
 
   packages/index:
     specifiers:
-      '@types/react': ^17.0.42
+      '@types/react': ^17.0.43
       '@types/react-dom': ^17.0.14
       '@web/shared': workspace:^1.0.0
       bulma: ^0.9.3
       griffith: ^1.24.1
       griffith-message: ^1.21.0
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      react: ^18.0.0-rc.3
+      react-dom: ^18.0.0-rc.3
       react-markdown-editor-lite: ^1.3.2
       rehype-attr: ^2.0.8
       rehype-raw: ^6.1.1
@@ -131,15 +131,15 @@ importers:
       web-vitals: ^2.1.4
       wouter: ^2.8.0-alpha.2
     dependencies:
-      '@types/react': 17.0.42
+      '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
       '@web/shared': link:../shared
       bulma: 0.9.3
-      griffith: 1.24.1_react-dom@17.0.2+react@17.0.2
+      griffith: 1.24.1_581fa33d3647c30d8078674dcd1b240a
       griffith-message: 1.21.0
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      react-markdown-editor-lite: 1.3.2_react@17.0.2
+      react: 18.0.0-rc.3
+      react-dom: 18.0.0-rc.3_react@18.0.0-rc.3
+      react-markdown-editor-lite: 1.3.2_react@18.0.0-rc.3
       rehype-attr: 2.0.8
       rehype-raw: 6.1.1
       rehype-sanitize: 5.0.1
@@ -148,7 +148,7 @@ importers:
       remark-rehype: 10.1.0
       unified: 10.1.2
       web-vitals: 2.1.4
-      wouter: 2.8.0-alpha.2_react@17.0.2
+      wouter: 2.8.0-alpha.2_react@18.0.0-rc.3
 
   packages/shared:
     specifiers: {}
@@ -757,11 +757,11 @@ packages:
   /@types/react-dom/17.0.14:
     resolution: {integrity: sha512-H03xwEP1oXmSfl3iobtmQ/2dHF5aBHr8aUMwyGZya6OW45G+xtdzmq6HkncefiBt5JU8DVyaWl/nWZbjZCnzAQ==}
     dependencies:
-      '@types/react': 17.0.42
+      '@types/react': 17.0.43
     dev: false
 
-  /@types/react/17.0.42:
-    resolution: {integrity: sha512-nuab3x3CpJ7VFeNA+3HTUuEkvClYHXqWtWd7Ud6AZYW7Z3NH9WKtgU+tFB0ZLcHq+niB/HnzLcaZPqMJ95+k5Q==}
+  /@types/react/17.0.43:
+    resolution: {integrity: sha512-8Q+LNpdxf057brvPu1lMtC5Vn7J119xrP1aq4qiaefNioQUYANF/CYeK4NsKorSZyUGJ66g0IM+4bbjwx45o2A==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
@@ -1321,7 +1321,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001320
-      electron-to-chromium: 1.4.92
+      electron-to-chromium: 1.4.93
       escalade: 3.1.1
       node-releases: 2.0.2
       picocolors: 1.0.0
@@ -1893,8 +1893,8 @@ packages:
     resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
     dev: true
 
-  /electron-to-chromium/1.4.92:
-    resolution: {integrity: sha512-YAVbvQIcDE/IJ/vzDMjD484/hsRbFPW2qXJPaYTfOhtligmfYEYOep+5QojpaEU9kq6bMvNeC2aG7arYvTHYsA==}
+  /electron-to-chromium/1.4.93:
+    resolution: {integrity: sha512-ywq9Pc5Gwwpv7NG767CtoU8xF3aAUQJjH9//Wy3MBCg4w5JSLbJUq2L8IsCdzPMjvSgxuue9WcVaTOyyxCL0aQ==}
     dev: true
 
   /emojis-list/3.0.0:
@@ -2291,7 +2291,7 @@ packages:
       '@nodelib/fs.walk': 1.2.8
       glob-parent: 5.1.2
       merge2: 1.4.1
-      micromatch: 4.0.4
+      micromatch: 4.0.5
 
   /fast-json-stable-stringify/2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
@@ -2476,22 +2476,22 @@ packages:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
     dev: true
 
-  /griffith-hls/1.18.1_react-dom@17.0.2+react@17.0.2:
+  /griffith-hls/1.18.1_581fa33d3647c30d8078674dcd1b240a:
     resolution: {integrity: sha512-R1E6WshyNgKxJfsSGo16OXVugBrVIXbpjDXvxOjdwxNzYzGEvBcDV9OxAiW7Bd36muPlLs833IehOTyf0hAYfw==}
     peerDependencies:
       react: ^16.8 || ^17
       react-dom: ^16.8 || ^17
     dependencies:
       hls.js: 0.7.11
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0-rc.3
+      react-dom: 18.0.0-rc.3_react@18.0.0-rc.3
     dev: false
 
   /griffith-message/1.21.0:
     resolution: {integrity: sha512-4N0pG30fc3dAtV521UsedZdErrChj/1FpT8T5XzDrNPtSfR8U4f/xGNbEFufOqgMv5vGBrd/VZ1F6vFnaZbwDQ==}
     dev: false
 
-  /griffith-mp4/1.23.0_react-dom@17.0.2+react@17.0.2:
+  /griffith-mp4/1.23.0_581fa33d3647c30d8078674dcd1b240a:
     resolution: {integrity: sha512-DpAp4GM/efyPWIlSiQWa7cNnLjwwwqM/J4noGMCOH4+47rCpgbuxZS0FsalYjAm8oeDfQzO4p7SXDqq7m+i82Q==}
     peerDependencies:
       react: ^16.8 || ^17
@@ -2499,33 +2499,33 @@ packages:
     dependencies:
       griffith-utils: 1.23.0
       lodash: 4.17.21
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0-rc.3
+      react-dom: 18.0.0-rc.3_react@18.0.0-rc.3
     dev: false
 
   /griffith-utils/1.23.0:
     resolution: {integrity: sha512-W2CwQElENyQrg6Bm1jN8mGynphBhdBose6uH5wls5bW5GkA1WgeN9eCDCC1dZGpmcrluSAphFsL9A+j27zuCRw==}
     dev: false
 
-  /griffith/1.24.1_react-dom@17.0.2+react@17.0.2:
+  /griffith/1.24.1_581fa33d3647c30d8078674dcd1b240a:
     resolution: {integrity: sha512-n3/qDQTvR8Y9pFR8Pn9PlXIlYnTzYpZwPzftoQtEpP/uIUPNiqbeq3fAPRLtcRJ/56bB9KqvY6NSnCqZiA+yEQ==}
     peerDependencies:
       react: ^16.8 || ^17
       react-dom: ^16.8 || ^17
     dependencies:
       '@types/lodash': 4.14.180
-      '@types/react': 17.0.42
+      '@types/react': 17.0.43
       aphrodite: 2.4.0
       eventemitter3: 3.1.2
-      griffith-hls: 1.18.1_react-dom@17.0.2+react@17.0.2
+      griffith-hls: 1.18.1_581fa33d3647c30d8078674dcd1b240a
       griffith-message: 1.21.0
-      griffith-mp4: 1.23.0_react-dom@17.0.2+react@17.0.2
+      griffith-mp4: 1.23.0_581fa33d3647c30d8078674dcd1b240a
       griffith-utils: 1.23.0
       isomorphic-bigscreen: 2.0.5
       lodash: 4.17.21
       prop-types: 15.8.1
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0-rc.3
+      react-dom: 18.0.0-rc.3_react@18.0.0-rc.3
     dev: false
 
   /gzip-size/6.0.0:
@@ -2775,7 +2775,7 @@ packages:
       http-proxy: 1.18.1
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
-      micromatch: 4.0.4
+      micromatch: 4.0.5
     transitivePeerDependencies:
       - debug
     dev: true
@@ -3330,8 +3330,8 @@ packages:
       uvu: 0.5.3
     dev: false
 
-  /micromark-extension-gfm-footnote/1.0.3:
-    resolution: {integrity: sha512-bn62pC5y39rIo2g1RqZk1NhF7T7cJLuJlbevunQz41U0iPVCdVOFASe5/L1kke+DFKSgfCRhv24+o42cZ1+ADw==}
+  /micromark-extension-gfm-footnote/1.0.4:
+    resolution: {integrity: sha512-E/fmPmDqLiMUP8mLJ8NbJWJ4bTw6tS+FEQS8CcuDtZpILuOb2kjLqPEeAePF1djXROHXChM/wPJw0iS4kHCcIg==}
     dependencies:
       micromark-core-commonmark: 1.0.6
       micromark-factory-space: 1.0.0
@@ -3339,6 +3339,7 @@ packages:
       micromark-util-normalize-identifier: 1.0.0
       micromark-util-sanitize-uri: 1.0.0
       micromark-util-symbol: 1.0.1
+      micromark-util-types: 1.0.2
       uvu: 0.5.3
     dev: false
 
@@ -3383,7 +3384,7 @@ packages:
     resolution: {integrity: sha512-p2sGjajLa0iYiGQdT0oelahRYtMWvLjy8J9LOCxzIQsllMCGLbsLW+Nc+N4vi02jcRJvedVJ68cjelKIO6bpDA==}
     dependencies:
       micromark-extension-gfm-autolink-literal: 1.0.3
-      micromark-extension-gfm-footnote: 1.0.3
+      micromark-extension-gfm-footnote: 1.0.4
       micromark-extension-gfm-strikethrough: 1.0.4
       micromark-extension-gfm-table: 1.0.5
       micromark-extension-gfm-tagfilter: 1.0.1
@@ -3547,8 +3548,8 @@ packages:
       - supports-color
     dev: false
 
-  /micromatch/4.0.4:
-    resolution: {integrity: sha512-pRmzw/XUcwXGpD9aI9q/0XOwLNygjETJ8y0ao0wdqprrzDa4YnxLcz7fQRZr8voh8V10kGhABbNcHVk5wHgWwg==}
+  /micromatch/4.0.5:
+    resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
     dependencies:
       braces: 3.0.2
@@ -4184,22 +4185,21 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-dom/17.0.2_react@17.0.2:
-    resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
+  /react-dom/18.0.0-rc.3_react@18.0.0-rc.3:
+    resolution: {integrity: sha512-WPlWXyzZp22+uGUNNNoZnAPWAcr5sSeaEj0S1lLqKc2DkovKugJl1VgnBfk6gQX9llTb5/qkRNVtW31WdhG8iA==}
     peerDependencies:
-      react: 17.0.2
+      react: ^18.0.0-rc.3
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react: 17.0.2
-      scheduler: 0.20.2
+      react: 18.0.0-rc.3
+      scheduler: 0.21.0-rc.3-next-de516ca5a-20220321
     dev: false
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
-  /react-markdown-editor-lite/1.3.2_react@17.0.2:
+  /react-markdown-editor-lite/1.3.2_react@18.0.0-rc.3:
     resolution: {integrity: sha512-pjtu+tpTjc2u4hauFozzbX7EQEnKCCfDCEAY4vnc0AXCPqdFwaoe7A/Fb3J8qwUIS1Ox5XVjeRWKt11FgrMdZA==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0
@@ -4207,16 +4207,15 @@ packages:
       '@babel/runtime': 7.17.8
       classnames: 2.3.1
       eventemitter3: 4.0.7
-      react: 17.0.2
+      react: 18.0.0-rc.3
       uuid: 8.3.2
     dev: false
 
-  /react/17.0.2:
-    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
+  /react/18.0.0-rc.3:
+    resolution: {integrity: sha512-2NzSty8Dtq+5lnOdnP5MNA2iSn51PmvAuqgHLmUoXU3ohEtL+r0a1Az1iWvurMBIqW9cz49fJ42AM/+ziPmlWg==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
     dev: false
 
   /readable-stream/2.3.7:
@@ -4492,11 +4491,10 @@ packages:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: true
 
-  /scheduler/0.20.2:
-    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
+  /scheduler/0.21.0-rc.3-next-de516ca5a-20220321:
+    resolution: {integrity: sha512-g/Zjh5Nz9nxRP3xQQJuegLJWzJQuO03XF1WkWRS37PNczvw1jOV30utrrCxx819JNsA4A3JXAhdBjyZj81LMfw==}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
     dev: false
 
   /schema-utils/3.1.1:
@@ -4955,8 +4953,8 @@ packages:
       mime-types: 2.1.35
     dev: true
 
-  /typescript/4.6.2:
-    resolution: {integrity: sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==}
+  /typescript/4.6.3:
+    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -5365,12 +5363,12 @@ packages:
     resolution: {integrity: sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==}
     dev: true
 
-  /wouter/2.8.0-alpha.2_react@17.0.2:
+  /wouter/2.8.0-alpha.2_react@18.0.0-rc.3:
     resolution: {integrity: sha512-aPsL5m5rW9RiceClOmGj6t5gn9Ut2TJVr98UDi1u9MIRNYiYVflg6vFIjdDYJ4IAyH0JdnkSgGwfo0LQS3k2zg==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
-      react: 17.0.2
+      react: 18.0.0-rc.3
     dev: false
 
   /wrappy/1.0.2:

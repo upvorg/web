@@ -19,6 +19,7 @@ export default function PlayerPage(props: any) {
         b.data && setVideo(b.data)
       }
     )
+    axios.post(`/pv/${props.id}`)
   }, [])
 
   return (
