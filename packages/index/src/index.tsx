@@ -6,7 +6,7 @@ import { DefaultRoute, IndexRoute } from './components/layout'
 
 import './index.scss'
 
-createRoot(document.getElementById('app')!).render(
+createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <Suspense fallback={null}>
