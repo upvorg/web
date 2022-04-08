@@ -11,12 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/dplayer": "^1.25.2",
     "@types/react": "^17.0.44",
     "@types/react-dom": "^17.0.15",
     "@web/shared": "workspace:^1.0.0",
     "bulma": "^0.9.3",
+    "dplayer": "^1.26.0",
     "griffith": "^1.25.0",
     "griffith-message": "^1.25.0",
+    "indigo-player": "^1.5.1",
+    "lottie-react": "^2.2.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-markdown-editor-lite": "^1.3.2",
@@ -28,7 +32,6 @@
     "remark-rehype": "^10.1.0",
     "unified": "^10.1.2",
     "web-vitals": "^2.1.4",
-    "wouter": "^2.8.0-alpha.2",
-    "lottie-react": "^2.2.1"
+    "wouter": "^2.8.0-alpha.2"
   }
 }

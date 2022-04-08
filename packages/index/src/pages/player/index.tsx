@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import UPlayer from '../../components/player'
+import { ReactDPlayer } from '../../components/player/DPlayer'
 import { axios, getTimeDistance } from '@web/shared'
 import './index.scss'
 
@@ -10,7 +10,7 @@ export default function PlayerPage({ id }: any) {
   const [comments, setComments] = useState([])
 
   const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const [playerIsPlaying, setPlayerIsPlaying] = useState<boolean>(false)
+  const [isPlaying, setPlayerIsPlaying] = useState<boolean>(false)
 
   useEffect(() => {
     Promise.all([
@@ -32,7 +32,7 @@ export default function PlayerPage({ id }: any) {
     <>
       <div className="player-header">
         <div className="player-header__player">
-          <UPlayer src={video[currentIndex]?.content} playerIsPlaying={playerIsPlaying} />
+          <ReactDPlayer url={video[currentIndex]?.content} isPlaying={isPlaying} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">
