@@ -17,5 +17,5 @@ export function getTimeDistance(_date: string) {
   if (now.getFullYear() === date.getFullYear()) {
     return `${date.getMonth() + 1}月${date.getDate()}日`
   }
-  return `${date.getMonth() + 1}月${date.getDate()}日 ${date.getFullYear()}`
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
 }
