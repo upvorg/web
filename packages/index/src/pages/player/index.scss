@@ -54,7 +54,7 @@
 .player-header {
   display: flex;
   position: relative;
-  margin: 1.5em auto;
+  margin: 1.5em auto 0.5em;
   max-width: 1660px;
   min-width: 988px;
   padding-right: 350px;
@@ -197,35 +197,47 @@
   }
 }
 
-@media screen and (max-width: 991px) {
-  .player-header {
-    & {
-      min-width: 100%;
-      flex-direction: column;
-      padding-right: 0px;
-      margin: 10px auto;
+.video-comment {
+  margin: 2em auto;
+  padding-right: 350px;
 
-      &__player.empty {
-        height: 200px !important;
-        line-height: 200px !important;
-      }
+  .video-comment-edit {
+    display: flex;
+    margin-bottom: 1em;
+    align-items: flex-start;
 
-      .upv-player {
-        min-height: auto;
-      }
+    &__avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #f4f4f4;
+      margin-right: 1em;
+    }
+    &__input {
+      display: inline-block;
+      box-sizing: border-box;
+      background-color: var(--bg3);
+      border: 1px solid var(--bg3);
+      overflow: auto;
+      border-radius: 6px;
+      color: var(--text1);
+      width: 100%;
+      height: 50px;
+      transition: 0.2s;
+      padding: 5px 10px;
+      line-height: 38px;
+      outline: none;
+      vertical-align: middle;
+      resize: none;
 
-      &__r {
-        margin-top: 10px;
-        position: relative;
-        width: 100%;
+      &:focus {
+        border-color: var(--primary-color);
+        height: 100px;
+        box-shadow: 0 0 0 0.125em rgb(102 104 171 / 25%);
+        // box-shadow: 0 0 0 0.125em rgb(72 95 199 / 25%);
       }
     }
   }
-}
-
-.video-comment {
-  margin-top: 2em;
-  margin-bottom: 2em;
 
   &__title > h4 {
     display: block !important;
@@ -277,5 +289,37 @@
     white-space: pre-wrap;
     margin: 4px auto 4px 46px;
     color: var(--text1);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .player-header {
+    & {
+      min-width: 100%;
+      flex-direction: column;
+      padding-right: 0px;
+      margin: 10px auto;
+
+      &__player.empty {
+        height: 200px !important;
+        line-height: 200px !important;
+      }
+
+      .upv-player {
+        min-height: auto;
+      }
+
+      &__r {
+        margin-top: 10px;
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
+  .video-comment {
+    margin: 1em auto;
+  }
+  .video-comment-edit {
+    zoom: 0.7;
   }
 }

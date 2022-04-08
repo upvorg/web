@@ -97,4 +97,23 @@
     padding: 0 8px;
     min-width: 100%;
   }
+  .upv-header__bar {
+    height: auto;
+  }
+  .logo {
+    font-size: 1.2em;
+  }
+  .navbar {
+    padding: 0.4em;
+  }
+
+  .navbar-burger {
+    height: 2.6rem !important;
+    width: 2.6rem !important;
+  }
+  .navbar-brand,
+  .navbar,
+  .navbar-burger {
+    min-height: 2.6rem !important;
+  }
 }

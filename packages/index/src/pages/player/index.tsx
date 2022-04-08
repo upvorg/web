@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import UPlayer from '../../components/player'
-import { axios } from '@web/shared'
+import { axios, getTimeDistance } from '@web/shared'
 import './index.scss'
 
-export default function PlayerPage(props: any) {
+export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
   const [video, setVideo] = useState<any[]>([])
   const [pv, setPv] = useState<number>(0)
@@ -14,16 +14,18 @@ export default function PlayerPage(props: any) {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`/post/${props.id}`),
-      axios.get(`/videos?pid=${props.id}&page=1&pageSize=222`)
-    ]).then(([a, b]) => {
+      axios.get(`/post/${id}`),
+      axios.get(`/videos?pid=${id}&page=1&pageSize=222`),
+      axios.get(`/post/${id}/comments`)
+    ]).then(([a, b, c]) => {
       const { title, creator_nickname } = a.data
       a.data && setState(a.data)
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
       b.data && setVideo(b.data)
+      c.data && setComments(c.data)
       document.title = `${title || '少女祈祷中···'} ${creator_nickname ? ` - ${creator_nickname}` : ''}`
     })
-    axios.get(`/pv/${props.id}`).then((_) => setPv(_.data.pv))
+    axios.get(`/pv/${id}`).then((_) => setPv(_.data.pv))
   }, [])
 
   return (
@@ -51,6 +53,7 @@ export default function PlayerPage(props: any) {
                           setCurrentIndex(i)
                           setPlayerIsPlaying(true)
                         }}
+                        title={item.title}
                       >
                         <span> {item.oid}</span>
                       </li>
@@ -108,7 +111,7 @@ export default function PlayerPage(props: any) {
                 p-id="6828"
               ></path>
             </svg>
-            <span>{state.create_time || '-'}</span>
+            <span>{state.create_time ? getTimeDistance(state.create_time) : '-'}</span>
           </div>
         </div>
       </div>
@@ -116,15 +119,23 @@ export default function PlayerPage(props: any) {
         <div className="video-comment__title">
           <h4>评论</h4>
         </div>
+        <div className="video-comment-edit">
+          <img className="video-comment-edit__avatar" src={'https://upv.life/ic_launcher_round.png'} alt="" />
+          <textarea
+            className="video-comment-edit__input"
+            placeholder="下载 APP 参与互动..."
+            disabled
+          ></textarea>
+        </div>
         <div className="comment-list">
           {comments.length > 0 ? (
             <ul>
-              {comments.map((item: any, i: number) => (
-                <li key={i} className="comment-item">
+              {comments.map((item: any) => (
+                <li key={item.id} className="comment-item">
                   <div className="comment-item__head">
-                    <img className="comment-item__avatar" src={item.avatar} alt="" />
+                    <img className="comment-item__avatar" src={item.creator_avatar} alt="" />
                     <div>
-                      <span className="comment-item__name">{item.nickname}</span>
+                      <span className="comment-item__name">{item.creator_nickname}</span>
                       <p className="comment-item__time">{item.create_time}</p>
                     </div>
                   </div>

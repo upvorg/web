@@ -9,7 +9,7 @@ export default function RankList({ list }: { list: any[] | null }) {
         {list ? (
           list.length > 0 ? (
             list.map((item, i) => (
-              <Link href={`/bangumi/play/${item.id}`} key={i}>
+              <Link href={`/bangumi/play/${item.id}`} key={i} target="_blank">
                 <li className="rank-video-list__item">
                   <span className="rank-video-list__item--index" data-index={i}>
                     {i + 1}

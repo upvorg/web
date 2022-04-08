@@ -15,7 +15,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       template: '../../public/index.html',
-      title: 'vpv - free animes no ads',
+      title: 'UPV - free animes no ads',
       script: `<script>
       var _hmt = _hmt || [];
       (function() {

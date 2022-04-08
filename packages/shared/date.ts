@@ -1,4 +1,3 @@
-// 根据时间返回距离当前时间多久
 export function getTimeDistance(_date: string) {
   const now = new Date()
   const date = new Date(_date)

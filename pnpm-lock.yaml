@@ -118,6 +118,7 @@ importers:
       bulma: ^0.9.3
       griffith: ^1.25.0
       griffith-message: ^1.25.0
+      lottie-react: ^2.2.1
       react: ^18.0.0
       react-dom: ^18.0.0
       react-markdown-editor-lite: ^1.3.2
@@ -137,6 +138,7 @@ importers:
       bulma: 0.9.3
       griffith: 1.25.0_react-dom@18.0.0+react@18.0.0
       griffith-message: 1.25.0
+      lottie-react: 2.2.1_react-dom@18.0.0+react@18.0.0
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-markdown-editor-lite: 1.3.2_react@18.0.0
@@ -460,7 +462,7 @@ packages:
       prosemirror-state: 1.3.4
       prosemirror-tables: 1.1.1
       prosemirror-transform: 1.4.2
-      prosemirror-view: 1.23.11
+      prosemirror-view: 1.23.12
       tslib: 2.3.1
     dev: false
 
@@ -1217,7 +1219,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.20.2
-      caniuse-lite: 1.0.30001325
+      caniuse-lite: 1.0.30001327
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1304,7 +1306,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001325
+      caniuse-lite: 1.0.30001327
       electron-to-chromium: 1.4.106
       escalade: 3.1.1
       node-releases: 2.0.2
@@ -1345,8 +1347,8 @@ packages:
     engines: {node: '>= 6'}
     dev: false
 
-  /caniuse-lite/1.0.30001325:
-    resolution: {integrity: sha512-sB1bZHjseSjDtijV1Hb7PB2Zd58Kyx+n/9EotvZ4Qcz2K3d0lWB8dB4nb8wN/TsOGFq3UuAm0zQZNQ4SoR7TrQ==}
+  /caniuse-lite/1.0.30001327:
+    resolution: {integrity: sha512-1/Cg4jlD9qjZzhbzkzEaAC2JHsP0WrOc8Rd/3a3LuajGzGWR/hD7TVyvq99VqmTy99eVh8Zkmdq213OgvgXx7w==}
     dev: true
 
   /ccount/2.0.1:
@@ -2984,6 +2986,21 @@ packages:
       js-tokens: 4.0.0
     dev: false
 
+  /lottie-react/2.2.1_react-dom@18.0.0+react@18.0.0:
+    resolution: {integrity: sha512-lAdIUw+zeHLX3gtyLkisa4QM9NkTUUeZTsEL53laBEsjIH4JibgwkioZuza8CtwZ7/cpPZRbCRXWKfiuaDZWww==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      lottie-web: 5.9.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+    dev: false
+
+  /lottie-web/5.9.2:
+    resolution: {integrity: sha512-YnoJIKCdKIzno8G/kONOpADW6H/ORZV9puy3vWOhWmHtbDcpISFGVvvdKKa2jwAcsVqXK4xSi0po730kAPIfBw==}
+    dev: false
+
   /lower-case/2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
@@ -3899,7 +3916,7 @@ packages:
     dependencies:
       prosemirror-state: 1.3.4
       prosemirror-transform: 1.4.2
-      prosemirror-view: 1.23.11
+      prosemirror-view: 1.23.12
     dev: false
 
   /prosemirror-gapcursor/1.2.2:
@@ -3908,7 +3925,7 @@ packages:
       prosemirror-keymap: 1.1.5
       prosemirror-model: 1.16.1
       prosemirror-state: 1.3.4
-      prosemirror-view: 1.23.11
+      prosemirror-view: 1.23.12
     dev: false
 
   /prosemirror-history/1.2.0:
@@ -3960,7 +3977,7 @@ packages:
       prosemirror-model: 1.16.1
       prosemirror-state: 1.3.4
       prosemirror-transform: 1.4.2
-      prosemirror-view: 1.23.11
+      prosemirror-view: 1.23.12
     dev: false
 
   /prosemirror-transform/1.4.2:
@@ -3969,8 +3986,8 @@ packages:
       prosemirror-model: 1.16.1
     dev: false
 
-  /prosemirror-view/1.23.11:
-    resolution: {integrity: sha512-iBqsyrQZz9NYcJ13JC7sPZ+4PdbBbUXhs1qzbxkDQ2tplcVROwxmAn3bnxpVFst/guv+XFI5KTHHbw5stvKt0g==}
+  /prosemirror-view/1.23.12:
+    resolution: {integrity: sha512-uvw9ZVz5dNDD9w1bzHkU2r4NWFlpFz85v9rCD8NAhQBau6LYhwM/crjry+C4JgeR8gy6pMXS5eJ1zhNLcK4ctQ==}
     dependencies:
       prosemirror-model: 1.16.1
       prosemirror-state: 1.3.4

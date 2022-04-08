@@ -12,14 +12,9 @@ createRoot(document.getElementById('root')!).render(
         <Switch>
           <IndexRoute path="/" component={lazy(() => import('./pages/index'))} />
           <DefaultRoute path="/search" component={lazy(() => import('./pages/search'))} />
-          {/* <DefaultRoute path="/anime/index/" component={lazy(() => import('./pages/search'))} /> */}
           <DefaultRoute path="/bangumi/play/:id" component={lazy(() => import('./pages/player'))} />
           <DefaultRoute path="/about" component={lazy(() => import('./pages/about'))} />
-          <DefaultRoute path="/:rest*">
-            {(params) => (
-              <p style={{ marginTop: '2em' }}>{`404, Sorry the page ${params.rest} does not exist!`}</p>
-            )}
-          </DefaultRoute>
+          <DefaultRoute path="/:rest*" component={lazy(() => import('./pages/404'))} />
         </Switch>
         <footer className="footer">
           <div className="bd-footer-support">

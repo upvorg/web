@@ -38,7 +38,7 @@
               <div class="indicator">
                 <div class="indicator-item badge badge-secondary">{{ list.selected.length }}</div>
                 <input
-                  :checked="isSelectedAll.value"
+                  :checked="isSelectedAll"
                   class="checkbox"
                   type="checkbox"
                   @change="toggleSelectedAll"
@@ -86,11 +86,7 @@
             </label>
           </th>
           <th v-if="isAdmin(state.user.level)">{{ item.id }}</th>
-          <th
-            pointer
-            @click="pushDetail(item.id)"
-            class="primary-color"
-          >{{ item.title.substr(0, 15) }}</th>
+          <th pointer @click="pushDetail(item.id)" class="primary-color">{{ item.title.substr(0, 15) }}</th>
           <th v-if="isAdmin(state.user.level)">{{ item.creator_name }}</th>
           <th>{{ getTimeDistance(item.create_time) }}</th>
           <th>{{ getTimeDistance(item.update_time) }}</th>
@@ -116,7 +112,7 @@ import { isAdmin, POST_STATE, POST_STATE_ENUM } from '../constant'
 import { getLocalUser } from '../utils/localstorage'
 import useSelect from '../shared/use-select'
 import { watch } from '@vue/runtime-core'
-import { getTimeDistance } from '../utils/date'
+import { getTimeDistance } from '@web/shared'
 
 const prePage = ref(1)
 const router = useRouter()
@@ -149,18 +145,16 @@ const _effect = () => {
       state.status = '10'
     }
 
-    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then(
-      (res) => {
-        if (res.code === 200) {
-          if (prePage.value < state.page) {
-            list.data = list.data.concat(res.data || [])
-            prePage.value = state.page
-          } else {
-            list.data = res.data || []
-          }
+    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then((res) => {
+      if (res.code === 200) {
+        if (prePage.value < state.page) {
+          list.data = list.data.concat(res.data || [])
+          prePage.value = state.page
+        } else {
+          list.data = res.data || []
         }
       }
-    )
+    })
   }
   list.selected = []
 }
