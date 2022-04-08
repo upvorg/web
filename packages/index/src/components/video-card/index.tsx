@@ -32,7 +32,7 @@ export default function VideoCard({ info }: any) {
         </a>
         <div className="upv-video-card__content">
           <div className="upv-video-card__content__title">{info.title}</div>
-          <div className="upv-video-card__content__subtitle">{info.creator_name}</div>
+          <div className="upv-video-card__content__subtitle">{info.creator_nickname}</div>
         </div>
       </div>
     </div>
