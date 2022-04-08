@@ -51,12 +51,7 @@ const DefaultLayout: React.FC = (props) => {
 
 type LayoutRouteProps = RouteProps & { layout: React.FC; component?: React.FC<any> }
 
-const LayoutRoute = ({
-  component: Component,
-  layout: Layout,
-  children,
-  ...rest
-}: LayoutRouteProps) => {
+const LayoutRoute = ({ component: Component, layout: Layout, children, ...rest }: LayoutRouteProps) => {
   return (
     <Route
       {...rest}
@@ -73,7 +68,7 @@ const LayoutRoute = ({
           </Layout>
         )
       }}
-    ></Route>
+    />
   )
 }
 

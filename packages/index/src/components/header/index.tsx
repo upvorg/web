@@ -4,25 +4,30 @@ import { Link, useRoute } from 'wouter'
 import './index.scss'
 
 export default function Header() {
-  const [searchPlaceholder, setSearchPlaceholder] = useState('Search')
   const searchValue = useRef('')
+  const [isSearchPage] = useRoute('/search')
+  const [searchPlaceholder, setSearchPlaceholder] = useState('Search')
 
   useEffect(() => {
-    const $navbarBurger: HTMLHRElement = document.querySelector('.navbar-burger')!
     fetch('//v1.hitokoto.cn?c=a')
       .then((res) => res.json())
       .then((data) => {
         setSearchPlaceholder(data.hitokoto)
       })
-    $navbarBurger.addEventListener('click', () => {
-      const target = $navbarBurger.dataset.target!
-      const $target = document.getElementById(target)
 
+    const $navbarBurger: HTMLElement = document.querySelector('.navbar-burger')!
+    const handler: EventListener = () => {
+      const $target = document.getElementById($navbarBurger.dataset.target!)
       $navbarBurger.classList.toggle('is-active')
       $target!.classList.toggle('is-active')
-    })
+    }
+
+    $navbarBurger.addEventListener('click', handler, false)
+
+    return () => {
+      $navbarBurger.removeEventListener('click', handler, false)
+    }
   }, [])
-  const [isSearchPage] = useRoute('/search')
 
   return (
     <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
