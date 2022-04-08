@@ -138,7 +138,11 @@
           type="text"
         />
         <span>
-          <input v-model="soltVideo.oid" class="input input-bordered inline-block input-sm mr-4 w-12" type="number" />
+          <input
+            v-model="soltVideo.oid"
+            class="input input-bordered inline-block input-sm mr-4 w-12"
+            type="number"
+          />
           集
         </span>
 
@@ -161,7 +165,7 @@ import { GlobalState } from '../utils/localstorage'
 import { POST_STATE_ENUM, TAGS, isAdmin } from '../constant'
 import emitter from '../utils/emitter'
 import ModalWithSlot from '../components/ModalWithSlot.vue'
-import { getTimeDistance } from '../utils/date'
+import { getTimeDistance } from '@web/shared'
 import { defineComponent } from 'vue'
 import Vditor from '../components/Vditor.vue'
 
