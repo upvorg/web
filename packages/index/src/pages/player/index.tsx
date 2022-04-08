@@ -5,12 +5,20 @@ import './index.scss'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
-  const [video, setVideo] = useState<any[]>([])
+  const [video, setVideo] = useState<any[]>([
+    // {
+    //   id: 1,
+    //   content: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4'
+    // },
+    // {
+    //   id: 2,
+    //   content: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_sd.mp4'
+    // }
+  ])
   const [pv, setPv] = useState<number>(0)
   const [comments, setComments] = useState([])
 
   const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const [isPlaying, setPlayerIsPlaying] = useState<boolean>(false)
 
   useEffect(() => {
     Promise.all([
@@ -23,7 +31,9 @@ export default function PlayerPage({ id }: any) {
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
       b.data && setVideo(b.data)
       c.data && setComments(c.data)
-      document.title = `${title || '少女祈祷中···'} ${creator_nickname ? ` - ${creator_nickname}` : ''}`
+      document.title = `${title || '少女祈祷中···'} ${
+        creator_nickname ? ` - ${creator_nickname}` : ''
+      }`
     })
     axios.get(`/pv/${id}`).then((_) => setPv(_.data.pv))
   }, [])
@@ -32,7 +42,7 @@ export default function PlayerPage({ id }: any) {
     <>
       <div className="player-header">
         <div className="player-header__player">
-          <ReactDPlayer url={video[currentIndex]?.content} isPlaying={isPlaying} />
+          <ReactDPlayer url={video[currentIndex]?.content} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">
@@ -51,7 +61,6 @@ export default function PlayerPage({ id }: any) {
                         className={'list-item ' + (i === currentIndex ? 'cursor' : '')}
                         onClick={() => {
                           setCurrentIndex(i)
-                          setPlayerIsPlaying(true)
                         }}
                         title={item.title}
                       >
@@ -78,7 +87,13 @@ export default function PlayerPage({ id }: any) {
           <h3 className="video-info__title">{state.title || '少女祈祷中···'}</h3>
           <div className="video-meta">
             <span>{state.creator_nickname || '-'}</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -87,7 +102,13 @@ export default function PlayerPage({ id }: any) {
               ></path>
             </svg>
             <span>{pv || '-'}</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -120,7 +141,11 @@ export default function PlayerPage({ id }: any) {
           <h4>评论</h4>
         </div>
         <div className="video-comment-edit">
-          <img className="video-comment-edit__avatar" src={'https://upv.life/ic_launcher_round.png'} alt="" />
+          <img
+            className="video-comment-edit__avatar"
+            src={'https://upv.life/ic_launcher_round.png'}
+            alt=""
+          />
           <textarea
             className="video-comment-edit__input"
             placeholder="下载 APP 参与互动..."

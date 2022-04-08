@@ -1,33 +1,27 @@
 import { useEffect, useRef } from 'react'
 import DPlayer from 'dplayer'
 
-export const ReactDPlayer = ({ url, isPlaying = false }: { url: string; isPlaying: boolean }) => {
+type Props = { url: string }
+
+export const ReactDPlayer = ({ url }: Props) => {
   const $ = useRef<HTMLDivElement>(null)
   const dp = useRef<DPlayer>()
 
   useEffect(() => {
-    dp.current = new DPlayer({
-      container: $.current,
-      video: { url },
-      theme: '#6668ab'
-    })
-
-    return () => dp.current?.destroy()
-  }, [$.current])
-
-  useEffect(() => {
-    if (isPlaying) {
-      dp.current?.play()
-    } else {
-      dp.current?.pause()
+    if (!dp.current && url && $.current) {
+      dp.current = new DPlayer({
+        container: $.current,
+        video: { url },
+        theme: '#6668ab'
+      })
     }
-  }, [isPlaying])
+  }, [$.current, url])
 
   useEffect(() => {
     // @ts-ignore
     dp.current?.switchVideo({ url })
 
-    return () => dp.current?.pause()
+    return () => dp.current?.seek(0)
   }, [url])
 
   return <div ref={$}></div>
