@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ReactDPlayer } from '../../components/player/DPlayer'
 import { axios, getTimeDistance } from '@web/shared'
 import './index.scss'
+import ShakaPlayer from '/src/components/player/ShakaPlayer'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
@@ -17,7 +17,6 @@ export default function PlayerPage({ id }: any) {
   ])
   const [pv, setPv] = useState<number>(0)
   const [comments, setComments] = useState([])
-
   const [currentIndex, setCurrentIndex] = useState<number>(0)
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function PlayerPage({ id }: any) {
     <>
       <div className="player-header">
         <div className="player-header__player">
-          <ReactDPlayer url={video[currentIndex]?.content} />
+          <ShakaPlayer src={video[currentIndex]?.content} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">
@@ -77,12 +76,6 @@ export default function PlayerPage({ id }: any) {
         </div>
       </div>
       <div className="video-info">
-        <div className="video-author">
-          <img
-            src={state.creator_avatar || 'https://upv.life/ic_launcher_round.png'}
-            alt={state.creator_nickname}
-          />
-        </div>
         <div>
           <h3 className="video-info__title">{state.title || '少女祈祷中···'}</h3>
           <div className="video-meta">
@@ -134,6 +127,12 @@ export default function PlayerPage({ id }: any) {
             </svg>
             <span>{state.create_time ? getTimeDistance(state.create_time) : '-'}</span>
           </div>
+        </div>
+        <div className="video-author">
+          <img
+            src={state.creator_avatar || 'https://upv.life/ic_launcher_round.png'}
+            alt={state.creator_nickname}
+          />
         </div>
       </div>
       <div className="video-comment">

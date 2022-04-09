@@ -131,6 +131,7 @@ importers:
       rehype-stringify: ^9.0.3
       remark-parse: ^10.0.1
       remark-rehype: ^10.1.0
+      shaka-player: ^3.1.6
       unified: ^10.1.2
       web-vitals: ^2.1.4
       wouter: ^2.8.0-alpha.2
@@ -154,6 +155,7 @@ importers:
       rehype-stringify: 9.0.3
       remark-parse: 10.0.1
       remark-rehype: 10.1.0
+      shaka-player: 3.1.6
       unified: 10.1.2
       web-vitals: 2.1.4
       wouter: 2.8.0-alpha.2_react@18.0.0
@@ -4592,6 +4594,12 @@ packages:
 
   /shaka-player/2.5.23:
     resolution: {integrity: sha512-3MC9k0OXJGw8AZ4n/ZNCZS2yDxx+3as5KgH6Tx4Q5TRboTBBCu6dYPI5vp1DxKeyU12MBN1Zcbs7AKzXv2EnCg==}
+    dependencies:
+      eme-encryption-scheme-polyfill: 2.0.4
+    dev: false
+
+  /shaka-player/3.1.6:
+    resolution: {integrity: sha512-67mSVRum8J3AZL7sCuoAR48lfb5+6B2lQXv51QgJe3VaPfW5yOBNoG2oe7ZHooXEZELzXIqjLrmAjOOtXXGc1g==}
     dependencies:
       eme-encryption-scheme-polyfill: 2.0.4
     dev: false

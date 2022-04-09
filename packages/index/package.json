@@ -30,6 +30,7 @@
     "rehype-stringify": "^9.0.3",
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
+    "shaka-player": "^3.1.6",
     "unified": "^10.1.2",
     "web-vitals": "^2.1.4",
     "wouter": "^2.8.0-alpha.2"
