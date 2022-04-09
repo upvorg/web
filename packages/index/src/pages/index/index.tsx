@@ -4,15 +4,16 @@ import RankList from '../../components/rank-list'
 import { axios } from '@web/shared'
 
 export default function IndexPage() {
-  const st = ['推荐', '最新', '原创']
+  const st = ['推荐', '文章', '最新', '原创']
   const [state, setState] = useState<any[]>([null, null, null])
   const [rankList, setRankList] = useState<[] | null>(null)
 
   useEffect(() => {
     Promise.allSettled([
-      axios.get('/posts?status=3&tag=推荐&page=1&pageSize=10&type=video'),
-      axios.get('/posts?status=3&sort=bgm&page=1&pageSize=10&type=video'),
-      axios.get('/posts?status=3&sort=原创&page=1&pageSize=10&type=video'),
+      axios.get('/posts?status=3&tag=推荐&page=1&pageSize=8&type=video'),
+      axios.get('/posts?status=3&sort=bgm&page=1&pageSize=6&type=post'),
+      axios.get('/posts?status=3&sort=bgm&page=1&pageSize=12&type=video'),
+      axios.get('/posts?status=3&sort=原创&page=1&pageSize=12&type=video'),
       axios.get(`/rank`)
     ]).then((_resp) => {
       const resp = _resp.map(
