@@ -13,6 +13,7 @@ createRoot(document.getElementById('root')!).render(
         <IndexRoute path="/" component={lazy(() => import('./pages/index'))} />
         <DefaultRoute path="/search" component={lazy(() => import('./pages/search'))} />
         <DefaultRoute path="/bangumi/play/:id" component={lazy(() => import('./pages/player'))} />
+        <DefaultRoute path="/post/:id" component={lazy(() => import('./pages/post'))} />
         <DefaultRoute path="/about" component={lazy(() => import('./pages/about'))} />
         <DefaultRoute path="/:rest*" component={lazy(() => import('./pages/404'))} />
       </Switch>

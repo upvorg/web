@@ -13,10 +13,12 @@ const ImageType = {
 
 export default function VideoCard({ info }: any) {
   const { url, type } = getCoverFormMd(info.content)
+  const target = info.type === 'video' ? `/bangumi/play/${info.id}` : `/post/${info.id}`
+
   return (
     <div className="upv-video-card">
       <div className="upv-video-card__wrap">
-        <a href={`/bangumi/play/${info.id}`} target="_blank">
+        <a href={target} target="_blank">
           <div className="upv-video-card__image">
             <div className="upv-video-card__image--wrap">
               <picture>

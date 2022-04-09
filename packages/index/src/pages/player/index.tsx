@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { axios, getTimeDistance } from '@web/shared'
 import './index.scss'
 import ShakaPlayer from '/src/components/player/ShakaPlayer'
+import Comment from '/src/components/comment'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
@@ -16,20 +17,17 @@ export default function PlayerPage({ id }: any) {
     // }
   ])
   const [pv, setPv] = useState<number>(0)
-  const [comments, setComments] = useState([])
   const [currentIndex, setCurrentIndex] = useState<number>(0)
 
   useEffect(() => {
     Promise.all([
       axios.get(`/post/${id}`),
-      axios.get(`/videos?pid=${id}&page=1&pageSize=222`),
-      axios.get(`/post/${id}/comments`)
-    ]).then(([a, b, c]) => {
+      axios.get(`/videos?pid=${id}&page=1&pageSize=222`)
+    ]).then(([a, b]) => {
       const { title, creator_nickname } = a.data
       a.data && setState(a.data)
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
       b.data && setVideo(b.data)
-      c.data && setComments(c.data)
       document.title = `${title || '少女祈祷中···'} ${
         creator_nickname ? ` - ${creator_nickname}` : ''
       }`
@@ -135,45 +133,7 @@ export default function PlayerPage({ id }: any) {
           />
         </div>
       </div>
-      <div className="video-comment">
-        <div className="video-comment__title">
-          <h4>评论</h4>
-        </div>
-        <div className="video-comment-edit">
-          <img
-            className="video-comment-edit__avatar"
-            src={'https://upv.life/ic_launcher_round.png'}
-            alt=""
-          />
-          <textarea
-            className="video-comment-edit__input"
-            placeholder="下载 APP 参与互动..."
-            disabled
-          ></textarea>
-        </div>
-        <div className="comment-list">
-          {comments.length > 0 ? (
-            <ul>
-              {comments.map((item: any) => (
-                <li key={item.id} className="comment-item">
-                  <div className="comment-item__head">
-                    <img className="comment-item__avatar" src={item.creator_avatar} alt="" />
-                    <div>
-                      <span className="comment-item__name">{item.creator_nickname}</span>
-                      <p className="comment-item__time">{item.create_time}</p>
-                    </div>
-                  </div>
-                  <div className="comment-item__content">
-                    <p>{item.content}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <span className="empty">暂无评论</span>
-          )}
-        </div>
-      </div>
+      <Comment id={id} />
     </>
   )
 }
