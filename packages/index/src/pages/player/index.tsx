@@ -27,7 +27,7 @@ export default function PlayerPage({ id }: any) {
       const { title, creator_nickname } = a.data
       a.data && setState(a.data)
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
-      // b.data && setVideo(b.data)
+      b.data && setVideo(b.data)
       document.title = `${title || '少女祈祷中···'} ${
         creator_nickname ? ` - ${creator_nickname}` : ''
       }`
