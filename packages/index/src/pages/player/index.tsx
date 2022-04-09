@@ -9,10 +9,10 @@ import { ReactDPlayer } from '../../components/player/DPlayer'
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
   const [video, setVideo] = useState<any[]>([
-    // {
-    //   id: 1,
-    //   content: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4'
-    // },
+    {
+      id: 1,
+      content: 'https://s2.monidai.com/ppvod/DADA21B4B4C28DFE8F6E69F90D490E59.m3u8'
+    }
     // {
     //   id: 2,
     //   content: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_sd.mp4'
@@ -29,7 +29,7 @@ export default function PlayerPage({ id }: any) {
       const { title, creator_nickname } = a.data
       a.data && setState(a.data)
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
-      b.data && setVideo(b.data)
+      // b.data && setVideo(b.data)
       document.title = `${title || '少女祈祷中···'} ${
         creator_nickname ? ` - ${creator_nickname}` : ''
       }`
@@ -41,9 +41,9 @@ export default function PlayerPage({ id }: any) {
     <>
       <div className="player-header">
         <div className="player-header__player">
-          <GriffithPlayer src={video[currentIndex].content} />
-          <ShakaPlayer src={video[currentIndex].content} />
-          <ReactDPlayer url={video[currentIndex].content} />
+          <GriffithPlayer src={video[currentIndex]?.content} />
+          <ShakaPlayer src={video[currentIndex]?.content} />
+          <ReactDPlayer url={video[currentIndex]?.content} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">

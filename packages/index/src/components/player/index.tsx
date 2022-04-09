@@ -33,7 +33,7 @@ export default function UPlayer({ src, playerIsPlaying = false }: UPlayerProps) 
           <Player
             autoplay
             // 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4'
-            sources={{ hd: { play_url: src } }}
+            sources={{ hd: { play_url: src, format: 'm3u8' } }}
             id={src}
           >
             <MessageContext.Consumer>

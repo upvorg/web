@@ -21,6 +21,14 @@ function ShakaPlayer({ src, config, chromeless, ...rest }: ShakaPlayerProps, ref
   const [ui, setUi] = useState(null)
 
   useEffect(() => {
+    shaka.polyfill.installAll()
+    shaka.media.ManifestParser.registerParserByExtension('m3u8', shaka.hls.HlsParser)
+    shaka.media.ManifestParser.registerParserByMime(
+      'Application/vnd.apple.mpegurl',
+      shaka.hls.HlsParser
+    )
+    shaka.media.ManifestParser.registerParserByMime('application/x-mpegURL', shaka.hls.HlsParser)
+
     const player = new shaka.Player(videoRef.current)
     setPlayer(player)
 
@@ -29,8 +37,6 @@ function ShakaPlayer({ src, config, chromeless, ...rest }: ShakaPlayerProps, ref
       const ui = new shaka.ui.Overlay(player, uiContainerRef.current, videoRef.current)
       setUi(ui)
     }
-
-    console.log('shaka player', player, ui)
 
     return () => {
       player.destroy()
@@ -46,7 +52,7 @@ function ShakaPlayer({ src, config, chromeless, ...rest }: ShakaPlayerProps, ref
 
   useEffect(() => {
     if (player && src) {
-      player.load(src)
+      player.load(src).catch(console.log)
     }
   }, [player, src])
 
