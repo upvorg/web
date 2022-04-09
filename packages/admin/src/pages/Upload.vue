@@ -45,7 +45,11 @@
               {{ POST_STATE_ENUM[item] }}
             </option>
           </select>
-          <select v-model="post.sort" v-if="post.type == 'video'" class="select select-bordered select-sm">
+          <select
+            v-model="post.sort"
+            v-if="post.type == 'video'"
+            class="select select-bordered select-sm"
+          >
             <option>番剧</option>
             <option>原创</option>
             <option>转载</option>
@@ -88,19 +92,19 @@
             <th>Name</th>
             <th>url</th>
             <th>发布时间</th>
-            <th>更新时间</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in combineVideos">
+          <tr v-for="item in videos.concat(queueVideos)">
             <th>{{ item?.oid }}</th>
             <td>{{ item?.title }}</td>
             <td>{{ url(item?.content) }}</td>
             <td>{{ getTimeDistance(item?.create_time) }}</td>
-            <td>{{ getTimeDistance(item?.update_time) }}</td>
             <th>
-              <button class="btn btn-ghost btn-xs inline" @click="showModifyVideo(item)">修改</button>
+              <button class="btn btn-ghost btn-xs inline" @click="showModifyVideo(item)">
+                修改
+              </button>
               <button class="btn btn-ghost btn-xs inline" @click="delVideo(item.id)">删除</button>
             </th>
           </tr>
@@ -121,7 +125,11 @@
   <ModalWithSlot v-show="isAddVideo">
     <div class="card card-side flex-col md:flex-row">
       <label for="file" class="flex flex-col items-center text-center">
-        <img class="rounded-lg p-6 pb-2 w-40 md:w-min" pointer :src="file ? hasFileImage : nofileImage" />
+        <img
+          class="rounded-lg p-6 pb-2 w-40 md:w-min"
+          pointer
+          :src="file ? hasFileImage : nofileImage"
+        />
         <p>{{ file?.name?.substr(0, 10) || '点击上传' }}</p>
       </label>
       <div class="max-w-lg card-body">
@@ -179,7 +187,9 @@ export default defineComponent({
   components: { ModalWithSlot, Vditor },
   data() {
     return {
+      //@ts-ignore
       nofileImage: require('../assets/no-file.png'),
+      //@ts-ignore
       hasFileImage: require('../assets/file-audio.png'),
       GlobalState: GlobalState,
       POST_STATE_ENUM: POST_STATE_ENUM,
@@ -188,7 +198,7 @@ export default defineComponent({
       isModify: false,
       isAddVideo: false,
       isModifyVideo: false,
-      file: null as unknown as File,
+      file: null as unknown as File | null,
       videos: [],
       queueVideos: [],
       post: {
@@ -203,11 +213,6 @@ export default defineComponent({
       soltVideo: emptyVideo
     }
   },
-  computed: {
-    combineVideos() {
-      return this.queueVideos.concat(this.videos).sort((_, __) => __['create_time'] - _['create_time'])
-    }
-  },
   mounted() {
     if (this.$route.params.gv) {
       this.isModify = true
@@ -220,14 +225,11 @@ export default defineComponent({
     }
   },
   methods: {
-    typeHandler(e) {
-      this.post.type = e.target.value
-    },
     showAddVideo() {
       this.isAddVideo = true
-      this.soltVideo.oid = this.combineVideos.length + 1
+      this.soltVideo.oid = this.videos.length + this.queueVideos.length + 1
     },
-    showModifyVideo(item) {
+    showModifyVideo(item: any) {
       this.isModifyVideo = true
       this.isAddVideo = true
       this.soltVideo = { ...item }
@@ -240,10 +242,10 @@ export default defineComponent({
     resetSoltVideo() {
       this.soltVideo.title = ''
       this.soltVideo.content = ''
-      this.soltVideo.oid = this.combineVideos?.length + 1 || 0
+      this.soltVideo.oid = this.videos.length + this.queueVideos.length + 1 || 0
       this.isAddVideo = false
     },
-    delVideo(id) {
+    delVideo(id: number) {
       emitter.emit('opm', {
         t: '确认删除 ？',
         ok: () => {
@@ -297,7 +299,7 @@ export default defineComponent({
 
       if (this.isModifyVideo) return this.editVideo()
 
-      if (this.combineVideos.some((_) => _.oid === oid)) {
+      if (this.videos.concat(this.queueVideos).some((_) => _.oid === oid)) {
         return emitter.emit('alert', { type: 'warning', text: '已有此集' })
       }
 
@@ -321,7 +323,7 @@ export default defineComponent({
     },
     uploadFile() {
       const formData = new FormData()
-      formData.append('file', this.file)
+      formData.append('file', this.file!)
       return uploadApi(formData).then((src) => {
         this.file = null
         return src
@@ -334,7 +336,7 @@ export default defineComponent({
         throw new Error('请完善信息')
       }
     },
-    stepHandler(n) {
+    stepHandler(n: number) {
       if (n < 0) n = 0
       if (n > 1) n = 1
       if (this.step === 0) {
@@ -343,9 +345,9 @@ export default defineComponent({
       this.step = n
     },
     fileHandler(e) {
-      this.file = e.target.files[0]
+      this.file = e.target!.files[0]
     },
-    selectTag(tag) {
+    selectTag(tag: string) {
       if (this.post.tag.indexOf(tag) > -1) {
         this.post.tag = this.post.tag.replace(` ${tag}`, '')
       } else {
@@ -359,7 +361,7 @@ export default defineComponent({
       })
       this.$router.push('/posts')
     },
-    url(u) {
+    url(u: string) {
       try {
         return new URL(u).origin || u
       } catch (error) {
@@ -368,11 +370,6 @@ export default defineComponent({
     },
     isAdmin,
     getTimeDistance
-  },
-  watch: {
-    isAddVideo(v) {
-      document.querySelector('.drawer-content').style.zIndex = v ? 20 : 0
-    }
   }
 })
 </script>

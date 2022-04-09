@@ -14,9 +14,10 @@ const onChange = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
 
-watch(
+const w = watch(
   () => props.modelValue,
   (value) => {
+    w()
     if (vditor.value !== value) {
       vditor.value!.setValue(value)
     }
@@ -25,10 +26,32 @@ watch(
 
 onMounted(() => {
   vditor.value = new Vditor('vditor', {
-    toolbar: [],
-    toolbarConfig: { hide: true },
+    icon: 'material',
+    toolbar: [
+      'emoji',
+      'headings',
+      'bold',
+      'italic',
+      'strike',
+      '|',
+      'line',
+      'quote',
+      'list',
+      'ordered-list',
+      'link',
+      'table',
+      'code',
+      'inline-code',
+      'check',
+      '|',
+      'undo',
+      'redo',
+      'export'
+    ],
     after: () => {
-      document.querySelector('.vditor-ir')!.classList.add('textarea', 'textarea-bordered', 'milkdown-root')
+      document
+        .querySelector('.vditor-ir')!
+        .classList.add('textarea', 'textarea-bordered', 'milkdown-root')
       vditor.value!.setValue(props.modelValue)
     },
     input: (value: string) => {
@@ -45,7 +68,9 @@ onMounted(() => {
   max-height: 700px;
 
   .vditor-toolbar {
-    display: none;
+    background: #fff;
+    border: 0;
+    padding: 0 !important;
   }
 
   .vditor-ir {
@@ -55,6 +80,10 @@ onMounted(() => {
 
   .vditor-reset {
     background: transparent;
+  }
+
+  .vditor-reset p {
+    margin-bottom: 0;
   }
 }
 </style>
