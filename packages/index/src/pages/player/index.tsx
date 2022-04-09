@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { axios, getTimeDistance } from '@web/shared'
 import './index.scss'
-import ShakaPlayer from '/src/components/player/ShakaPlayer'
-import Comment from '/src/components/comment'
+import ShakaPlayer from '../../components/player/ShakaPlayer'
+import Comment from '../../components/comment'
+import GriffithPlayer from '../../components/player'
+import { ReactDPlayer } from '../../components/player/DPlayer'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
@@ -39,7 +41,9 @@ export default function PlayerPage({ id }: any) {
     <>
       <div className="player-header">
         <div className="player-header__player">
-          <ShakaPlayer src={video[currentIndex]?.content} />
+          <GriffithPlayer src={video[currentIndex].content} />
+          <ShakaPlayer src={video[currentIndex].content} />
+          <ReactDPlayer url={video[currentIndex].content} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">
