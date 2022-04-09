@@ -10,7 +10,7 @@ export default function PlayerPage({ id }: any) {
     // {
     //   id: 1,
     //   content: 'https://s2.monidai.com/ppvod/DADA21B4B4C28DFE8F6E69F90D490E59.m3u8'
-    // }
+    // },
     // {
     //   id: 2,
     //   content: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_sd.mp4'

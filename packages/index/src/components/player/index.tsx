@@ -1,12 +1,14 @@
 import React from 'react'
 import Player, { MessageContext } from 'griffith'
-import { ACTIONS } from 'griffith-message'
+import { ACTIONS, EVENTS } from 'griffith-message'
 
 interface UPlayerProps {
   src: string
   playerIsPlaying?: boolean
 }
 export default function UPlayer({ src, playerIsPlaying = false }: UPlayerProps) {
+  const [error, setError] = React.useState<any>(null)
+
   return (
     <div
       className="upv-player"
@@ -31,6 +33,12 @@ export default function UPlayer({ src, playerIsPlaying = false }: UPlayerProps) 
       >
         {src ? (
           <Player
+            error={error}
+            onEvent={(event: EVENTS) => {
+              if (event === EVENTS.PLAY_FAILED || event === EVENTS.ERROR) {
+                setError({ message: 'PLAY FAILED' })
+              }
+            }}
             autoplay
             // 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4'
             sources={{ hd: { play_url: src } }}
