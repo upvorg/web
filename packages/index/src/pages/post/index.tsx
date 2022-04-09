@@ -1,8 +1,9 @@
-import { axios, getCoverFormMd, getTimeDistance, removeImagesFormMd } from '@web/shared'
 import React, { useEffect, useState } from 'react'
-import Markdown from '../../components/markdown'
-import './index.scss'
+import toast from 'react-hot-toast'
 import Comment from '/src/components/comment'
+import Markdown from '../../components/markdown'
+import { axios, getCoverFormMd, getTimeDistance, removeImagesFormMd } from '@web/shared'
+import './index.scss'
 
 const PostPage: React.FC = ({ id }: any) => {
   const [state, setState] = useState<any>({})
@@ -33,25 +34,23 @@ const PostPage: React.FC = ({ id }: any) => {
       }
     }
 
-    //TODO: Toast
-    const shareHandler = () => {
-      navigator.clipboard.writeText(
-        `${state.title} - ${state.creator_nickname} \r\n ${window.location.origin}/post/${id}`
-      )
-    }
-
-    const $cover = document.querySelector('.post-container__cover')!
     const $side = document.querySelector('.post-side')!
-    const $share = document.querySelector('.post-side-action.share')!
-
+    const $cover = document.querySelector('.post-container__cover')!
     document.getElementById('root')!.addEventListener('scroll', scrollHandler)
-    $share.addEventListener('click', shareHandler)
 
     return () => {
       document.getElementById('root')!.removeEventListener('scroll', scrollHandler)
-      $share.removeEventListener('click', shareHandler)
     }
   }, [state])
+
+  const shareHandler = () => {
+    navigator.clipboard
+      .writeText(
+        `${state.title} - ${state.creator_nickname} \r\n${window.location.origin}/post/${id}`
+      )
+      .then((_) => toast.success('链接已复制到剪贴板'))
+      .catch((_) => toast.error('剪切板写入失败, 请手动复制'))
+  }
 
   const cover = getCoverFormMd(state.content)
 
@@ -67,7 +66,7 @@ const PostPage: React.FC = ({ id }: any) => {
       )}
       <div className="post-container">
         <div className="post-side post-side--hide">
-          <div className="post-side-action" role="button">
+          <div className="post-side-action" role="button" onClick={() => toast.error('暂未开放')}>
             <div className="side-action-icon">
               <svg
                 className="side-action__icon"
@@ -131,7 +130,7 @@ const PostPage: React.FC = ({ id }: any) => {
               {state.liked_count ? `获赞 ${state.liked_count}` : '点赞'}
             </div>
           </div>
-          <div className="post-side-action share" role="button">
+          <div className="post-side-action share" role="button" onClick={shareHandler}>
             <div className="side-action-icon">
               <svg
                 className="side-action__icon share"

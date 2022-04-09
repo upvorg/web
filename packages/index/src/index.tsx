@@ -2,6 +2,8 @@ import { Router, Switch } from 'wouter'
 import { lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { DefaultRoute, IndexRoute } from './components/layout'
+import { Toaster } from 'react-hot-toast'
+import { PRIMARY_COLOR } from '@web/shared'
 
 import './index.scss'
 
@@ -17,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
         <DefaultRoute path="/about" component={lazy(() => import('./pages/about'))} />
         <DefaultRoute path="/:rest*" component={lazy(() => import('./pages/404'))} />
       </Switch>
+
       <footer className="footer">
         <div className="bd-footer-support">
           <h4 className="bd-footer-title">
@@ -33,6 +36,19 @@ createRoot(document.getElementById('root')!).render(
           </p>
         </div>
       </footer>
+
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: PRIMARY_COLOR,
+              secondary: '#fff'
+            }
+          }
+        }}
+        containerStyle={{ top: 70, right: 20 }}
+      />
     </Suspense>
   </Router>
   // </React.StrictMode>
