@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import { axios, getTimeDistance } from '@web/shared'
-import './index.scss'
-import ShakaPlayer from '../../components/player/ShakaPlayer'
 import Comment from '../../components/comment'
 import GriffithPlayer from '../../components/player'
-import { ReactDPlayer } from '../../components/player/DPlayer'
+import './index.scss'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
   const [video, setVideo] = useState<any[]>([
-    {
-      id: 1,
-      content: 'https://s2.monidai.com/ppvod/DADA21B4B4C28DFE8F6E69F90D490E59.m3u8'
-    }
+    // {
+    //   id: 1,
+    //   content: 'https://s2.monidai.com/ppvod/DADA21B4B4C28DFE8F6E69F90D490E59.m3u8'
+    // }
     // {
     //   id: 2,
     //   content: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_sd.mp4'
@@ -42,8 +40,6 @@ export default function PlayerPage({ id }: any) {
       <div className="player-header">
         <div className="player-header__player">
           <GriffithPlayer src={video[currentIndex]?.content} />
-          <ShakaPlayer src={video[currentIndex]?.content} />
-          <ReactDPlayer url={video[currentIndex]?.content} />
         </div>
         <div className="player-header__r">
           <div className="eplist_module">
