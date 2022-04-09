@@ -60,9 +60,9 @@ const PostPage: React.FC = ({ id }: any) => {
         <div
           className="post-container__cover"
           style={{
-            background: `url(${cover.url}) no-repeat top/cover`
+            background: `url(${cover.url}) no-repeat top/cover #f4f5f7`
           }}
-        ></div>
+        />
       )}
       <div className="post-container">
         <div className="post-side post-side--hide">
