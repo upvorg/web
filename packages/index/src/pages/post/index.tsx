@@ -59,13 +59,14 @@ const PostPage: React.FC = ({ id }: any) => {
 
   return (
     <>
-      <div
-        className="post-container__cover"
-        style={{
-          backgroundImage: `url(${cover.url})`
-        }}
-      ></div>
-
+      {!cover._df && (
+        <div
+          className="post-container__cover"
+          style={{
+            background: `url(${cover.url}) no-repeat top/cover`
+          }}
+        ></div>
+      )}
       <div className="post-container">
         <div className="post-side post-side--hide">
           <div className="post-side-action" role="button">
