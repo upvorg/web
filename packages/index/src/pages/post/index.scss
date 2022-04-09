@@ -184,4 +184,21 @@
   .post-container__cover {
     margin-top: -6px;
   }
+  .post-side {
+    top: 77vh;
+    right: 10vw;
+
+    .side-action__icon.share {
+      width: 20px;
+      height: 20px;
+    }
+
+    .side-action-icon {
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .side-action__text {
+      display: none;
+    }
+  }
 }

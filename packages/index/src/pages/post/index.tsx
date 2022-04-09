@@ -24,8 +24,6 @@ const PostPage: React.FC = ({ id }: any) => {
   }, [])
 
   useEffect(() => {
-    if (window.innerWidth <= 991) return
-
     const scrollHandler = () => {
       const { top, bottom } = $cover.getBoundingClientRect()
       if (top <= window.innerHeight && bottom >= 0) {

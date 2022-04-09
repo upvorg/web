@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect, Component } from 'react'
 import Player, { MessageContext } from 'griffith'
 import { ACTIONS, EVENTS } from 'griffith-message'
 
@@ -7,7 +7,11 @@ interface UPlayerProps {
   playerIsPlaying?: boolean
 }
 export default function UPlayer({ src, playerIsPlaying = false }: UPlayerProps) {
-  const [error, setError] = React.useState<any>(null)
+  const [error, setError] = useState<any>(null)
+
+  useEffect(() => {
+    setError(null)
+  }, [src])
 
   return (
     <div
@@ -60,7 +64,7 @@ export default function UPlayer({ src, playerIsPlaying = false }: UPlayerProps) 
   )
 }
 
-class ActionRegister extends React.Component<{
+class ActionRegister extends Component<{
   dispatchAction: (action: ACTIONS) => void
   playerIsPlaying: boolean
 }> {
