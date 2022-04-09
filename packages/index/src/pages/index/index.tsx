@@ -11,7 +11,7 @@ export default function IndexPage() {
   useEffect(() => {
     Promise.allSettled([
       axios.get('/posts?status=3&tag=推荐&page=1&pageSize=8&type=video'),
-      axios.get('/posts?status=3&sort=bgm&page=1&pageSize=6&type=post'),
+      axios.get('/posts?status=3&page=1&pageSize=6&type=post'),
       axios.get('/posts?status=3&sort=bgm&page=1&pageSize=12&type=video'),
       axios.get('/posts?status=3&sort=原创&page=1&pageSize=12&type=video'),
       axios.get(`/rank`)
