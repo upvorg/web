@@ -1,3 +1,4 @@
+import '@web/shared/f12'
 import { Router, Switch } from 'wouter'
 import { lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
