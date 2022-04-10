@@ -85,17 +85,10 @@ module.exports = {
         ]
       },
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/i],
         type: 'asset',
         parser: {
-          dataUrlCondition: { maxSize: 10000 }
-        }
-      },
-      {
-        test: /\.svg$/i,
-        loader: 'file-loader',
-        options: {
-          name: 'static/media/[name].[hash].[ext]'
+          dataUrlCondition: { maxSize: 10 * 1024 }
         }
       }
     ]

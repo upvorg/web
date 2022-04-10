@@ -166,6 +166,27 @@
     border: 1px solid #b2bcc4;
     border-width: 2px 0 0;
   }
+  a {
+    color: var(--primary-color);
+
+    &:hover {
+      text-shadow: 0 0 0.5em rgba(102, 104, 171, 0.4);
+    }
+
+    &:visited {
+      opacity: 0.5;
+    }
+
+    &::before {
+      display: inline-block;
+      content: '';
+      font-size: 0.8em;
+      width: 1.5em;
+      height: 1.5em;
+      vertical-align: text-top;
+      background: url('../../assets/a.svg') no-repeat center/cover;
+    }
+  }
 }
 
 @media (max-width: 991px) {
@@ -184,7 +205,8 @@
     margin-top: -6px;
   }
   .post-side {
-    top: 77vh;
+    top: auto;
+    bottom: 180px;
     right: 10vw;
 
     .side-action__icon.share {

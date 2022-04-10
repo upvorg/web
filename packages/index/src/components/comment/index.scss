@@ -1,5 +1,17 @@
 .video-comment {
   margin: 1.2em auto;
+
+  &__title > h4 {
+    display: block !important;
+    margin-right: 6px;
+    line-height: 34px;
+    color: var(--text1);
+    pointer-events: none;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 0.3em;
+  }
+
   .video-comment-edit {
     display: flex;
     margin: 1em 0;
@@ -38,15 +50,8 @@
     }
   }
 
-  &__title > h4 {
-    display: block !important;
-    margin-right: 6px;
-    line-height: 34px;
-    color: var(--text1);
-    pointer-events: none;
-    font-weight: 500;
-    font-size: 20px;
-    margin-bottom: 0.3em;
+  .empty {
+    text-align: center;
   }
 
   .comment-item + .comment-item {

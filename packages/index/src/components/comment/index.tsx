@@ -47,7 +47,7 @@ const Comment = ({ id }: any) => {
             ))}
           </ul>
         ) : (
-          <span className="empty">暂无评论</span>
+          <p className="empty">暂无评论</p>
         )}
       </div>
     </div>

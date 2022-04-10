@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
-import Comment from '/src/components/comment'
+import classNames from 'classnames'
+import Comment from '../../components/comment'
 import Markdown from '../../components/markdown'
 import { axios, getCoverFormMd, getTimeDistance, removeImagesFormMd } from '@web/shared'
 import './index.scss'
@@ -8,6 +9,9 @@ import './index.scss'
 const PostPage: React.FC = ({ id }: any) => {
   const [state, setState] = useState<any>({})
   const [pv, setPv] = useState<number>(0)
+  const cover = useRef<ReturnType<typeof getCoverFormMd>>()
+  const hasCover = cover.current && !cover.current._df
+  const isMobile = useMemo(() => window.innerWidth < 991, [])
 
   useEffect(() => {
     Promise.all([axios.get(`/post/${id}`), axios.get(`/pv/${id}`)]).then(([a, p]) => {
@@ -21,25 +25,26 @@ const PostPage: React.FC = ({ id }: any) => {
       document.title = `${title || '少女祈祷中···'} ${
         creator_nickname ? ` - ${creator_nickname}` : ''
       }`
+      cover.current = getCoverFormMd(a.data.content, { strict: true })
     })
   }, [])
 
   useEffect(() => {
+    if (!hasCover || isMobile) return
     const scrollHandler = () => {
-      const { top, bottom } = $cover.getBoundingClientRect()
-      if (top <= window.innerHeight && bottom >= 0) {
-        $side.classList.add('post-side--hide')
-      } else {
+      if ($cover!.getBoundingClientRect().top <= -200) {
         $side.classList.remove('post-side--hide')
+      } else {
+        $side.classList.add('post-side--hide')
       }
     }
 
     const $side = document.querySelector('.post-side')!
-    const $cover = document.querySelector('.post-container__cover')!
+    const $cover = document.querySelector('.post-container__cover')
     document.getElementById('root')!.addEventListener('scroll', scrollHandler)
 
     return () => {
-      document.getElementById('root')!.removeEventListener('scroll', scrollHandler)
+      $cover && document.getElementById('root')!.removeEventListener('scroll', scrollHandler)
     }
   }, [state])
 
@@ -52,20 +57,18 @@ const PostPage: React.FC = ({ id }: any) => {
       .catch((_) => toast.error('剪切板写入失败, 请手动复制'))
   }
 
-  const cover = getCoverFormMd(state.content)
-
   return (
     <>
-      {!cover._df && (
+      {hasCover && (
         <div
           className="post-container__cover"
           style={{
-            background: `url(${cover.url}) no-repeat top/cover #f4f5f7`
+            background: `url(${cover.current!.url}) no-repeat top/cover #f4f5f7`
           }}
         />
       )}
-      <div className="post-container">
-        <div className="post-side post-side--hide">
+      <div className={classNames('post-container', { '--no-cover': !hasCover })}>
+        <div className={classNames('post-side', { 'post-side--hide': hasCover && !isMobile })}>
           <div className="post-side-action" role="button" onClick={() => toast.error('暂未开放')}>
             <div className="side-action-icon">
               <svg
@@ -212,10 +215,7 @@ const PostPage: React.FC = ({ id }: any) => {
             </div>
           </div>
         </div>
-        <Markdown
-          type="render"
-          value={removeImagesFormMd(state.content + `\n ![${cover.title}](${cover.url})` || '')}
-        />
+        <Markdown type="render" value={removeImagesFormMd(state.content)} />
         <Comment id={id} />
       </div>
     </>
