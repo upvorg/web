@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from 'vue'
 import Vditor from 'vditor'
+// import { SMMS } from '@web/shared'
 import 'vditor/dist/index.css'
 
 const vditor = ref<Vditor | null>(null)
@@ -14,21 +15,10 @@ const onChange = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
 
-const w = watch(
-  () => props.modelValue,
-  (value) => {
-    w()
-    if (vditor.value !== value) {
-      vditor.value!.setValue(value)
-    }
-  }
-)
-
 onMounted(() => {
   vditor.value = new Vditor('vditor', {
-    icon: 'material',
     toolbar: [
-      'emoji',
+      // 'emoji',
       'headings',
       'bold',
       'italic',
@@ -44,9 +34,18 @@ onMounted(() => {
       'inline-code',
       'check',
       '|',
+      {
+        name: 'smms',
+        icon: '<svg><use xlink:href="#vditor-icon-upload"></use></svg>',
+        tip: 'sm.ms',
+        click: () => {
+          window.open('https://sm.ms/')
+        }
+      },
+      // 'upload',
       'undo',
-      'redo',
-      'export'
+      'redo'
+      // 'export'
     ],
     after: () => {
       document
@@ -57,8 +56,25 @@ onMounted(() => {
     input: (value: string) => {
       onChange('update:modelValue', value)
     }
+    // upload: {
+    //   handler(files: File[]) {
+    //     return SMMS.upload(files[0]).then((url) => {
+    //       return url.url as any
+    //     })
+    //   }
+    // }
   })
 })
+
+const w = watch(
+  () => props.modelValue,
+  (value) => {
+    w?.()
+    if (vditor.value?.getValue() !== value) {
+      vditor.value?.setValue(value)
+    }
+  }
+)
 </script>
 
 <style lang="scss">
@@ -71,6 +87,10 @@ onMounted(() => {
     background: #fff;
     border: 0;
     padding: 0 !important;
+  }
+
+  button[data-type='smms'] > svg {
+    width: 20px;
   }
 
   .vditor-ir {

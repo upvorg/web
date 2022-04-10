@@ -9,6 +9,10 @@ export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
   const [video, setVideo] = useState<any[]>([
     // {
+    //   content:
+    //     'https://svp.cdn.qq.com/0b53muajsaaakmafje2sk5rjazodtfsqbgia.f0.mp4?dis_k=5321f1f6c51f0bfccd8feffa4fa72184&dis_t=1649593655'
+    // }
+    // {
     //   id: 1,
     //   content: 'https://s2.monidai.com/ppvod/DADA21B4B4C28DFE8F6E69F90D490E59.m3u8'
     // },

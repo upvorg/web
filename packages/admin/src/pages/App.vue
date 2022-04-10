@@ -170,9 +170,11 @@
 
     <div class="drawer-side">
       <label for="main-menu" class="drawer-overlay"></label>
-      <aside class="flex flex-col text-base-content w-64 md:w-80">
+      <aside
+        class="flex flex-col border-r border-base-200 bg-base-100 text-base-content w-64 md:w-80"
+      >
         <div
-          class="sticky inset-x-0 top-0 hidden w-full py-1 transition duration-200 ease-in-out lg:block"
+          class="sticky inset-x-0 top-0 z-50 hidden w-full py-1 transition duration-200 ease-in-out border-b lg:block border-base-200 bg-base-100"
         >
           <div class="mx-auto space-x-1 navbar max-w-none">
             <div class="flex items-center flex-none">
@@ -190,7 +192,7 @@
           </div>
         </div>
         <div>
-          <ul class="menu flex flex-col p-4 pt-2 compact rounded-box">
+          <ul class="menu flex flex-col p-4 pt-2 compact bg-base-100 rounded-box">
             <li class="mt-4 menu-title">
               <span>Action</span>
             </li>

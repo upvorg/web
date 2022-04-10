@@ -1,7 +1,14 @@
 <template>
   <div class="actions space-x-2 space-y-2 mb-2">
-    <input class="input input-bordered input-sm" placeholder="输入关键词" type="text" @input="search" />
-    <button :disabled="!hasSelected" class="btn btn-sm md:btn-sm btn-primary" @click="del">删除</button>
+    <input
+      class="input input-bordered input-sm"
+      placeholder="输入关键词"
+      type="text"
+      @input="search"
+    />
+    <button :disabled="!hasSelected" class="btn btn-sm md:btn-sm btn-primary" @click="del">
+      删除
+    </button>
 
     <div class="dropdown dropdown-hover">
       <div class="btn btn-sm" tabindex="0">
@@ -49,6 +56,7 @@
           <th v-if="isAdmin(state.user.level)">ID</th>
           <th>Title</th>
           <th v-if="isAdmin(state.user.level)">Creator</th>
+          <th>Type</th>
           <th pointer @click="toggleSort">
             Create At
             <svg
@@ -86,8 +94,11 @@
             </label>
           </th>
           <th v-if="isAdmin(state.user.level)">{{ item.id }}</th>
-          <th pointer @click="pushDetail(item.id)" class="primary-color">{{ item.title.substr(0, 15) }}</th>
+          <th pointer @click="pushDetail(item.id)" class="primary-color">
+            {{ item.title.substr(0, 15) }}
+          </th>
           <th v-if="isAdmin(state.user.level)">{{ item.creator_name }}</th>
+          <th>{{ item.type }}</th>
           <th>{{ getTimeDistance(item.create_time) }}</th>
           <th>{{ getTimeDistance(item.update_time) }}</th>
           <th>{{ POST_STATE_ENUM[item.status as keyof typeof POST_STATE_ENUM] }}</th>
@@ -145,16 +156,18 @@ const _effect = () => {
       state.status = '10'
     }
 
-    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then((res) => {
-      if (res.code === 200) {
-        if (prePage.value < state.page) {
-          list.data = list.data.concat(res.data || [])
-          prePage.value = state.page
-        } else {
-          list.data = res.data || []
+    getPosts(state.status, '', '', uid, state.page, state.size, state.order, state.key).then(
+      (res) => {
+        if (res.code === 200) {
+          if (prePage.value < state.page) {
+            list.data = list.data.concat(res.data || [])
+            prePage.value = state.page
+          } else {
+            list.data = res.data || []
+          }
         }
       }
-    })
+    )
   }
   list.selected = []
 }

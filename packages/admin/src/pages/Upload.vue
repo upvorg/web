@@ -96,7 +96,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in videos.concat(queueVideos)">
+          <tr v-for="item in queueVideos.concat(videos)">
             <th>{{ item?.oid }}</th>
             <td>{{ item?.title }}</td>
             <td>{{ url(item?.content) }}</td>
@@ -213,6 +213,13 @@ export default defineComponent({
       soltVideo: emptyVideo
     }
   },
+  watch: {
+    isAddVideo: {
+      handler(v) {
+        document.querySelector<HTMLDivElement>('.drawer-content')!.style.zIndex = v ? '20' : '0'
+      }
+    }
+  },
   mounted() {
     if (this.$route.params.gv) {
       this.isModify = true
@@ -290,7 +297,7 @@ export default defineComponent({
     },
     async addVideo() {
       const { title, oid, content } = this.soltVideo
-      if (!title || !oid || !(this.file || content)) {
+      if (!oid || !(this.file || content)) {
         return emitter.emit('alert', {
           type: 'warning',
           text: '请完善视频信息'
