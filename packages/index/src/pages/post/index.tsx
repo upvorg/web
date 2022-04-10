@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
+import copyTextToClipboard from 'copy-text-to-clipboard'
 import Comment from '../../components/comment'
 import Markdown from '../../components/markdown'
 import { axios, getCoverFormMd, getTimeDistance, removeImagesFormMd } from '@web/shared'
@@ -16,7 +17,10 @@ const PostPage: React.FC = ({ id }: any) => {
   useEffect(() => {
     Promise.all([axios.get(`/post/${id}`), axios.get(`/pv/${id}`)]).then(([a, p]) => {
       if (a.data?.type != 'post' && !__DEV__) {
-        window.location.href = '/404'
+        toast.error('文章不见了', {
+          duration: 90000,
+          position: 'top-center'
+        })
         return
       }
       a.data && setState(a.data)
@@ -49,12 +53,13 @@ const PostPage: React.FC = ({ id }: any) => {
   }, [state])
 
   const shareHandler = () => {
-    navigator.clipboard
-      .writeText(
-        `${state.title} - ${state.creator_nickname} \r\n${window.location.origin}/post/${id}`
-      )
-      .then((_) => toast.success('链接已复制到剪贴板'))
-      .catch((_) => toast.error('剪切板写入失败, 请手动复制'))
+    if (
+      copyTextToClipboard(`${state.title} - ${state.creator_nickname} \r\n${window.location.href}`)
+    ) {
+      toast.success('链接已复制到剪贴板')
+    } else {
+      toast.error('剪切板写入失败, 请手动复制')
+    }
   }
 
   return (

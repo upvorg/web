@@ -118,6 +118,7 @@ importers:
       '@web/shared': workspace:^1.0.0
       bulma: ^0.9.3
       classnames: ^2.3.1
+      copy-text-to-clipboard: ^3.0.1
       dplayer: ^1.26.0
       griffith: ^1.25.0
       griffith-message: ^1.25.0
@@ -144,6 +145,7 @@ importers:
       '@web/shared': link:../shared
       bulma: 0.9.3
       classnames: 2.3.1
+      copy-text-to-clipboard: 3.0.1
       dplayer: 1.26.0
       griffith: 1.25.0_react-dom@18.0.0+react@18.0.0
       griffith-message: 1.25.0
@@ -1560,6 +1562,11 @@ packages:
     resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
     engines: {node: '>= 0.6'}
     dev: true
+
+  /copy-text-to-clipboard/3.0.1:
+    resolution: {integrity: sha512-rvVsHrpFcL4F2P8ihsoLdFHmd404+CMg71S756oRSeQgqk51U3kicGdnvfkrxva0xXH92SjGS62B0XIJsbh+9Q==}
+    engines: {node: '>=12'}
+    dev: false
 
   /copy-webpack-plugin/10.2.4_webpack@5.72.0:
     resolution: {integrity: sha512-xFVltahqlsRcyyJqQbDY6EYTtyQZF9rf+JPjwHObLdPFMEISqkFkr7mFoVOC6BfYS/dNThyoQKvziugm+OnwBg==}

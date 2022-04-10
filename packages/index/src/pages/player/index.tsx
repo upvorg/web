@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { axios, getTimeDistance } from '@web/shared'
+import toast from 'react-hot-toast'
 import Comment from '../../components/comment'
 import GriffithPlayer from '../../components/player'
 import './index.scss'
@@ -17,13 +18,22 @@ export default function PlayerPage({ id }: any) {
     // }
   ])
   const [pv, setPv] = useState<number>(0)
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  const queryParams = Object.fromEntries(urlSearchParams.entries())
+  const [currentIndex, setCurrentIndex] = useState(() => +queryParams.v - 1 || 0)
 
   useEffect(() => {
     Promise.all([
       axios.get(`/post/${id}`),
       axios.get(`/videos?pid=${id}&page=1&pageSize=222`)
     ]).then(([a, b]) => {
+      if (!a.data) {
+        toast.error('视频不见了', {
+          duration: 90000,
+          position: 'top-center'
+        })
+        return
+      }
       const { title, creator_nickname } = a.data
       a.data && setState(a.data)
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
@@ -56,9 +66,7 @@ export default function PlayerPage({ id }: any) {
                     <a key={i}>
                       <li
                         className={'list-item ' + (i === currentIndex ? 'cursor' : '')}
-                        onClick={() => {
-                          setCurrentIndex(i)
-                        }}
+                        onClick={() => setCurrentIndex(i)}
                         title={item.title}
                       >
                         <span> {item.oid}</span>

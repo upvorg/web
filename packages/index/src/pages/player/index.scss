@@ -212,26 +212,24 @@ $pr: 350px;
 
 @media screen and (max-width: 991px) {
   .player-header {
-    & {
-      min-width: 100%;
-      flex-direction: column;
-      padding-right: 0px;
-      margin: 10px auto;
+    min-width: 100%;
+    flex-direction: column;
+    padding-right: 0px;
+    margin-top: 0;
 
-      &__player.empty {
-        height: 200px !important;
-        line-height: 200px !important;
-      }
+    &__player.empty {
+      height: 200px !important;
+      line-height: 200px !important;
+    }
 
-      .upv-player {
-        min-height: auto;
-      }
+    .upv-player {
+      min-height: auto;
+    }
 
-      &__r {
-        margin-top: 10px;
-        position: relative;
-        width: 100%;
-      }
+    &__r {
+      margin-top: 10px;
+      position: relative;
+      width: 100%;
     }
   }
   .video-comment,

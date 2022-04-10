@@ -18,9 +18,8 @@ module.exports = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: '../../public/index.html',
       title: 'UPV - free animes no ads',
-      head:
-        isEnvProduction &&
-        `<script>
+      head: isEnvProduction
+        ? `<script>
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
@@ -31,6 +30,7 @@ module.exports = merge(baseConfig, {
       </script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum Pen Script" />
       `
+        : ''
     })
   ],
   optimization: {
