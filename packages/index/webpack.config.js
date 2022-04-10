@@ -4,6 +4,8 @@ const baseConfig = require('../../webpack.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { default: merge } = require('webpack-merge')
 
+const isEnvProduction = process.env.NODE_ENV === 'production'
+
 module.exports = merge(baseConfig, {
   entry: './src/index.tsx',
   output: {
@@ -16,7 +18,9 @@ module.exports = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: '../../public/index.html',
       title: 'UPV - free animes no ads',
-      script: `<script>
+      head:
+        isEnvProduction &&
+        `<script>
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");

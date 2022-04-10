@@ -46,8 +46,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       template: '../../public/index.html',
-      title: '创作者中心',
-      script: `<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />`
+      title: '创作者中心'
     }),
     new VueLoaderPlugin(),
     new webpack.ProvidePlugin({
