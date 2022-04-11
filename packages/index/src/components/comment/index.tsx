@@ -5,12 +5,26 @@ import './index.scss'
 
 const Comment = ({ id }: any) => {
   const [comments, setComments] = useState<any[] | null>(null)
+  const [comment, setComment] = useState<string>('')
 
   useEffect(() => {
     axios.get(`/post/${id}/comments`).then((c) => {
       setComments(c?.data || [])
     })
   }, [])
+
+  const doComment = () => {
+    axios.post(`/post/${id}/comments`).then((_) => {
+      const newComment = {
+        id: Date.now(),
+        create_time: Date.now(),
+        content: comment,
+        creator_avatar: '',
+        creator_name: ''
+      }
+      setComments([newComment, ...comments!])
+    })
+  }
 
   return (
     <div className="video-comment">
@@ -27,7 +41,16 @@ const Comment = ({ id }: any) => {
           className="video-comment-edit__input"
           placeholder="下载 APP 参与互动..."
           disabled
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
         ></textarea>
+        <button
+          disabled
+          className="button is-primary video-comment-edit__button"
+          onClick={doComment}
+        >
+          评论
+        </button>
       </div>
       <div className="comment-list">
         {comments ? (
