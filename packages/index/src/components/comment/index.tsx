@@ -4,6 +4,7 @@ import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
 import { useLocalUser } from '/src/hooks/use-local-user'
 import './index.scss'
 import toast from 'react-hot-toast'
+import classNames from 'classnames'
 
 const Comment = ({ id }: any) => {
   const [comments, setComments] = useState<any[] | null>(null)
@@ -22,16 +23,24 @@ const Comment = ({ id }: any) => {
       return
     }
 
-    axios.post(`/post/comment/${id}`).then((_) => {
+    axios.post(`/post/comment/${id}`, { data: { content: comment } }).then((_) => {
       const newComment = {
         id: Date.now(),
+        uid: user!.id,
         create_time: getTimeDistance(Date()),
         content: comment,
         creator_avatar: user!.avatar,
         creator_nickname: user!.nickname
       }
+      setComment('')
       setComments([newComment, ...comments!])
     })
+  }
+
+  const ctrlEnter = (e: any) => {
+    if (e.ctrlKey && e.keyCode === 13) {
+      doComment()
+    }
   }
 
   return (
@@ -51,6 +60,7 @@ const Comment = ({ id }: any) => {
           disabled={!user}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          onKeyDown={ctrlEnter}
         ></textarea>
         <button
           disabled={!user}
@@ -65,7 +75,10 @@ const Comment = ({ id }: any) => {
           comments.length > 0 ? (
             <ul>
               {comments.map((item: any) => (
-                <li key={item.id} className="comment-item">
+                <li
+                  key={item.id}
+                  className={classNames('comment-item', { '--o': user?.id == item.uid })}
+                >
                   <div className="comment-item__head">
                     <img className="comment-item__avatar" src={item.creator_avatar} alt="" />
                     <div>
