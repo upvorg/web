@@ -36,6 +36,7 @@
     "wouter": "^2.8.0-alpha.2",
     "react-hot-toast": "^2.2.0",
     "classnames": "^2.3.1",
-    "copy-text-to-clipboard": "^3.0.1"
+    "copy-text-to-clipboard": "^3.0.1",
+    "react-content-loader": "^6.2.0"
   }
 }

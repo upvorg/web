@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { axios } from '@web/shared'
+import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
 import './index.scss'
 
 const Comment = ({ id }: any) => {
-  const [comments, setComments] = useState([])
+  const [comments, setComments] = useState<any[] | null>(null)
 
   useEffect(() => {
     axios.get(`/post/${id}/comments`).then((c) => {
-      c.data && setComments(c.data)
+      setComments(c?.data || [])
     })
   }, [])
 
@@ -29,25 +30,29 @@ const Comment = ({ id }: any) => {
         ></textarea>
       </div>
       <div className="comment-list">
-        {comments.length > 0 ? (
-          <ul>
-            {comments.map((item: any) => (
-              <li key={item.id} className="comment-item">
-                <div className="comment-item__head">
-                  <img className="comment-item__avatar" src={item.creator_avatar} alt="" />
-                  <div>
-                    <span className="comment-item__name">{item.creator_nickname}</span>
-                    <p className="comment-item__time">{item.create_time}</p>
+        {comments ? (
+          comments.length > 0 ? (
+            <ul>
+              {comments.map((item: any) => (
+                <li key={item.id} className="comment-item">
+                  <div className="comment-item__head">
+                    <img className="comment-item__avatar" src={item.creator_avatar} alt="" />
+                    <div>
+                      <span className="comment-item__name">{item.creator_nickname}</span>
+                      <p className="comment-item__time">{item.create_time}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="comment-item__content">
-                  <p>{item.content}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  <div className="comment-item__content">
+                    <p>{item.content}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="empty">暂无评论</p>
+          )
         ) : (
-          <p className="empty">暂无评论</p>
+          <CommentSkeleton />
         )}
       </div>
     </div>

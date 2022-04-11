@@ -105,3 +105,9 @@
     color: var(--text1);
   }
 }
+
+@media (max-width: 991px) {
+  .video-comment-edit {
+    zoom: 0.7;
+  }
+}
