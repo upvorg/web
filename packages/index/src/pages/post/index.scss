@@ -51,6 +51,12 @@
     &:hover .side-action__text {
       transform: translateY(4px);
     }
+
+    &.--l {
+      .side-action-icon {
+        background-color: var(--primary-color);
+      }
+    }
   }
 
   .side-action-icon {
