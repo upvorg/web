@@ -10,6 +10,20 @@
   align-items: center !important;
 }
 
+.navbar-item.avatar {
+  padding: 0;
+}
+
+@media (max-width: 991px) {
+  .navbar-item.avatar {
+    padding: auto;
+  }
+}
+
+.navbar-item img {
+  max-height: 999px !important;
+}
+
 .center-search {
   display: block !important;
   flex: 1;

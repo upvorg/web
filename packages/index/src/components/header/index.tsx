@@ -1,12 +1,17 @@
+import { HOST } from '@web/shared'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useRoute } from 'wouter'
+import { useLocalUser } from '/src/hooks/use-local-user'
 
 import './index.scss'
+
+const admin = '//admin.' + HOST
 
 export default function Header() {
   const searchValue = useRef('')
   const [isSearchPage] = useRoute('/search')
   const [searchPlaceholder, setSearchPlaceholder] = useState('Search')
+  const user = useLocalUser()
 
   useEffect(() => {
     fetch('//v1.hitokoto.cn?c=a')
@@ -37,7 +42,6 @@ export default function Header() {
             <h1 className="logo">UPV</h1>
           </a>
         </Link>
-
         <a
           role="button"
           className="navbar-burger"
@@ -118,17 +122,34 @@ export default function Header() {
             </form>
           </div>
         )}
+
         <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              <a className="button is-primary" href="//admin.upv.life">
-                <strong>Sign up</strong>
-              </a>
-              <a className="button is-light" href="//admin.upv.life">
-                Log in
-              </a>
+          {user ? (
+            <div className="navbar-item has-dropdown is-hoverable">
+              <div className="navbar-link">
+                <figure className="image is-32x32 ">
+                  <img className="is-rounded" src={user.avatar} />
+                </figure>
+              </div>
+
+              <div className="navbar-dropdown is-boxed is-right">
+                <a className="navbar-item" href={admin}>
+                  我的资料
+                </a>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="navbar-item">
+              <div className="buttons">
+                <a className="button is-primary" href={admin + `?r=${location.href}`}>
+                  <strong>Sign up</strong>
+                </a>
+                <a className="button is-light" href={admin + `?r=${location.href}`}>
+                  Log in
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </nav>

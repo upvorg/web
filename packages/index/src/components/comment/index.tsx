@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { axios } from '@web/shared'
 import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
+import { useLocalUser } from '/src/hooks/use-local-user'
 import './index.scss'
 
 const Comment = ({ id }: any) => {
   const [comments, setComments] = useState<any[] | null>(null)
   const [comment, setComment] = useState<string>('')
+  const user = useLocalUser()
 
   useEffect(() => {
     axios.get(`/post/${id}/comments`).then((c) => {
@@ -14,7 +16,7 @@ const Comment = ({ id }: any) => {
   }, [])
 
   const doComment = () => {
-    axios.post(`/post/${id}/comments`).then((_) => {
+    axios.post(`/post/comment/${id}`).then((_) => {
       const newComment = {
         id: Date.now(),
         create_time: Date.now(),
@@ -34,18 +36,18 @@ const Comment = ({ id }: any) => {
       <div className="video-comment-edit">
         <img
           className="video-comment-edit__avatar"
-          src={'https://upv.life/ic_launcher_round.png'}
+          src={user?.avatar || 'https://upv.life/ic_launcher_round.png'}
           alt=""
         />
         <textarea
           className="video-comment-edit__input"
-          placeholder="下载 APP 参与互动..."
-          disabled
+          placeholder="..."
+          disabled={!user}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         ></textarea>
         <button
-          disabled
+          disabled={!user}
           className="button is-primary video-comment-edit__button"
           onClick={doComment}
         >

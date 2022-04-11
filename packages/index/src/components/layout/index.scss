@@ -25,7 +25,7 @@
       nav.navbar {
         background-color: transparent;
 
-        .navbar-menu:not(.is-active) {
+        .navbar-menu:not(.is-active) .navbar-start {
           a.navbar-item {
             color: #fff;
           }
