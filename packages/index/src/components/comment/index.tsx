@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { axios } from '@web/shared'
+import { axios, getTimeDistance } from '@web/shared'
 import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
 import { useLocalUser } from '/src/hooks/use-local-user'
 import './index.scss'
+import toast from 'react-hot-toast'
 
 const Comment = ({ id }: any) => {
   const [comments, setComments] = useState<any[] | null>(null)
@@ -16,13 +17,18 @@ const Comment = ({ id }: any) => {
   }, [])
 
   const doComment = () => {
+    if (!comment) {
+      toast.error('写点什么吧')
+      return
+    }
+
     axios.post(`/post/comment/${id}`).then((_) => {
       const newComment = {
         id: Date.now(),
-        create_time: Date.now(),
+        create_time: getTimeDistance(Date()),
         content: comment,
-        creator_avatar: '',
-        creator_name: ''
+        creator_avatar: user!.avatar,
+        creator_nickname: user!.nickname
       }
       setComments([newComment, ...comments!])
     })
