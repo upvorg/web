@@ -26,6 +26,7 @@ export default function PlayerPage({ id }: any) {
   const urlSearchParams = new URLSearchParams(window.location.search)
   const queryParams = Object.fromEntries(urlSearchParams.entries())
   const [currentIndex, setCurrentIndex] = useState(() => +queryParams.v - 1 || 0)
+  const [commentCount, setCommentCount] = useState<number>(0)
 
   useEffect(() => {
     Promise.all([
@@ -121,7 +122,7 @@ export default function PlayerPage({ id }: any) {
                   fill="var(--text3)"
                 ></path>
               </svg>
-              <span>-</span>
+              <span>{commentCount || '-'}</span>
               <svg
                 viewBox="0 0 1024 1024"
                 version="1.1"
@@ -151,7 +152,7 @@ export default function PlayerPage({ id }: any) {
         <VideoMetaSkeleton className="video-info__skeleton" height={'200px'} />
       )}
 
-      <Comment id={id} />
+      <Comment id={id} onLoad={(c) => setCommentCount(c.length)} />
     </>
   )
 }

@@ -13,3 +13,7 @@ $primary: #6668ab;
   --bg2: #f6f7f8;
   --bg3: #f1f2f3;
 }
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

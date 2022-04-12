@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FocusEventHandler, useEffect, useState } from 'react'
 import { axios, getTimeDistance } from '@web/shared'
 import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
 import { useLocalUser } from '/src/hooks/use-local-user'
@@ -6,7 +6,15 @@ import './index.scss'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
 
-const Comment = ({ id }: any) => {
+interface CommentProps {
+  id: string
+  uid?: string
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>
+  onLoad?: (c: any[]) => void
+}
+
+const Comment = ({ id, onFocus, onBlur, onLoad }: CommentProps) => {
   const [comments, setComments] = useState<any[] | null>(null)
   const [comment, setComment] = useState<string>('')
   const user = useLocalUser()
@@ -14,6 +22,7 @@ const Comment = ({ id }: any) => {
   useEffect(() => {
     axios.get(`/post/${id}/comments`).then((c) => {
       setComments(c?.data || [])
+      onLoad?.(c?.data || [])
     })
   }, [])
 
@@ -61,6 +70,8 @@ const Comment = ({ id }: any) => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           onKeyDown={ctrlEnter}
+          onFocus={(e) => onFocus?.(e)}
+          onBlur={(e) => onBlur?.(e)}
         ></textarea>
         <button
           disabled={!user}

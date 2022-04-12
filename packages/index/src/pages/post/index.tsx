@@ -13,6 +13,9 @@ const PostPage: React.FC = ({ id }: any) => {
   const [state, setState] = useState<any>({})
   const [pv, setPv] = useState<number>(0)
   const [isLiked, setIsLiked] = useState<boolean>(false)
+  const [isFocus, setIsFocus] = useState<boolean>(false)
+  const [commentCount, setCommentCount] = useState<number>(0)
+
   const cover = useRef<ReturnType<typeof getCoverFormMd>>()
   const hasCover = cover.current && !cover.current._df
   const isMobile = useMemo(() => window.innerWidth < 991, [])
@@ -96,7 +99,12 @@ const PostPage: React.FC = ({ id }: any) => {
       )}
 
       <div className={classNames('post-container', { '--no-cover': !hasCover })}>
-        <div className={classNames('post-side', { 'post-side--hide': hasCover && !isMobile })}>
+        <div
+          className={classNames('post-side', {
+            'post-side--hide': hasCover && !isMobile,
+            '--o': isMobile && isFocus
+          })}
+        >
           <div
             className={classNames('post-side-action', { '--l': isLiked })}
             role="button"
@@ -244,7 +252,7 @@ const PostPage: React.FC = ({ id }: any) => {
                       fill="var(--text3)"
                     ></path>
                   </svg>
-                  <span>-</span>
+                  <span>{commentCount || '-'}</span>
                 </div>
               </div>
             </div>
@@ -253,7 +261,12 @@ const PostPage: React.FC = ({ id }: any) => {
           <Postkeleton />
         )}
         <Markdown type="render" value={removeImagesFormMd(state.content)} />
-        <Comment id={id} />
+        <Comment
+          id={id}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onLoad={(c) => setCommentCount(c.length)}
+        />
       </div>
     </>
   )

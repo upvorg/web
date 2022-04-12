@@ -201,15 +201,11 @@
     padding: 0.5em;
     margin: 0 auto;
   }
-  .custom-html-style {
-    p {
-      font-size: 1em;
-      margin: 0.5em auto;
-    }
-  }
+
   .post-container__cover {
     margin-top: -6px;
   }
+
   .post-side {
     top: auto;
     bottom: 180px;
@@ -226,6 +222,17 @@
     }
     .side-action__text {
       display: none;
+    }
+  }
+
+  .post-side.--o {
+    opacity: 0;
+  }
+
+  .custom-html-style {
+    p {
+      font-size: 1em;
+      margin: 0.5em auto;
     }
   }
 }
