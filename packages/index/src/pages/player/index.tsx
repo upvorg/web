@@ -5,6 +5,7 @@ import Comment from '../../components/comment'
 import GriffithPlayer from '../../components/player'
 import './index.scss'
 import { VideoMetaSkeleton } from '/src/skeleton/CommentSkeleton'
+import { Helmet } from 'react-helmet'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
@@ -40,19 +41,22 @@ export default function PlayerPage({ id }: any) {
         })
         return
       }
-      const { title, creator_nickname } = a.data
       a.data && setState(a.data)
       b.data.sort((a: { oid: number }, b: { oid: number }) => a.oid - b.oid)
       b.data && setVideo(b.data)
-      document.title = `${title || '少女祈祷中···'} ${
-        creator_nickname ? ` - ${creator_nickname}` : ''
-      }`
     })
     axios.get(`/pv/${id}`).then((_) => setPv(_.data.pv))
   }, [])
 
+  const { title, creator_nickname } = state
+
   return (
     <>
+      <Helmet>
+        <title>{`${title || '少女祈祷中···'} ${
+          creator_nickname ? ` - ${creator_nickname}` : ''
+        }`}</title>
+      </Helmet>
       <div className="player-header">
         <div className="player-header__player">
           <GriffithPlayer src={video[currentIndex]?.content} />

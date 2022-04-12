@@ -115,6 +115,7 @@ importers:
       '@types/dplayer': ^1.25.2
       '@types/react': ^17.0.44
       '@types/react-dom': ^17.0.15
+      '@types/react-helmet': ^6.1.5
       '@web/shared': workspace:^1.0.0
       bulma: ^0.9.3
       classnames: ^2.3.1
@@ -125,6 +126,7 @@ importers:
       react: ^18.0.0
       react-content-loader: ^6.2.0
       react-dom: ^18.0.0
+      react-helmet: ^6.1.0
       react-hot-toast: ^2.2.0
       react-markdown-editor-lite: ^1.3.2
       rehype-attr: ^2.0.8
@@ -151,6 +153,7 @@ importers:
       react: 18.0.0
       react-content-loader: 6.2.0_react@18.0.0
       react-dom: 18.0.0_react@18.0.0
+      react-helmet: 6.1.0_react@18.0.0
       react-hot-toast: 2.2.0_react-dom@18.0.0+react@18.0.0
       react-markdown-editor-lite: 1.3.2_react@18.0.0
       rehype-attr: 2.0.8
@@ -163,6 +166,8 @@ importers:
       unified: 10.1.2
       web-vitals: 2.1.4
       wouter: 2.8.0-alpha.2_react@18.0.0
+    devDependencies:
+      '@types/react-helmet': 6.1.5
 
   packages/shared:
     specifiers: {}
@@ -686,7 +691,6 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-    dev: false
 
   /@types/prosemirror-commands/1.0.4:
     resolution: {integrity: sha512-utDNYB3EXLjAfYIcRWJe6pn3kcQ5kG4RijbT/0Y/TFOm6yhvYS/D9eJVnijdg9LDjykapcezchxGRqFD5LcyaQ==}
@@ -782,13 +786,18 @@ packages:
       '@types/react': 17.0.44
     dev: false
 
+  /@types/react-helmet/6.1.5:
+    resolution: {integrity: sha512-/ICuy7OHZxR0YCAZLNg9r7I9aijWUWvxaPR6uTuyxe8tAj5RL4Sw1+R6NhXUtOsarkGYPmaHdBDvuXh2DIN/uA==}
+    dependencies:
+      '@types/react': 17.0.44
+    dev: true
+
   /@types/react/17.0.44:
     resolution: {integrity: sha512-Ye0nlw09GeMp2Suh8qoOv0odfgCoowfM/9MG6WeRD60Gq9wS90bdkdRtYbRkNhXOpG4H+YXGvj4wOWhAC0LJ1g==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.0.11
-    dev: false
 
   /@types/retry/0.12.1:
     resolution: {integrity: sha512-xoDlM2S4ortawSWORYqsdU+2rxdh4LRW9ytc3zmT37RIKQh6IHyKwwtKhKis9ah8ol07DCkZxPt8BBvPjC6v4g==}
@@ -796,7 +805,6 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: false
 
   /@types/serve-index/1.9.1:
     resolution: {integrity: sha512-d/Hs3nWDxNL2xAczmOVZNj92YZCS6RGxfBPjKzuu/XirCgXdpKEb88dYNbrYGint6IVWLNP+yonwVAuRC0T2Dg==}
@@ -1666,7 +1674,6 @@ packages:
 
   /csstype/3.0.11:
     resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
-    dev: false
 
   /daisyui/1.25.4:
     resolution: {integrity: sha512-Y9DrFYjjfwK09Fc8/05DhpWgwqhqRuhuH4gMdQxCeZ9dLJ82y5xb6kvwLuK1cWLfCckDOWk3reEKXsciaMHyAw==}
@@ -4091,6 +4098,22 @@ packages:
       scheduler: 0.21.0
     dev: false
 
+  /react-fast-compare/3.2.0:
+    resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
+  /react-helmet/6.1.0_react@18.0.0:
+    resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+      react: 18.0.0
+      react-fast-compare: 3.2.0
+      react-side-effect: 2.1.1_react@18.0.0
+    dev: false
+
   /react-hot-toast/2.2.0_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g==}
     engines: {node: '>=10'}
@@ -4119,6 +4142,14 @@ packages:
       eventemitter3: 4.0.7
       react: 18.0.0
       uuid: 8.3.2
+    dev: false
+
+  /react-side-effect/2.1.1_react@18.0.0:
+    resolution: {integrity: sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0
+    dependencies:
+      react: 18.0.0
     dev: false
 
   /react/18.0.0:

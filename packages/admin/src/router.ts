@@ -1,7 +1,11 @@
 import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router'
 import { getLocalToken } from './utils/localstorage'
 
-const createRoute = (name: string, path: string = '', children?: RouteRecordRaw[]): RouteRecordRaw => {
+const createRoute = (
+  name: string,
+  path: string = '',
+  children?: RouteRecordRaw[]
+): RouteRecordRaw => {
   return {
     path: `/${path || name.toLocaleLowerCase()}`,
     name: name,
@@ -30,11 +34,14 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, _, next) => {
+router.beforeEach((to, { params }, next) => {
   document.documentElement.scrollTo(0, 0)
   document.body.scrollTo(0, 0)
-  if (to.name !== 'Login' && to.name !== 'Register' && !getLocalToken()) next({ name: 'Login' })
-  else next()
+  if (to.name !== 'Login' && to.name !== 'Register' && !getLocalToken()) {
+    next({ name: 'Login', params })
+  } else {
+    next()
+  }
 })
 
 export default router

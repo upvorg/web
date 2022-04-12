@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
+import { Helmet } from 'react-helmet'
 import copyTextToClipboard from 'copy-text-to-clipboard'
+import { axios, getCoverFormMd, getTimeDistance, removeImagesFormMd } from '@web/shared'
 import Comment from '../../components/comment'
 import Markdown from '../../components/markdown'
-import { Postkeleton } from '/src/skeleton/CommentSkeleton'
+import { Postkeleton } from '../..//skeleton/CommentSkeleton'
 
-import { axios, getCoverFormMd, getTimeDistance, removeImagesFormMd } from '@web/shared'
 import './index.scss'
 
 const PostPage: React.FC = ({ id }: any) => {
@@ -87,8 +88,15 @@ const PostPage: React.FC = ({ id }: any) => {
     })
   }
 
+  const { title, creator_nickname } = state
+
   return (
     <>
+      <Helmet>
+        <title>{`${title || '少女祈祷中···'} ${
+          creator_nickname ? ` - ${creator_nickname}` : ''
+        }`}</title>
+      </Helmet>
       {hasCover && (
         <div
           className="post-container__cover"
