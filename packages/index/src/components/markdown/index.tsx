@@ -29,27 +29,16 @@ const processor = unified()
 const Markdown: React.FC<Props> = (props) => {
   const { value = '', type, onChange, customClassName = '' } = props
 
-  let view
+  let view = { menu: false, md: false, html: true }
   let classname = 'markdown'
 
   if (type === 'render') {
-    view = {
-      menu: false,
-      md: false,
-      html: true
-    }
-
     classname += ` markdown_render`
   }
 
   if (type === 'editor') {
-    view = {
-      menu: true,
-      md: true,
-      html: false
-    }
-
-    classname += ` markdown_editor}`
+    view = { menu: true, md: true, html: false }
+    classname += ` markdown_editor`
   }
 
   if (customClassName) {
@@ -66,9 +55,7 @@ const Markdown: React.FC<Props> = (props) => {
         const content: any = await processor.process(text)
         return content.value
       }}
-      onChange={(data) => {
-        onChange && onChange(data.text)
-      }}
+      onChange={(data) => onChange?.(data.text)}
     />
   )
 }
