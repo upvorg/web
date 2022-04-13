@@ -86,26 +86,24 @@ export default class Http<T = any> {
       .then(
         (res: Response) => {
           rawResponse = res
-          return res.json()
+          try {
+            return res.json()
+          } catch (error) {
+            throw error
+          }
         },
         (reson: any) => {
           console.log('request error' + reson)
-          const returnValue = this.interceptors.request.reject?.(reson)
-          throw new Error(JSON.stringify(returnValue))
+          throw this.interceptors.request.reject?.(reson)
         }
       )
       .then((response) => {
         if (!rawResponse.ok) {
-          throw new Error(
-            "The response's status is not ok" +
-              JSON.stringify(
-                this.interceptors.response.reject?.({
-                  status: rawResponse.status,
-                  statusText: rawResponse.statusText,
-                  ...response
-                })
-              )
-          )
+          throw this.interceptors.response.reject?.({
+            status: rawResponse.status,
+            statusText: rawResponse.statusText,
+            ...response
+          })
         }
         if (__DEV__) console.log(`${method} ${url} response: `, response)
         return this.interceptors.response.resolve?.(response) ?? response

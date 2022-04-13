@@ -88,7 +88,7 @@ const PostPage: React.FC = ({ id }: any) => {
       .catch(() => {
         setTimeout(() => {
           setIsLiked((isLiked) => !isLiked)
-        }, 200)
+        }, 300)
       })
   }, [state, isLiked])
 
