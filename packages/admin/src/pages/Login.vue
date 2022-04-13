@@ -44,14 +44,24 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { login } from '../utils/api'
-import { GlobalState, setLocalToken, setLocalUser } from '../utils/localstorage'
+import {
+  getLocalToken,
+  getLocalUser,
+  GlobalState,
+  setLocalToken,
+  setLocalUser
+} from '../utils/localstorage'
 import { useRouter } from 'vue-router'
 
 const name = ref('')
 const pwd = ref('')
 const router = useRouter()
 
-onMounted(() => {})
+onMounted(() => {
+  if (getLocalToken() && getLocalUser()) {
+    router.push('/')
+  }
+})
 
 const onLogin = () => {
   login({ name: name.value, pwd: pwd.value }).then(({ data }) => {

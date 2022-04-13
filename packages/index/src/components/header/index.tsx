@@ -141,10 +141,13 @@ export default function Header() {
           ) : (
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-primary" href={__ADMIN_HOST__ + `?r=${location.href}`}>
+                <a
+                  className="button is-primary"
+                  href={__ADMIN_HOST__ + `/login?r=${location.href}`}
+                >
                   <strong>Sign up</strong>
                 </a>
-                <a className="button is-light" href={__ADMIN_HOST__ + `?r=${location.href}`}>
+                <a className="button is-light" href={__ADMIN_HOST__ + `/login?r=${location.href}`}>
                   Log in
                 </a>
               </div>

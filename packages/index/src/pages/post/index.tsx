@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
@@ -70,23 +70,27 @@ const PostPage: React.FC = ({ id }: any) => {
     }
   }
 
-  const likeHandler = () => {
-    axios.post(isLiked ? `/post/unlike/${id}` : `/post/like/${id}`).then((_) => {
-      if (_.code == 200) {
-        if (isLiked) {
-          setIsLiked(false)
-          setState((s: any) => ({ ...s, liked: 0, liked_count: s.liked_count - 1 }))
-          toast.error('你所热爱的，就是你的生活。\r\n 				--------?')
+  const likeHandler = useCallback(() => {
+    setIsLiked((isLiked) => !isLiked)
+    axios
+      .post(isLiked ? `/post/unlike/${id}` : `/post/like/${id}`)
+      .then((_) => {
+        if (_.code != 200) {
+          setIsLiked((isLiked) => !isLiked)
         } else {
-          setIsLiked(true)
-          setState((s: any) => ({ ...s, liked: 1, liked_count: s.liked_count + 1 }))
-          toast.success('nice!')
+          if (isLiked) {
+            toast.error('你所热爱的，就是你的生活。\r\n 				--------?')
+          } else {
+            toast.success('nice!')
+          }
         }
-      } else {
-        toast.error('你所热爱的，就是你的生活。\r\n 				--------?')
-      }
-    })
-  }
+      })
+      .catch(() => {
+        setTimeout(() => {
+          setIsLiked((isLiked) => !isLiked)
+        }, 200)
+      })
+  }, [state, isLiked])
 
   const { title, creator_nickname } = state
 
