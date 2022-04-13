@@ -1,7 +1,7 @@
 import { HOST } from '@web/shared'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useRoute } from 'wouter'
-import { useLocalUser } from '/src/hooks/use-local-user'
+import { useUserStore } from '../../store/user'
 
 import './index.scss'
 
@@ -11,7 +11,7 @@ export default function Header() {
   const searchValue = useRef('')
   const [isSearchPage] = useRoute('/search')
   const [searchPlaceholder, setSearchPlaceholder] = useState('Search')
-  const user = useLocalUser()
+  const user = useUserStore()
 
   useEffect(() => {
     fetch('//v1.hitokoto.cn?c=a')

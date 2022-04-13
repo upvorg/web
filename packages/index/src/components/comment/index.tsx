@@ -1,10 +1,10 @@
 import { FocusEventHandler, useEffect, useState } from 'react'
-import { axios, getTimeDistance } from '@web/shared'
-import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
-import { useLocalUser } from '/src/hooks/use-local-user'
-import './index.scss'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
+import { axios, getTimeDistance } from '@web/shared'
+import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
+import { useUserStore } from '/src/store/user'
+import './index.scss'
 
 interface CommentProps {
   id: string
@@ -17,7 +17,7 @@ interface CommentProps {
 const Comment = ({ id, onFocus, onBlur, onLoad }: CommentProps) => {
   const [comments, setComments] = useState<any[] | null>(null)
   const [comment, setComment] = useState<string>('')
-  const user = useLocalUser()
+  const user = useUserStore()
 
   useEffect(() => {
     axios.get(`/post/${id}/comments`).then((c) => {
@@ -65,7 +65,7 @@ const Comment = ({ id, onFocus, onBlur, onLoad }: CommentProps) => {
         />
         <textarea
           className="video-comment-edit__input"
-          placeholder="..."
+          placeholder={user ? '...' : 'login to comment'}
           disabled={!user}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -74,7 +74,7 @@ const Comment = ({ id, onFocus, onBlur, onLoad }: CommentProps) => {
           onBlur={(e) => onBlur?.(e)}
         ></textarea>
         <button
-          disabled={!user}
+          disabled={!user || !!!comment}
           className="button is-primary video-comment-edit__button"
           onClick={doComment}
         >

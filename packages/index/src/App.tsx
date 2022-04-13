@@ -1,6 +1,6 @@
 import '@web/shared/f12'
 import { Router, Switch } from 'wouter'
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { DefaultRoute, IndexRoute } from './components/layout'
 import toast, { Toaster } from 'react-hot-toast'
 import {
@@ -12,6 +12,7 @@ import {
   LOCAL_STORAGE_USER_INFO_KEY,
   PRIMARY_COLOR
 } from '@web/shared'
+import { UserContext } from './store/user'
 
 import './index.scss'
 
@@ -23,42 +24,56 @@ axios.interceptors.request.use((config) => {
   }
 })
 
-axios.interceptors.response.use(
-  (data) => data,
-  (res) => {
-    res.msg && toast.error(res.msg)
-    if (res.status === 401) {
-      Cookie.del(COOKIE_ACCESS_TOKEN_KEY, '/', HOST)
-      localStorage.removeItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY)
-      localStorage.removeItem(LOCAL_STORAGE_USER_INFO_KEY)
-    }
-    return res
-  }
-)
-
 const App = () => {
+  const [user, setUser] = useState<Record<string, any> | null>(null)
+
   useEffect(() => {
+    axios.interceptors.response.use(
+      (data) => data,
+      (res) => {
+        res.msg && toast.error(res.msg)
+        if (res.status === 401) {
+          setUser(null)
+          Cookie.del(COOKIE_ACCESS_TOKEN_KEY, '/', HOST)
+          localStorage.removeItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY)
+          localStorage.removeItem(LOCAL_STORAGE_USER_INFO_KEY)
+        }
+        return res
+      }
+    )
     const cookie = Cookie.get(COOKIE_ACCESS_TOKEN_KEY)
     !!cookie && localStorage.setItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY, cookie)
+    const userInfo = localStorage.getItem(LOCAL_STORAGE_USER_INFO_KEY)
 
-    if (!localStorage.getItem(LOCAL_STORAGE_USER_INFO_KEY) && !!cookie) {
-      axios.get('/me').then((_) => {
-        _.data && localStorage.setItem(LOCAL_STORAGE_USER_INFO_KEY, JSON.stringify(_.data))
-      })
+    if (userInfo) {
+      setUser(JSON.parse(userInfo))
+    } else {
+      !!cookie &&
+        axios.get('/me').then((_) => {
+          if (_.data) {
+            setUser(_.data)
+            localStorage.setItem(LOCAL_STORAGE_USER_INFO_KEY, JSON.stringify(_.data))
+          }
+        })
     }
   }, [])
 
   return (
     <Router>
       <Suspense fallback={null}>
-        <Switch>
-          <IndexRoute path="/" component={lazy(() => import('./pages/index'))} />
-          <DefaultRoute path="/search" component={lazy(() => import('./pages/search'))} />
-          <DefaultRoute path="/bangumi/play/:id" component={lazy(() => import('./pages/player'))} />
-          <DefaultRoute path="/post/:id" component={lazy(() => import('./pages/post'))} />
-          <DefaultRoute path="/about" component={lazy(() => import('./pages/about'))} />
-          <DefaultRoute path="/:rest*" component={lazy(() => import('./pages/404'))} />
-        </Switch>
+        <UserContext.Provider value={user}>
+          <Switch>
+            <IndexRoute path="/" component={lazy(() => import('./pages/index'))} />
+            <DefaultRoute path="/search" component={lazy(() => import('./pages/search'))} />
+            <DefaultRoute
+              path="/bangumi/play/:id"
+              component={lazy(() => import('./pages/player'))}
+            />
+            <DefaultRoute path="/post/:id" component={lazy(() => import('./pages/post'))} />
+            <DefaultRoute path="/about" component={lazy(() => import('./pages/about'))} />
+            <DefaultRoute path="/:rest*" component={lazy(() => import('./pages/404'))} />
+          </Switch>
+        </UserContext.Provider>
 
         <footer className="footer">
           <div className="bd-footer-support">
