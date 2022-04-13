@@ -71,12 +71,15 @@ const PostPage: React.FC = ({ id }: any) => {
   }
 
   const likeHandler = useCallback(() => {
+    const c = isLiked ? -1 : 1
     setIsLiked((isLiked) => !isLiked)
+    setState((state: any) => ({ ...state, liked_count: state.liked_count + c }))
     axios
       .post(isLiked ? `/post/unlike/${id}` : `/post/like/${id}`)
       .then((_) => {
         if (_.code != 200) {
           setIsLiked((isLiked) => !isLiked)
+          setState((state: any) => ({ ...state, liked_count: state.liked_count - c }))
         } else {
           if (isLiked) {
             toast.error('你所热爱的，就是你的生活。\r\n 				--------?')
@@ -88,6 +91,7 @@ const PostPage: React.FC = ({ id }: any) => {
       .catch(() => {
         setTimeout(() => {
           setIsLiked((isLiked) => !isLiked)
+          setState((state: any) => ({ ...state, liked_count: state.liked_count - 1 }))
         }, 300)
       })
   }, [state, isLiked])
