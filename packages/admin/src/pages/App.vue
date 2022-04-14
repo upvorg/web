@@ -219,6 +219,7 @@
 <script setup lang="ts">
 import { getLocalUser, logout } from '../utils/localstorage'
 import { onMounted } from 'vue'
+import { get } from '../utils/api'
 
 // https://fonts.google.com/icons?selected=Material+Icons&icon.query=edit
 const user = getLocalUser()
@@ -261,6 +262,7 @@ const navList = [
 ].filter((_) => _.level >= user.level)
 
 onMounted(() => {
+  get('/me')
   document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light')
   document.querySelectorAll('[data-set-theme]').forEach((e) => {
     e.addEventListener('click', function () {

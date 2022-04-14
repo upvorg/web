@@ -5,6 +5,7 @@ import { axios } from '@web/shared'
 
 export default function IndexPage() {
   const st = ['推荐', '文章', '最新', '原创']
+  const tag = ['tag=推荐', 'type=post', 'sort=bgm', 'sort=原创']
   const [state, setState] = useState<any[]>([null, null, null])
   const [rankList, setRankList] = useState<[] | null>(null)
 
@@ -30,6 +31,7 @@ export default function IndexPage() {
         if (index == 0) {
           return (
             <ListSection
+              moreUrl={`/post/tag?${tag[index]}`}
               key={index}
               title={st[index]}
               videos={item}
@@ -38,7 +40,14 @@ export default function IndexPage() {
             />
           )
         }
-        return <ListSection key={index} title={st[index]} videos={item} />
+        return (
+          <ListSection
+            key={index}
+            title={st[index]}
+            videos={item}
+            moreUrl={`/post/tag?${tag[index]}`}
+          />
+        )
       })}
     </>
   )

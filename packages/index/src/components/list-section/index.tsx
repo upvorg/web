@@ -6,14 +6,26 @@ interface ListSectionProps {
   videos: any[]
   asideTitle?: string
   aside?: React.ReactNode
+  moreUrl?: string
 }
 
-export default function ListSection({ title, videos, asideTitle, aside }: ListSectionProps) {
+export default function ListSection({
+  title,
+  videos,
+  asideTitle,
+  aside,
+  moreUrl
+}: ListSectionProps) {
   return (
     <div className={`upv-grid ${!!asideTitle ? 'col-2' : ''}`}>
       <div className="upv-card-list">
         <div className="list-header">
           <h2>{title}</h2>
+          {moreUrl && (
+            <a href={moreUrl} target="_blank">
+              更多{' >'}
+            </a>
+          )}
         </div>
         <div className="list-body ">
           {videos ? (
