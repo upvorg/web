@@ -170,6 +170,7 @@ module.exports = {
   devServer: {
     static: '../../public',
     open: true,
+    host: '127.0.0.1',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
