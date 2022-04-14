@@ -80,7 +80,7 @@ export default function Header() {
               className="nav-search-form"
               onSubmit={(e) => {
                 e.preventDefault()
-                window.open(`/search?keyword=${searchValue.current}`)
+                window.open(`/search?k=${searchValue.current}`)
               }}
             >
               <div className="nav-search-content">

@@ -21,21 +21,21 @@
     "@milkdown/preset-gfm": "^5.5.0",
     "@milkdown/prose": "^5.5.0",
     "@milkdown/vue": "^5.5.0",
-    "@vue/reactivity": "^3.2.31",
-    "@vue/runtime-core": "^3.2.31",
+    "@vue/reactivity": "^3.2.33",
+    "@vue/runtime-core": "^3.2.33",
     "@web/shared": "workspace:^1.0.0",
     "daisyui": "^1.25.4",
     "lodash.debounce": "^4.0.8",
     "mitt": "^3.0.0",
     "prosemirror-model": "^1.16.1",
-    "tailwindcss": "^3.0.23",
+    "tailwindcss": "^3.0.24",
     "vditor": "^3.8.13",
-    "vue": "^3.2.31",
+    "vue": "^3.2.33",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
-    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/compiler-sfc": "^3.2.33",
     "vue-loader": "^17.0.0"
   }
 }

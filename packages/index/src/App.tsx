@@ -64,13 +64,13 @@ const App = () => {
         <UserContext.Provider value={user}>
           <Switch>
             <IndexRoute path="/" component={lazy(() => import('./pages/index'))} />
+            <DefaultRoute path="/post/tag" component={lazy(() => import('./pages/tag'))} />
             <DefaultRoute path="/post/:id" component={lazy(() => import('./pages/post'))} />
             <DefaultRoute
               path="/bangumi/play/:id"
               component={lazy(() => import('./pages/player'))}
             />
             <DefaultRoute path="/search" component={lazy(() => import('./pages/search'))} />
-            <DefaultRoute path="/post/tag" component={lazy(() => import('./pages/tag'))} />
             <DefaultRoute path="/about" component={lazy(() => import('./pages/about'))} />
             <DefaultRoute path="/:rest*" component={lazy(() => import('./pages/404'))} />
           </Switch>
