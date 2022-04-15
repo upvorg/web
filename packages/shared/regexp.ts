@@ -13,7 +13,7 @@ const getCoverFormMd = (
   const cover = text.match(/!\[suo\]\((.*?)\)/)
   const df = {
     title: 'cover',
-    url: 'https://s2.loli.net/2022/01/22/IkS53uazMbyYHsp.jpg',
+    url: 'https://s2.loli.net/2022/04/15/m8MDhjliOSHtXnR.jpg',
     type: 'jpg',
     _df: true
   }

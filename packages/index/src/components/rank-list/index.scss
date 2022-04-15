@@ -8,9 +8,10 @@
   --subtitle-line-height: 16px;
   --icon-size: 18px;
   --graph_weak: #c9ccd0;
+
   &__list {
-    border: 1px solid var(--line_light);
-    border-radius: 6px;
+    // border: 1px solid var(--line_light);
+    // border-radius: 6px;
     background-color: var(--bg2);
     overflow: hidden;
     list-style: none;
