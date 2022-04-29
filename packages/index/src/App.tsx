@@ -45,7 +45,7 @@ const App = () => {
     !!cookie && localStorage.setItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY, cookie)
     const userInfo = localStorage.getItem(LOCAL_STORAGE_USER_INFO_KEY)
 
-    if (userInfo) {
+    if (userInfo && !!cookie) {
       setUser(JSON.parse(userInfo))
     } else {
       !!cookie &&

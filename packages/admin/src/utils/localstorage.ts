@@ -1,5 +1,6 @@
 import router from '../router'
 import { TOKEN_KEY, USER_KEY } from '../constant'
+import { Cookie, COOKIE_ACCESS_TOKEN_KEY, HOST } from '@web/shared'
 
 const ls = {
   get(k: string) {
@@ -40,6 +41,7 @@ export const removeLocalUser = () => {
 export const logout = () => {
   removeLocalUser()
   router.push({ path: '/login', replace: true })
+  Cookie.del(COOKIE_ACCESS_TOKEN_KEY, '/', HOST)
 }
 
 export default ls

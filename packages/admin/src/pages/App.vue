@@ -242,7 +242,7 @@ const navList = [
     name: 'post',
     path: '/posts',
     title: '文章',
-    level: 0,
+    level: 2,
     icon: 'vertical_split'
   },
   {
