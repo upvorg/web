@@ -21,13 +21,17 @@ export default function VideoCard({ info }: any) {
         <a href={target} target="_blank">
           <div className="upv-video-card__image">
             <div className="upv-video-card__image--wrap">
-              <picture>
+              <picture
+                onError={(e: any) => {
+                  e.target.src = 'https://s2.loli.net/2022/04/15/m8MDhjliOSHtXnR.jpg'
+                }}
+              >
                 <source
                   srcSet={url}
                   type={ImageType[type! as keyof typeof ImageType]}
                   title={info.title}
                 />
-                <img src="https://s2.loli.net/2022/01/22/IkS53uazMbyYHsp.jpg" alt={info.title} />
+                <img src="https://s2.loli.net/2022/04/15/m8MDhjliOSHtXnR.jpg" alt={info.title} />
               </picture>
             </div>
           </div>
