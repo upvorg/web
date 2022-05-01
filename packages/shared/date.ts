@@ -1,8 +1,8 @@
-export function getTimeDistance(_date: string) {
+export function getTimeDistance(_date: string | Date) {
   const now = new Date()
-  const date = new Date(_date.replaceAll('-', '/'))
-
+  const date = typeof _date == 'string' ? new Date(_date.replaceAll('-', '/')) : new Date(_date)
   const diff = (now.getTime() - date.getTime()) / 1000
+
   if (diff < 30) {
     return '刚刚'
   } else if (diff < 3600) {

@@ -8,7 +8,7 @@
           placeholder="请输入标题"
           type="text"
         />
-        <Vditor v-model="post.content" />
+        <MilkdownEditor v-model="post.content" />
         <ul class="tags mt-4" v-if="post.type == 'video'">
           <kbd
             class="kbd m-1"
@@ -175,7 +175,7 @@ import emitter from '../utils/emitter'
 import ModalWithSlot from '../components/ModalWithSlot.vue'
 import { getTimeDistance } from '@web/shared'
 import { defineComponent } from 'vue'
-import Vditor from '../components/Vditor.vue'
+import { MilkdownEditor } from '../components/Editor/MilkdownEditor'
 
 const emptyVideo = {
   oid: 1,
@@ -184,7 +184,7 @@ const emptyVideo = {
 }
 
 export default defineComponent({
-  components: { ModalWithSlot, Vditor },
+  components: { ModalWithSlot, MilkdownEditor },
   data() {
     return {
       //@ts-ignore
