@@ -2,8 +2,8 @@ import { FocusEventHandler, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
 import { axios, getTimeDistance } from '@web/shared'
-import { CommentSkeleton } from '/src/skeleton/CommentSkeleton'
-import { useUserStore } from '/src/store/user'
+import { CommentSkeleton } from '../../skeleton/CommentSkeleton'
+import { useUserStore } from '../../store/user'
 import './index.scss'
 
 interface CommentProps {
@@ -65,7 +65,7 @@ const Comment = ({ id, onFocus, onBlur, onLoad }: CommentProps) => {
         />
         <textarea
           className="video-comment-edit__input"
-          placeholder={user ? '...' : 'login to comment'}
+          placeholder={user ? '...' : 'Login to comment'}
           disabled={!user}
           value={comment}
           onChange={(e) => setComment(e.target.value)}

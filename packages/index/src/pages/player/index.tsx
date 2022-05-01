@@ -3,9 +3,9 @@ import { axios, getTimeDistance } from '@web/shared'
 import toast from 'react-hot-toast'
 import Comment from '../../components/comment'
 import GriffithPlayer from '../../components/player'
-import './index.scss'
-import { VideoMetaSkeleton } from '/src/skeleton/CommentSkeleton'
+import { VideoMetaSkeleton } from '../../skeleton/CommentSkeleton'
 import { Helmet } from 'react-helmet'
+import './index.scss'
 
 export default function PlayerPage({ id }: any) {
   const [state, setState] = useState<any>({})
@@ -62,6 +62,16 @@ export default function PlayerPage({ id }: any) {
           <GriffithPlayer src={video[currentIndex]?.content} />
         </div>
         <div className="player-header__r">
+          <div className="video-author">
+            <img
+              src={state.creator_avatar || 'https://upv.life/ic_launcher_round.png'}
+              alt={state.creator_nickname}
+            />
+            <div className="video-author__info">
+              <div className="video-author__info__name">{state.creator_nickname}</div>
+              <div className="video-author__info__bio">{state.creator_bio}</div>
+            </div>
+          </div>
           <div className="eplist_module">
             <div className="list-title">
               <h4>播放列表</h4>
@@ -96,7 +106,7 @@ export default function PlayerPage({ id }: any) {
           <div>
             <h3 className="video-info__title">{state.title || '少女祈祷中···'}</h3>
             <div className="video-meta">
-              <span>{state.creator_nickname || '-'}</span>
+              {/* <span>{state.creator_nickname || '-'}</span> */}
               <svg
                 width="20"
                 height="20"
@@ -144,30 +154,23 @@ export default function PlayerPage({ id }: any) {
               </svg>
               <span>{state.create_time ? getTimeDistance(state.create_time) : '-'}</span>
             </div>
-            {tag &&
-              tag
-                .trim()
-                .split(' ')
-                .map((tag: any, i: number) => (
-                  <a
-                    key={i}
-                    style={{ marginRight: '.5em' }}
-                    href={`/post/tag?tag=${tag}`}
-                    target="_blank"
-                  >
-                    {tag}
-                  </a>
-                ))}
-            <a href={`/post/tag?sort=${sort}`} target="_blank">
+            {tag
+              ?.trim()
+              .split(' ')
+              .map((tag: any, i: number) => (
+                <a
+                  className="video-info__tag"
+                  key={i}
+                  style={{ marginRight: '.5em' }}
+                  href={`/post/tag?tag=${tag}`}
+                  target="_blank"
+                >
+                  {tag}
+                </a>
+              ))}
+            <a className="video-info__tag" href={`/post/tag?sort=${sort}`} target="_blank">
               {sort}
             </a>
-          </div>
-
-          <div className="video-author">
-            <img
-              src={state.creator_avatar || 'https://upv.life/ic_launcher_round.png'}
-              alt={state.creator_nickname}
-            />
           </div>
         </div>
       ) : (
