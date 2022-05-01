@@ -154,20 +154,21 @@ export default function PlayerPage({ id }: any) {
               </svg>
               <span>{state.create_time ? getTimeDistance(state.create_time) : '-'}</span>
             </div>
-            {tag
-              ?.trim()
-              .split(' ')
-              .map((tag: any, i: number) => (
-                <a
-                  className="video-info__tag"
-                  key={i}
-                  style={{ marginRight: '.5em' }}
-                  href={`/post/tag?tag=${tag}`}
-                  target="_blank"
-                >
-                  {tag}
-                </a>
-              ))}
+            {tag &&
+              tag
+                .trim()
+                .split(' ')
+                .map((tag: any, i: number) => (
+                  <a
+                    className="video-info__tag"
+                    key={i}
+                    style={{ marginRight: '.5em' }}
+                    href={`/post/tag?tag=${tag}`}
+                    target="_blank"
+                  >
+                    {tag}
+                  </a>
+                ))}
             <a className="video-info__tag" href={`/post/tag?sort=${sort}`} target="_blank">
               {sort}
             </a>
