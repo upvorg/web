@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 importers:
 
@@ -44,17 +44,17 @@ importers:
       html-webpack-plugin: 5.5.0_webpack@5.72.0
       mini-css-extract-plugin: 2.6.0_webpack@5.72.0
       postcss: 8.4.13
-      postcss-loader: 6.2.1_postcss@8.4.13+webpack@5.72.0
+      postcss-loader: 6.2.1_g4najheu5gwop3kphiif6aqpde
       sass: 1.51.0
       sass-loader: 12.6.0_sass@1.51.0+webpack@5.72.0
       style-loader: 3.3.1_webpack@5.72.0
       stylus: 0.56.0
-      stylus-loader: 6.2.0_stylus@0.56.0+webpack@5.72.0
+      stylus-loader: 6.2.0_wmbwze5okbeiwngx3yherkukui
       terser-webpack-plugin: 5.3.1_webpack@5.72.0
       webpack: 5.72.0_webpack-cli@4.9.2
       webpack-bundle-analyzer: 4.5.0
-      webpack-cli: 4.9.2_a0d31263581cf2badb6e37c16bc9b287
-      webpack-dev-server: 4.8.1_webpack-cli@4.9.2+webpack@5.72.0
+      webpack-cli: 4.9.2_udjrey2ydtzlvw3og7awxsnsq4
+      webpack-dev-server: 4.8.1_q7qo2wgeiyigo3znjsjh7f36ue
       webpack-merge: 5.8.0
 
   packages/admin:
@@ -85,15 +85,15 @@ importers:
       vue-router: ^4.0.14
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
-      '@milkdown/plugin-history': 5.5.0_ee3a878e89576bb62ebc7021836857a7
-      '@milkdown/plugin-indent': 5.5.0_ee3a878e89576bb62ebc7021836857a7
-      '@milkdown/plugin-listener': 5.5.0_ee3a878e89576bb62ebc7021836857a7
-      '@milkdown/plugin-slash': 5.5.0_ee3a878e89576bb62ebc7021836857a7
-      '@milkdown/plugin-upload': 5.5.0_ee3a878e89576bb62ebc7021836857a7
-      '@milkdown/preset-commonmark': 5.5.0_ee3a878e89576bb62ebc7021836857a7
-      '@milkdown/preset-gfm': 5.5.0_b8e99fb6b049dba03aaadac54edfd796
+      '@milkdown/plugin-history': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
+      '@milkdown/plugin-indent': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
+      '@milkdown/plugin-listener': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
+      '@milkdown/plugin-slash': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
+      '@milkdown/plugin-upload': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
+      '@milkdown/preset-commonmark': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
+      '@milkdown/preset-gfm': 5.5.0_xduz7nvqjhn2aovk3lcu5x6xsy
       '@milkdown/prose': 5.5.0
-      '@milkdown/vue': 5.5.0_e5c40968e1a0902934fcce1b2b6c0877
+      '@milkdown/vue': 5.5.0_4xcas2hbucicsnh4zynsw3aio4
       '@vue/reactivity': 3.2.33
       '@vue/runtime-core': 3.2.33
       '@web/shared': link:../shared
@@ -108,7 +108,7 @@ importers:
     devDependencies:
       '@types/lodash.debounce': 4.0.7
       '@vue/compiler-sfc': 3.2.33
-      vue-loader: 17.0.0_webpack@5.72.0
+      vue-loader: 17.0.0
 
   packages/index:
     specifiers:
@@ -146,14 +146,14 @@ importers:
       bulma: 0.9.3
       classnames: 2.3.1
       copy-text-to-clipboard: 3.0.1
-      griffith: 1.26.0_react-dom@18.1.0+react@18.1.0
+      griffith: 1.26.0_ef5jwxihqo6n7gxfmzogljlgcm
       griffith-message: 1.25.0
-      lottie-react: 2.2.1_react-dom@18.1.0+react@18.1.0
+      lottie-react: 2.2.1_ef5jwxihqo6n7gxfmzogljlgcm
       react: 18.1.0
       react-content-loader: 6.2.0_react@18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-helmet: 6.1.0_react@18.1.0
-      react-hot-toast: 2.2.0_react-dom@18.1.0+react@18.1.0
+      react-hot-toast: 2.2.0_ef5jwxihqo6n7gxfmzogljlgcm
       react-markdown-editor-lite: 1.3.2_react@18.1.0
       rehype-attr: 2.0.8
       rehype-raw: 6.1.1
@@ -360,7 +360,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/plugin-history/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/plugin-history/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-GmoFyj83OlnOQxu+4f0bzKDOblDK3mXFDdKka7GxX18Zx2J5geiQYzf+Ell12jipHzWZYwPs5Z6byJt2/eDx5A==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -368,11 +368,11 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/plugin-indent/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/plugin-indent/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-4Uj+3O6CgnQbwmbCT6fxOFt6gCg6ftWnkh+lKr9n1u4HY2DpKSzaZcXGvF31bZ1g7pNTDs2txr59/GTZNhKYeg==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -380,11 +380,11 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/plugin-listener/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/plugin-listener/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-3hDgDO0Kbg1NsRbdI0o2YLZf5VEDLOXEOkz0J8B9dM4kpwHKZDAQ9I17TG3MizD66E6FxacqM06lUo9sYUuRcA==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -392,11 +392,11 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/plugin-slash/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/plugin-slash/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-7a/SZEOUylh1SNlrJD+yrWu8aUXr8KeR0r7BcjH4J0N+kdooN0XADBbTRHIswjRUlOQXv1IBbPDRRDN6suQnOg==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -404,12 +404,12 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       smooth-scroll-into-view-if-needed: 1.1.33
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/plugin-upload/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/plugin-upload/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-2UKqB7ruSHos7NKvHXvXSecEoV2G2Ys6J6qBAGfAdj0DyyCVb4f142NyJsRYT2pZtCR07Ey7qvpPDFEafoyHaQ==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -417,11 +417,11 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/preset-commonmark/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/preset-commonmark/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-zqDtGs7Tfx2KNZi4DOoEj7knbYrCpGkAevNSPFaU/G617eobCBpvusi5FgoGb1FLl2+TZP7DOXtvrTDZNvmCig==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -429,12 +429,12 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       remark-inline-links: 6.0.1
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/preset-gfm/5.5.0_b8e99fb6b049dba03aaadac54edfd796:
+  /@milkdown/preset-gfm/5.5.0_xduz7nvqjhn2aovk3lcu5x6xsy:
     resolution: {integrity: sha512-JdvitvHcp7/QUpDjczkD9RhIhOzErOoJKL1Udm1e4JSfEsJ80aioXjEcrJv5jSgI036Np1nBj2bdTgeFj5kmQQ==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -442,9 +442,9 @@ packages:
       '@milkdown/prose': ^5.4.0
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
-      '@milkdown/preset-commonmark': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/preset-commonmark': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       remark-gfm: 3.0.1
       tslib: 2.4.0
     transitivePeerDependencies:
@@ -495,7 +495,7 @@ packages:
       - supports-color
     dev: false
 
-  /@milkdown/utils/5.5.0_ee3a878e89576bb62ebc7021836857a7:
+  /@milkdown/utils/5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4:
     resolution: {integrity: sha512-p7dTjMJsE7v9UZbhTAM3brMvhQ7fNLUny6Z8ZI/iAipp8WbcXp59Tyl/hil5YBe5Aiuta8d9KzlzEYKudC6zQw==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -507,7 +507,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@milkdown/vue/5.5.0_e5c40968e1a0902934fcce1b2b6c0877:
+  /@milkdown/vue/5.5.0_4xcas2hbucicsnh4zynsw3aio4:
     resolution: {integrity: sha512-id1tieAW4BTChp3GOOKpBALnI2jskNds0nMcv3cjIbeXiW1e3VG0km/632pCf/vTeprWEFfO4aFcr7FL+WUvoQ==}
     peerDependencies:
       '@milkdown/core': ^5.4.0
@@ -516,7 +516,7 @@ packages:
     dependencies:
       '@milkdown/core': 5.5.0_@milkdown+prose@5.5.0
       '@milkdown/prose': 5.5.0
-      '@milkdown/utils': 5.5.0_ee3a878e89576bb62ebc7021836857a7
+      '@milkdown/utils': 5.5.0_5y5ipdujk5v3mlv4oaqyg2cxu4
       nanoid: 3.3.3
       tslib: 2.4.0
       vue: 3.2.33
@@ -1020,14 +1020,14 @@ packages:
       '@xtuc/long': 4.2.2
     dev: true
 
-  /@webpack-cli/configtest/1.1.1_webpack-cli@4.9.2+webpack@5.72.0:
+  /@webpack-cli/configtest/1.1.1_q7qo2wgeiyigo3znjsjh7f36ue:
     resolution: {integrity: sha512-1FBc1f9G4P/AxMqIgfZgeOTuRnwZMten8E7zap5zgpPInnCrP8D4Q81+4CWIch8i/Nf7nXjP0v6CjjbHOrXhKg==}
     peerDependencies:
       webpack: 4.x.x || 5.x.x
       webpack-cli: 4.x.x
     dependencies:
       webpack: 5.72.0_webpack-cli@4.9.2
-      webpack-cli: 4.9.2_a0d31263581cf2badb6e37c16bc9b287
+      webpack-cli: 4.9.2_udjrey2ydtzlvw3og7awxsnsq4
     dev: true
 
   /@webpack-cli/info/1.4.1_webpack-cli@4.9.2:
@@ -1036,10 +1036,10 @@ packages:
       webpack-cli: 4.x.x
     dependencies:
       envinfo: 7.8.1
-      webpack-cli: 4.9.2_a0d31263581cf2badb6e37c16bc9b287
+      webpack-cli: 4.9.2_udjrey2ydtzlvw3og7awxsnsq4
     dev: true
 
-  /@webpack-cli/serve/1.6.1_8b27d5839a2bdf89ba2338e4c89fea10:
+  /@webpack-cli/serve/1.6.1_rmt5la42fppytordhdsmrh7kca:
     resolution: {integrity: sha512-gNGTiTrjEVQ0OcVnzsRSqTxaBSr+dmTfm+qJsCDluky8uhdLWep7Gcr62QsAKHTMxjCS/8nEITsmFAhfIx+QSw==}
     peerDependencies:
       webpack-cli: 4.x.x
@@ -1048,8 +1048,8 @@ packages:
       webpack-dev-server:
         optional: true
     dependencies:
-      webpack-cli: 4.9.2_a0d31263581cf2badb6e37c16bc9b287
-      webpack-dev-server: 4.8.1_webpack-cli@4.9.2+webpack@5.72.0
+      webpack-cli: 4.9.2_udjrey2ydtzlvw3og7awxsnsq4
+      webpack-dev-server: 4.8.1_q7qo2wgeiyigo3znjsjh7f36ue
     dev: true
 
   /@xtuc/ieee754/1.2.0:
@@ -2448,7 +2448,7 @@ packages:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
 
-  /griffith-hls/1.18.1_react-dom@18.1.0+react@18.1.0:
+  /griffith-hls/1.18.1_ef5jwxihqo6n7gxfmzogljlgcm:
     resolution: {integrity: sha512-R1E6WshyNgKxJfsSGo16OXVugBrVIXbpjDXvxOjdwxNzYzGEvBcDV9OxAiW7Bd36muPlLs833IehOTyf0hAYfw==}
     peerDependencies:
       react: ^16.8 || ^17
@@ -2463,7 +2463,7 @@ packages:
     resolution: {integrity: sha512-KaOyd9Fa7B8QKezI+xukQQ+lMLZXFmLdD8mj3p/Bp07ugrKCH54WjXdJlxfZIZbbGnHAlvXoIQRIurpljRsYQQ==}
     dev: false
 
-  /griffith-mp4/1.23.0_react-dom@18.1.0+react@18.1.0:
+  /griffith-mp4/1.23.0_ef5jwxihqo6n7gxfmzogljlgcm:
     resolution: {integrity: sha512-DpAp4GM/efyPWIlSiQWa7cNnLjwwwqM/J4noGMCOH4+47rCpgbuxZS0FsalYjAm8oeDfQzO4p7SXDqq7m+i82Q==}
     peerDependencies:
       react: ^16.8 || ^17
@@ -2479,7 +2479,7 @@ packages:
     resolution: {integrity: sha512-W2CwQElENyQrg6Bm1jN8mGynphBhdBose6uH5wls5bW5GkA1WgeN9eCDCC1dZGpmcrluSAphFsL9A+j27zuCRw==}
     dev: false
 
-  /griffith/1.26.0_react-dom@18.1.0+react@18.1.0:
+  /griffith/1.26.0_ef5jwxihqo6n7gxfmzogljlgcm:
     resolution: {integrity: sha512-xTGM6dm9hpsBINcaAFPSYm+o/xvMoRsaB7FlD49rYx0uBtfKPBs+T/mLBYH/OVmerKU4vdjlwqMY2VcQXcnDqA==}
     peerDependencies:
       react: ^16.8 || ^17
@@ -2489,9 +2489,9 @@ packages:
       '@types/react': 17.0.44
       aphrodite: 2.4.0
       eventemitter3: 3.1.2
-      griffith-hls: 1.18.1_react-dom@18.1.0+react@18.1.0
+      griffith-hls: 1.18.1_ef5jwxihqo6n7gxfmzogljlgcm
       griffith-message: 1.25.0
-      griffith-mp4: 1.23.0_react-dom@18.1.0+react@18.1.0
+      griffith-mp4: 1.23.0_ef5jwxihqo6n7gxfmzogljlgcm
       griffith-utils: 1.23.0
       isomorphic-bigscreen: 2.0.5
       lodash: 4.17.21
@@ -3056,7 +3056,7 @@ packages:
       js-tokens: 4.0.0
     dev: false
 
-  /lottie-react/2.2.1_react-dom@18.1.0+react@18.1.0:
+  /lottie-react/2.2.1_ef5jwxihqo6n7gxfmzogljlgcm:
     resolution: {integrity: sha512-lAdIUw+zeHLX3gtyLkisa4QM9NkTUUeZTsEL53laBEsjIH4JibgwkioZuza8CtwZ7/cpPZRbCRXWKfiuaDZWww==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
@@ -3873,7 +3873,7 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /postcss-loader/6.2.1_postcss@8.4.13+webpack@5.72.0:
+  /postcss-loader/6.2.1_g4najheu5gwop3kphiif6aqpde:
     resolution: {integrity: sha512-WbbYpmAaKcux/P66bZ40bpWsBucjx/TTgVVzRZ9yUO8yQfVBlameJ0ZGVaPfH64hNSBh63a+ICP5nqOpBA0w+Q==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -4154,7 +4154,7 @@ packages:
       react-side-effect: 2.1.1_react@18.1.0
     dev: false
 
-  /react-hot-toast/2.2.0_react-dom@18.1.0+react@18.1.0:
+  /react-hot-toast/2.2.0_ef5jwxihqo6n7gxfmzogljlgcm:
     resolution: {integrity: sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -4770,7 +4770,7 @@ packages:
     resolution: {integrity: sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==}
     dev: false
 
-  /stylus-loader/6.2.0_stylus@0.56.0+webpack@5.72.0:
+  /stylus-loader/6.2.0_wmbwze5okbeiwngx3yherkukui:
     resolution: {integrity: sha512-5dsDc7qVQGRoc6pvCL20eYgRUxepZ9FpeK28XhdXaIPP6kXr6nI1zAAKFQgP5OBkOfKaURp4WUpJzspg1f01Gg==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -5084,7 +5084,7 @@ packages:
       vfile-message: 3.1.2
     dev: false
 
-  /vue-loader/17.0.0_webpack@5.72.0:
+  /vue-loader/17.0.0:
     resolution: {integrity: sha512-OWSXjrzIvbF2LtOUmxT3HYgwwubbfFelN8PAP9R9dwpIkj48TVioHhWWSx7W7fk+iF5cgg3CBJRxwTdtLU4Ecg==}
     peerDependencies:
       webpack: ^4.1.0 || ^5.0.0-0
@@ -5092,7 +5092,6 @@ packages:
       chalk: 4.1.2
       hash-sum: 2.0.0
       loader-utils: 2.0.2
-      webpack: 5.72.0_webpack-cli@4.9.2
     dev: true
 
   /vue-router/4.0.14_vue@3.2.33:
@@ -5163,7 +5162,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webpack-cli/4.9.2_a0d31263581cf2badb6e37c16bc9b287:
+  /webpack-cli/4.9.2_udjrey2ydtzlvw3og7awxsnsq4:
     resolution: {integrity: sha512-m3/AACnBBzK/kMTcxWHcZFPrw/eQuY4Df1TxvIWfWM2x7mRqBQCqKEd96oCUa9jkapLBaFfRce33eGDb4Pr7YQ==}
     engines: {node: '>=10.13.0'}
     hasBin: true
@@ -5184,9 +5183,9 @@ packages:
         optional: true
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 1.1.1_webpack-cli@4.9.2+webpack@5.72.0
+      '@webpack-cli/configtest': 1.1.1_q7qo2wgeiyigo3znjsjh7f36ue
       '@webpack-cli/info': 1.4.1_webpack-cli@4.9.2
-      '@webpack-cli/serve': 1.6.1_8b27d5839a2bdf89ba2338e4c89fea10
+      '@webpack-cli/serve': 1.6.1_rmt5la42fppytordhdsmrh7kca
       colorette: 2.0.16
       commander: 7.2.0
       execa: 5.1.1
@@ -5196,7 +5195,7 @@ packages:
       rechoir: 0.7.1
       webpack: 5.72.0_webpack-cli@4.9.2
       webpack-bundle-analyzer: 4.5.0
-      webpack-dev-server: 4.8.1_webpack-cli@4.9.2+webpack@5.72.0
+      webpack-dev-server: 4.8.1_q7qo2wgeiyigo3znjsjh7f36ue
       webpack-merge: 5.8.0
     dev: true
 
@@ -5214,7 +5213,7 @@ packages:
       webpack: 5.72.0_webpack-cli@4.9.2
     dev: true
 
-  /webpack-dev-server/4.8.1_webpack-cli@4.9.2+webpack@5.72.0:
+  /webpack-dev-server/4.8.1_q7qo2wgeiyigo3znjsjh7f36ue:
     resolution: {integrity: sha512-dwld70gkgNJa33czmcj/PlKY/nOy/BimbrgZRaR9vDATBQAYgLzggR0nxDtPLJiLrMgZwbE6RRfJ5vnBBasTyg==}
     engines: {node: '>= 12.13.0'}
     hasBin: true
@@ -5253,7 +5252,7 @@ packages:
       sockjs: 0.3.24
       spdy: 4.0.2
       webpack: 5.72.0_webpack-cli@4.9.2
-      webpack-cli: 4.9.2_a0d31263581cf2badb6e37c16bc9b287
+      webpack-cli: 4.9.2_udjrey2ydtzlvw3og7awxsnsq4
       webpack-dev-middleware: 5.3.1_webpack@5.72.0
       ws: 8.5.0
     transitivePeerDependencies:
@@ -5317,7 +5316,7 @@ packages:
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.1_webpack@5.72.0
       watchpack: 2.3.1
-      webpack-cli: 4.9.2_a0d31263581cf2badb6e37c16bc9b287
+      webpack-cli: 4.9.2_udjrey2ydtzlvw3og7awxsnsq4
       webpack-sources: 3.2.3
     transitivePeerDependencies:
       - '@swc/core'
