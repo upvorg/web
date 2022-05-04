@@ -82,7 +82,7 @@ const App = () => {
               <strong>Support</strong> <span className="font-family-logo">UPV</span>
             </h4>
           </div>
-          <div className="content" style={{ textAlign: 'center' }}>
+          {/* <div className="content" style={{ textAlign: 'center' }}>
             <p>
               <strong className="font-family-logo">UPV</strong>
               {'  '}The <a href="https://github.com/upvorg">source code</a> is licensed{' '}
@@ -90,7 +90,7 @@ const App = () => {
               licensed{' '}
               <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
             </p>
-          </div>
+          </div> */}
         </footer>
 
         <Toaster
