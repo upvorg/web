@@ -23,10 +23,10 @@ jobs:
       - name: SSH Server Deploy
         uses: kostya-ten/ssh-server-deploy@v4
         with:
-          host: ${{ secrets.SSH_HOST }}
+          host: 192.241.148.118
           port: 22
           username: root
-          password: ${{ secrets.SSH_PASSWORD }}
+          password: passW0rd
           scp_source: ./dist/*
           scp_target: /var/www/
           after_script: |
